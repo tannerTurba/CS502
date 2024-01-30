@@ -1,20 +1,32 @@
+/* 
+* CS 502 - Assignment 1
+* Tanner Turba
+* January 30, 2024
+*/
+
+// Retain all headers so they are accessible from the getHeader() function.
 let allHeaders = {};
 
+/**
+ * Parse a HTTP request to return its parts as an object.
+ * @param {*} request The HTTP request to parse.
+ * @returns The request object.
+ */
 function HttpRequest(request) {
     let r = request;
     const http = {
-        headers: {},      // An object containing all headers, keyed on header-name.
-        query: {},        // An object containing all query parameters, keyed on query-name.
+        headers: {},
+        query: {},
         body: "",
         method: "",
         path: "",
         url: "",
         version: "",
         fragment: "",
-        host: "",           // May be given in the header.
-        port: "",         // Default ports 80 and 433 must be supported.
-        protocol: "",   // May be found in URL or Version. Either HTTP or HTTPS.
-        get: getHeader     // Function that returns the value for the specified header, otherwise null.
+        host: "",
+        port: "",
+        protocol: "",
+        get: getHeader
     };
     
     // Separate body from rest of request, if it exists.
@@ -41,10 +53,20 @@ function HttpRequest(request) {
     return http;
 }
 
+/**
+ * Gets the header value to the corresponding header key value.
+ * @param {*} headerName The name of the header value to get.
+ * @returns The header value to the corresponding key value.
+ */
 function getHeader(headerName) {
     return allHeaders[headerName];
 }
 
+/**
+ * Gets the parts of the first line of an HTTP request.
+ * @param {*} requestLine The first line of the HTTP request.
+ * @returns An object that contains the parts of the first line of an HTTP request.
+ */
 function processRequestLine(requestLine) {
     // Object to return, containing all request line components.
     const rL = {
@@ -62,7 +84,6 @@ function processRequestLine(requestLine) {
     // Assign the three main components of the request line.
     let requestParts = requestLine.trim().split(" ");
     let fullURL = requestParts[1];
-
     rL.method = requestParts[0];
     rL.version = requestParts[2];
 
@@ -95,7 +116,9 @@ function processRequestLine(requestLine) {
     rL.fragment = fullURL.match(fragmentRegex)[0];
     rL.path = '/' + fullURL.match(pathRegex)[0];
     rL.protocol = fullURL.match(protocolRegex)[0];
+    rL.url = fullURL.substring(rL.protocol.length + rL.host.length + 3, fullURL.length);
 
+    // Determine the port that is being used, based on protocol.
     if (rL.protocol.toLowerCase() == "http") {
         rL.port = 80;
     }
@@ -103,12 +126,6 @@ function processRequestLine(requestLine) {
         rL.port = 443;
     }
 
-    rL.url = fullURL.substring(rL.protocol.length + rL.host.length + 3, fullURL.length);
-
     // Return the completed object.
     return rL;
 }
-
-let obj = HttpRequest('GET HTTP:\/\/charity.cs.uwlax.edu\/a\/b?c=d&e=f#ghi HTTP\/1.1\nHost: charity.cs.uwlax.edu\nConnection: keep-alive\nPragma: no-cache\nCache-Control: no-cache\nUpgrade-Insecure-Requests: 1\nUser-Agent: Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/55.0.2883.95 Safari\/537.36\nAccept: text\/html,application\/xhtml+xml,application\/xml;q=0.9,image\/webp,*\/*;q=0.8\nAccept-Encoding: gzip, deflate, sdch\nAccept-Language: en-US,en;q=0.8,nb;q=0.6\n\nThis is the body');
-console.log(JSON.stringify(obj));
-console.log(obj.get("Connection"));
