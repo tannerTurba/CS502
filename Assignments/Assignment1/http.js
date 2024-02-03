@@ -74,7 +74,7 @@ function processRequestLine(requestLine) {
         url: "",
         version: "",
         host: "",
-        port: "80",
+        port: "",
         query: {},
         fragment: "", 
         path: "",
@@ -83,10 +83,21 @@ function processRequestLine(requestLine) {
 
     // Assign the three main components of the request line.
     let requestParts = requestLine.trim().split(" ");
-    let fullURL = requestParts[1];
     rL.method = requestParts[0];
     rL.version = requestParts[2];
+    let fullURL = requestParts[1];
+    Object.assign(rL, processURL(fullURL));
 
+    // Return the completed object.
+    return rL;
+}
+
+/**
+ * Processes a url and returns an object containing each field of that url.
+ * @param {*} fullURL the url to process
+ * @returns an object containing each field of the url
+ */
+function processURL(fullURL) {
     // Regular Expressions for each piece of a URL.
     const passwordRegex = /(?<=:)[^(\/|:|@|?|#)]*(?=@)/;
     const hostWithPasswordRegex = /(?<=\/\/)[^(\/|:|@|?|#)]*(?=(\/|:))/;
@@ -97,35 +108,50 @@ function processRequestLine(requestLine) {
     const pathRegex = /(?<=([^:\/]\/))[^(:|@|?|#)]*(?=\?)/;
     const protocolRegex = /^[^:]*/;
 
+    // Object to return, containing all url components.
+    const url = {
+        url: "",
+        host: "",
+        port: "",
+        query: {},
+        fragment: "", 
+        path: "",
+        protocol: ""
+    };
+
     // Split up the url using regex.
     if (fullURL.match(passwordRegex) == null) {
-        rL.host = fullURL.match(hostWithPasswordRegex)[0];
+        url.host = fullURL.match(hostWithPasswordRegex)[0];
     }
     else {
-        rL.host = fullURL.match(hostWOPasswordRegex);
+        url.host = fullURL.match(hostWOPasswordRegex);
     }
-    rL.port = fullURL.match(portRegex)[0];
-    if (rL.port == "") {
-        rL.port = 80;
-    }
+    url.fragment = fullURL.match(fragmentRegex)[0];
+    url.path = '/' + fullURL.match(pathRegex)[0];
+    url.protocol = fullURL.match(protocolRegex)[0];
+    url.url = fullURL.substring(url.protocol.length + url.host.length + 3, fullURL.length);
+
+    // Split up the queries.
     let queries = fullURL.match(queryRegex)[0].split("&");
     queries.forEach((query) => {
         let pair = query.split("=");
-        rL.query[pair[0]] = pair[1];
+        url.query[pair[0]] = pair[1];
     });
-    rL.fragment = fullURL.match(fragmentRegex)[0];
-    rL.path = '/' + fullURL.match(pathRegex)[0];
-    rL.protocol = fullURL.match(protocolRegex)[0];
-    rL.url = fullURL.substring(rL.protocol.length + rL.host.length + 3, fullURL.length);
-
-    // Determine the port that is being used, based on protocol.
-    if (rL.protocol.toLowerCase() == "http") {
-        rL.port = 80;
-    }
-    else {
-        rL.port = 443;
+    
+    // Determine the port that is being used, based on protocol if not defined.
+    url.port = fullURL.match(portRegex)[0];
+    if (url.port == "") {
+        if (url.protocol.toLowerCase() == "http") {
+            url.port = "80";
+        }
+        else {
+            url.port = "443";
+        }
     }
 
     // Return the completed object.
-    return rL;
+    return url;
 }
+
+var test = 'GET HTTP:\/\/charity.cs.uwlax.edu\/a\/b?c=d&e=f#ghi HTTP\/1.1\nHost: charity.cs.uwlax.edu\nConnection: keep-alive\nPragma: no-cache\nCache-Control: no-cache\nUpgrade-Insecure-Requests: 1\nUser-Agent: Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/55.0.2883.95 Safari\/537.36\nAccept: text\/html,application\/xhtml+xml,application\/xml;q=0.9,image\/webp,*\/*;q=0.8\nAccept-Encoding: gzip, deflate, sdch\nAccept-Language: en-US,en;q=0.8,nb;q=0.6\n\nThis is the body';
+console.log(JSON.stringify(HttpRequest(test)));
