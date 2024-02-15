@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 
 var indexRouter = require('./routes/index');
 
@@ -13,8 +14,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'MySecret',
+  resave: false,
+  saveUninitialized: true
+}));
 
 app.use('/', indexRouter);
+app.use('api/v1/sid', indexRouter);
+app.use('api/v1/meta', indexRouter);
+app.use('api/v1/fonts', indexRouter);
+app.use('api/v1/:sid/games/:gid', indexRouter);
+app.use('api/v1/:sid/games', indexRouter);
+app.use('api/v1/:sid/games/:gid/guesses', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
