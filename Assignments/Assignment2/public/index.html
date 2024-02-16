@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>Wheel of Fortune - Tanner Turba</title>
         <link rel="stylesheet" href="../stylesheets/style.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <title>Wheel of Fortune - Tanner Turba</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="client.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     </head>
     <body>
         <div class="container border bg-light m-4 mx-auto py-0 bar">
@@ -14,11 +18,7 @@
                     <h5>Font</h5>
                 </span>
                 <span>
-                    <select name="Font" id="Font">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
+                    <select name="Font" id="font"></select>
                 </span>
             </div>
             <div class="m-1 p-1 d-inline-flex p-2">
@@ -26,24 +26,20 @@
                     <h5>Level</h5>
                 </span>
                 <span>
-                    <select name="Level" id="Level">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
+                    <select name="Level" id="level"></select>
                 </span>
             </div>
             <div class="input-group p-1 d-inline-flex p-2 color-picker">
                 <span class="input-group-text">Word</span>
-                <input type="color" class="form-control color-picker" id="word" value="#808080">
+                <input type="color" class="form-control color-picker" id="word">
             </div>
             <div class="input-group p-1 d-inline-flex p-2 color-picker">
                 <span class="input-group-text">Guess</span>
-                <input type="color" class="form-control color-picker" id="guess" value="#ffffff">
+                <input type="color" class="form-control color-picker" id="guess">
             </div>
             <div class="input-group p-1 d-inline-flex p-2 color-picker">
                 <span class="input-group-text">Fore</span>
-                <input type="color" class="form-control color-picker" id="fore" value="#000000">
+                <input type="color" class="form-control color-picker" id="fore">
             </div>
             <button type="button" class="btn btn-primary float-end my-3">New Game</button>
         </div>
@@ -65,9 +61,10 @@
                     <h5>Status</h5>
                 </div>
             </div>
-            <div class="row my-3"></div>
-        </div>
+            <div class="row my-3">
 
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </body>
 </html>
