@@ -4,7 +4,7 @@ div.bar {
 }
 select {
   width: 150px;
-  height: 80%;
+  height: 100px !important;
 }
 input[type="color"] {
   margin: 0px 0px;
@@ -12,4 +12,11 @@ input[type="color"] {
   height: 50px;
   width: 60px;
   flex: 0 1 60px;
+}
+div.color-picker {
+  width: 135px;
+}
+input.color-picker {
+  padding: 15px;
+  width: 100px;
 }

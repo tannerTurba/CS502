@@ -11,7 +11,7 @@
         <div class="container border bg-light m-4 mx-auto py-0 bar">
             <div class="m-1 p-1 d-inline-flex p-2">
                 <span>
-                    <h6>Font</h6>
+                    <h5>Font</h5>
                 </span>
                 <span>
                     <select name="Font" id="Font">
@@ -23,7 +23,7 @@
             </div>
             <div class="m-1 p-1 d-inline-flex p-2">
                 <span>
-                    <h6>Level</h6>
+                    <h5>Level</h5>
                 </span>
                 <span>
                     <select name="Level" id="Level">
@@ -33,38 +33,39 @@
                     </select>
                 </span>
             </div>
-            <div class="input-group m-1 p-1 d-inline-flex p-2 w-25">
+            <div class="input-group p-1 d-inline-flex p-2 color-picker">
                 <span class="input-group-text">Word</span>
-                <input type="color" class="form-control" id="word" value="#808080">
+                <input type="color" class="form-control color-picker" id="word" value="#808080">
             </div>
-            <div class="input-group m-1 p-1 d-inline-flex p-2 w-25">
+            <div class="input-group p-1 d-inline-flex p-2 color-picker">
                 <span class="input-group-text">Guess</span>
-                <input type="color" class="form-control" id="guess" value="#ffffff">
+                <input type="color" class="form-control color-picker" id="guess" value="#ffffff">
             </div>
-            <!-- <div class="input-group m-1 p-1 d-inline-flex p-2 w-25">
+            <div class="input-group p-1 d-inline-flex p-2 color-picker">
                 <span class="input-group-text">Fore</span>
-                <input type="color" class="form-control" id="fore" value="#000000">
-            </div> -->
-            <div class="my-3">
-                <button type="button" class="btn btn-primary float-end">New Game</button>
+                <input type="color" class="form-control color-picker" id="fore" value="#000000">
             </div>
+            <button type="button" class="btn btn-primary float-end my-3">New Game</button>
         </div>
-        <div class="container border bg-light m-4 mx-auto py-0 bar">
-            <div class="m-1 p-1 d-inline-flex p-2">
-                <h6>Level</h6>
+        <div class="container border bg-light m-4 mx-auto text-left">
+            <div class="row my-3">
+                <div class="col-1">
+                    <h5>Level</h5>
+                </div>
+                <div class="col-6">
+                    <h5>Phrase</h5>
+                </div>
+                <div class="col-2">
+                    <h5>Remaining</h5>
+                </div>
+                <div class="col-2">
+                    <h5>Answer</h5>
+                </div>
+                <div class="col-1">
+                    <h5>Status</h5>
+                </div>
             </div>
-            <div class="m-1 p-1 d-inline-flex p-2">
-                <h6>Phrase</h6>
-            </div>
-            <div class="m-1 p-1 d-inline-flex p-2">
-                <h6>Remaining</h6>
-            </div>
-            <div class="m-1 p-1 d-inline-flex p-2">
-                <h6>Answer</h6>
-            </div>
-            <div class="m-1 p-1 d-inline-flex p-2">
-                <h6>Status</h6>
-            </div>
+            <div class="row my-3"></div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
