@@ -1,5 +1,3 @@
-import { Colors } from "./javascripts/classes";
-
 $(document).ready(async function() {
   let sid = await getSID();
   let metadata = await getMetadata();
@@ -90,6 +88,8 @@ async function createGame() {
   const wordColor = document.getElementById('word').value;
   const guessColor = document.getElementById('guess').value;
   const foreColor = document.getElementById('fore').value;
+
+  // TODO: COLORS CLASS ISN'T IMPORTED OR ANYTHING ----------------------------
   const colorObj = new Colors(guessColor, foreColor, wordColor);
 
   return fetch (`/api/v1/${sessionID}/games?level=${level}`, {

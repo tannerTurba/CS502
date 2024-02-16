@@ -56,7 +56,7 @@ Level.LEVELS = {
 /**
  * The class to represent a Color object.
  */
-export default class Colors {
+class Colors {
   /**
    * Creates a Color object.
    * @param {string} guessColor the color of the guess background.
