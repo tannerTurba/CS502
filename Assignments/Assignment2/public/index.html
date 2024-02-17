@@ -1,49 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Wheel of Fortune - Tanner Turba</title>
-        <link rel="stylesheet" href="../stylesheets/style.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script type="text/javascript" src="client.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <title>Wheel of Fortune - Tanner Turba</title>
+        <script type="text/javascript" src="./js/app.js"></script>
+        <link rel="stylesheet" href="./css/style.css">
     </head>
     <body>
-        <div class="container border bg-light m-4 mx-auto py-0 bar">
-            <div class="m-1 p-1 d-inline-flex p-2">
-                <span>
-                    <h5>Font</h5>
-                </span>
-                <span>
-                    <select name="Font" id="font"></select>
-                </span>
-            </div>
-            <div class="m-1 p-1 d-inline-flex p-2">
-                <span>
-                    <h5>Level</h5>
-                </span>
-                <span>
-                    <select name="Level" id="level"></select>
-                </span>
-            </div>
-            <div class="input-group p-1 d-inline-flex p-2 color-picker">
-                <span class="input-group-text">Word</span>
-                <input type="color" class="form-control color-picker" id="word">
-            </div>
-            <div class="input-group p-1 d-inline-flex p-2 color-picker">
-                <span class="input-group-text">Guess</span>
-                <input type="color" class="form-control color-picker" id="guess">
-            </div>
-            <div class="input-group p-1 d-inline-flex p-2 color-picker">
-                <span class="input-group-text">Fore</span>
-                <input type="color" class="form-control color-picker" id="fore">
-            </div>
-            <button type="button" class="btn btn-primary float-end my-3">New Game</button>
-        </div>
         <div class="container border bg-light m-4 mx-auto text-left">
+            <div class="row">
+                <div class="col d-inline-flex my-auto">
+                    <h5 class="mx-auto">Font</h5>
+                    <select name="Font" id="font"></select>
+                    <h5 class="mx-auto">Level</h5>
+                    <select name="Level" id="level"></select>
+                </div>
+                <div class="col d-inline-flex">
+                    <div class="input-group p-1 d-inline-flex p-2 color-picker">
+                        <span class="input-group-text">Word</span>
+                        <input type="color" class="form-control color-picker" id="word">
+                    </div>
+                    <div class="input-group p-1 d-inline-flex p-2 color-picker">
+                        <span class="input-group-text">Guess</span>
+                        <input type="color" class="form-control color-picker" id="guess">
+                    </div>
+                    <div class="input-group p-1 d-inline-flex p-2 color-picker">
+                        <span class="input-group-text">Fore</span>
+                        <input type="color" class="form-control color-picker" id="fore">
+                    </div>
+                </div>
+                <div class="col float-end">
+                    <button type="button" class="btn btn-primary float-end my-3" id="newGameBtn" onclick="newGameBtnClick();">New Game</button>
+                </div>
+            </div>
+        </div>
+        <div class="container border bg-light m-4 mx-auto text-left" id="history">
             <div class="row my-3">
                 <div class="col-1">
                     <h5>Level</h5>
@@ -60,9 +56,6 @@
                 <div class="col-1">
                     <h5>Status</h5>
                 </div>
-            </div>
-            <div class="row my-3">
-
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
