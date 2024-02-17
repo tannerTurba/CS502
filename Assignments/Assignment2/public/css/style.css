@@ -26,3 +26,6 @@ p.phrase {
   width: 1em;
   text-align: center;
 }
+input#guessInput {
+  width: 75px;
+}

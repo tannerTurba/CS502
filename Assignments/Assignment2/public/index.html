@@ -12,49 +12,82 @@
         <link rel="stylesheet" href="./css/style.css">
     </head>
     <body>
-        <div class="container border bg-light m-4 mx-auto text-left">
-            <div class="row">
-                <div class="col d-inline-flex my-auto">
-                    <h5 class="mx-auto">Font</h5>
-                    <select name="Font" id="font"></select>
-                    <h5 class="mx-auto">Level</h5>
-                    <select name="Level" id="level"></select>
+        <div class="container" id="menu">
+            <div class="container card bg-light m-4 mx-auto text-left">
+                <div class="row">
+                    <div class="col d-inline-flex my-auto">
+                        <h5 class="mx-auto">Font</h5>
+                        <select name="Font" id="font"></select>
+                        <h5 class="mx-auto">Level</h5>
+                        <select name="Level" id="level"></select>
+                    </div>
+                    <div class="col d-inline-flex">
+                        <div class="input-group p-1 d-inline-flex p-2 color-picker">
+                            <span class="input-group-text">Word</span>
+                            <input type="color" class="form-control color-picker" id="word">
+                        </div>
+                        <div class="input-group p-1 d-inline-flex p-2 color-picker">
+                            <span class="input-group-text">Guess</span>
+                            <input type="color" class="form-control color-picker" id="guess">
+                        </div>
+                        <div class="input-group p-1 d-inline-flex p-2 color-picker">
+                            <span class="input-group-text">Fore</span>
+                            <input type="color" class="form-control color-picker" id="fore">
+                        </div>
+                    </div>
+                    <div class="col float-end">
+                        <button type="button" class="btn btn-primary float-end my-3" id="newGameBtn" onclick="newGameBtnClick();">New Game</button>
+                    </div>
                 </div>
-                <div class="col d-inline-flex">
-                    <div class="input-group p-1 d-inline-flex p-2 color-picker">
-                        <span class="input-group-text">Word</span>
-                        <input type="color" class="form-control color-picker" id="word">
-                    </div>
-                    <div class="input-group p-1 d-inline-flex p-2 color-picker">
-                        <span class="input-group-text">Guess</span>
-                        <input type="color" class="form-control color-picker" id="guess">
-                    </div>
-                    <div class="input-group p-1 d-inline-flex p-2 color-picker">
-                        <span class="input-group-text">Fore</span>
-                        <input type="color" class="form-control color-picker" id="fore">
+            </div>
+            <div class="container card border bg-light m-4 mx-auto text-left">
+                <div>
+                    <div class="row my-3">
+                        <div class="col-1">
+                            <h5>Level</h5>
+                        </div>
+                        <div class="col-6">
+                            <h5>Phrase</h5>
+                        </div>
+                        <div class="col-2">
+                            <h5>Remaining</h5>
+                        </div>
+                        <div class="col-2">
+                            <h5>Answer</h5>
+                        </div>
+                        <div class="col-1">
+                            <h5>Status</h5>
+                        </div>
                     </div>
                 </div>
-                <div class="col float-end">
-                    <button type="button" class="btn btn-primary float-end my-3" id="newGameBtn" onclick="newGameBtnClick();">New Game</button>
+                <div id="history">
+
                 </div>
             </div>
         </div>
-        <div class="container border bg-light m-4 mx-auto text-left" id="history">
-            <div class="row my-3">
-                <div class="col-1">
-                    <h5>Level</h5>
+        <div class="container" id="guesser" style="display: none;">
+            <div class="container card border bg-light m-4 mx-auto text-left">
+                <img id="winGif" src="./images/winner.gif" alt="win gif" class="img-fluid" style="display: none;">
+                <img id="loseGif" src="./images/cry.gif" alt="lose gif" class="img-fluid" style="display: none;">
+                <div class="row my-3">
+                    <div class="col-2 my-auto">
+                        <p id="guessesRemaining"></p>
+                    </div>
+                    <div class="col-2 d-inline-flex my-auto mx-0">
+                        <input type="text" name="guessInput" id="guessInput">
+                        <button type="button" id="guessBtn" class="btn btn-primary mx-1" onclick="guessBtnClick();">Guess</button>
+                    </div>
+                    <div class="col-8 float-end">
+                        <button type="button" class="btn-close mx-auto float-end" aria-label="Close" id="closeBtn" onclick="closeGuesser();"></button>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <h5>Phrase</h5>
-                </div>
-                <div class="col-2">
-                    <h5>Remaining</h5>
-                </div>
-                <div class="col-2">
-                    <h5>Answer</h5>
-                </div>
-                <div class="col-1">
-                    <h5>Status</h5>
+                <div class="row my-3">
+                    <div class="col-7">
+                        <span class="float-start d-inline-flex" id="displayView"></span>
+                    </div>
+                    <div class="col-5">
+                        <span class="mx-3 float-end d-inline-flex" id="displayGuesses"></span>
+                    </div>
                 </div>
             </div>
         </div>

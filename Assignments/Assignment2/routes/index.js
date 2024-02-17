@@ -1,5 +1,6 @@
 var fs = require('fs');
 var express = require('express');
+const { Console } = require('console');
 var router = express.Router();
 
 /**
@@ -75,7 +76,7 @@ class Font {
   /**
    * A predefined Color object that defines the default color values.
    */
-  Colors.DEFAULT = new Colors("#fefae0", "#606c38", "#283618");
+  Colors.DEFAULT = new Colors("#fefae0", "#283618", "#606c38");
   
   /**
    * The class to represent a Metadata object.
@@ -138,7 +139,8 @@ class Font {
     /**
      * Adds a guess to the list of guessed letters.
      */
-    addGuess = new function(guess) {
+    addGuess(guess) {
+        console.log("adding guess");
         if (this.guesses === undefined) {
             this.guesses = guess;
         }
@@ -227,6 +229,7 @@ router.get('/api/v1/:sid/games', (req, res) => {
     const games = sessions.get(sid);
     
     if (games) {
+        console.log(JSON.stringify(Object.fromEntries(games)));
         res.status(200).json( JSON.stringify(Array.from(games.values())) );
     }
     else {
@@ -277,25 +280,31 @@ router.post('/api/v1/:sid/games', async (req, res) => {
   let games;
 
   if (sessions.has(sid)) {
+    // console.log(`Sessions already has this session.`);
+
     // Get the map of games already associated to the sessionID. 
     games = sessions.get(sid);
   }
   else {
+    // console.log(`Creating new pair for this session.`);
+
     // Create a map of games associated with the sessionID.
     games = new Map();
     sessions.set(sid, games);
   }
-
-  console.log(`COLOR: ${JSON.stringify(color)}`);
-  console.log(JSON.stringify(await req.body));
-  console.log(await req.body.guessColor);
-  console.log(await req.body.foreColor);
-  console.log(await req.body.wordColor);
+//   console.log(`Session size = ${sessions.size}`);
+//   console.log(JSON.stringify(Object.fromEntries(sessions)));
   
   // Get the new id, create the game, add to the map of games.
-  let id = games.length;
+  let id = games.size.toString();
   const newGame = new Game(color, font, id, level, targetWord);
   games.set(id, newGame);
+
+//   console.log(`ID = ${id}`);
+//   console.log(`NewGame = ${JSON.stringify(newGame)}`);
+//   console.log(`Games = ${JSON.stringify(Object.fromEntries(games))}`);
+  console.log(`Sessions = ${JSON.stringify(Object.fromEntries(sessions.get(sid)))}`);
+
   res.status(200).json( JSON.stringify(newGame) );
 });
 
@@ -304,12 +313,11 @@ router.post('/api/v1/:sid/games/:gid/guesses', (req, res) => {
   const sid = req.params.sid;
   const gid = req.params.gid;
   const guess = req.query['guess'].toUpperCase();
-  let error;
 
   // Error checking in case session or game does not exist.
   const games = sessions.get(sid);
   if (games) {
-    const game = games.get(gid);
+    const game = games.get(gid.toString());
     if (game) {
         if (game.guesses.includes(guess)) {
             /* Do nothing... */
@@ -318,11 +326,16 @@ router.post('/api/v1/:sid/games/:gid/guesses', (req, res) => {
             game.addGuess(guess);
             let newView = "";
             for (let i = 0; i < game.target.length; i++) {
-                if (guess === game.target[i]) {
-                    newView.concat(guess);
+                if (game.view[i] !== '_') {
+                    newView = newView.concat(game.view[i]);
                 }
                 else {
-                    newView.concat('_');
+                    if (guess === game.target[i]) {
+                        newView = newView.concat(guess);
+                    }
+                    else {
+                        newView = newView.concat('_');
+                    }
                 }
             }
             game.view = newView;
@@ -332,20 +345,21 @@ router.post('/api/v1/:sid/games/:gid/guesses', (req, res) => {
             game.remaining--;
         }
 
+        console.log(`game.view = ${game.view}`);
         if (!game.view.includes('_')) {
-            game.status = game.STATUSES.VICTORY;
+            game.status = Game.STATUSES.VICTORY;
         }
         else if (game.remaining == 0) {
-            game.status = game.STATUSES.LOSS;
+            game.status = Game.STATUSES.LOSS;
         }
         res.status(200).json( JSON.stringify(game) );
     }
     else {
-      error = new Error(`The game '${gid}' is not associated with the session '${sid}'.`)
+      let error = new Error(`The game '${gid}' is not associated with the session '${sid}'.`)
       res.status(200).json( JSON.stringify(error) );
     }
   }
-  error = new Error(`The session '${sid}' does not exist.`)
+  let error = new Error(`The session '${sid}' does not exist.`)
   res.status(200).json( JSON.stringify(error) );
 });
 

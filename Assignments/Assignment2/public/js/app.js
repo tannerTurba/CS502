@@ -1,3 +1,5 @@
+let currentGameId = '';
+
 $(document).ready(async function() {
     let sid = await getSID();
     let metadata = await getMetadata();
@@ -31,13 +33,78 @@ $(document).ready(async function() {
     await updateView();
   });
 
-  // $('#newGameBtn').on('click', async function() {
-  //   alert("btn clicked");
-  // });
+  async function guessBtnClick() {
+    let guess = $('#guessInput').val().toUpperCase();
+    if (guess !== "") {
+      let gameState = await makeGuess(currentGameId, guess);
+      updateGuessView(gameState);
+      $('#guessInput').val('');
+    }
+  }
   
   async function newGameBtnClick() {
-    await createGame();
-    await updateView();
+    let game = await createGame();
+    currentGameId = game.id;
+    $('#menu').slideUp('slow');
+    $('#guesser').slideDown('slow');
+    updateGuessView(game);
+  }
+
+  function updateGuessView(game) {
+    if (game.status === 'unfinished') {
+      let phrase = "";
+      game.view.split("").forEach((letter) => {
+        phrase = phrase.concat(`<p class="phrase" style="background-color: ${game.colors.wordColor}; color: ${game.colors.foreColor}">${letter.toUpperCase()}</p>`);
+      });
+      $('#displayView').html(phrase);
+  
+      phrase = "";
+      game.guesses.split("").forEach((letter) => {
+        phrase = phrase.concat(`<p class="phrase" style="background-color: ${game.colors.guessColor}; color: ${game.colors.foreColor}">${letter.toUpperCase()}</p>`);
+      });
+      $('#displayGuesses').html(phrase);
+  
+      $('#guessesRemaining').text(`${game.remaining} guesses remaining.`);
+    }
+    else { 
+      $('#guessesRemaining').css('visibility', 'hidden');
+      $('#guessInput').css('visibility', 'hidden');
+      $('#guessBtn').css('visibility', 'hidden');
+      if (game.status === 'victory') {
+        // $('#winGif').css();
+      }
+      else {
+        // $('#loseGif').css();
+      }
+    }
+  }
+
+  function hideGuessUI() {
+    $('#guessesRemaining').css('visibility', 'hidden');
+    $('#guessInput').css('visibility', 'hidden');
+    $('#guessBtn').css('visibility', 'hidden');
+  }
+
+  function showGuessUI() {
+    $('#guessesRemaining').css('visibility', 'visible');
+    $('#guessInput').css('visibility', 'visible');
+    $('#guessBtn').css('visibility', 'visible');
+  }
+  
+  function closeGuesser() {
+    let x = 0;
+    $('#guesser').slideUp('slow');
+    $('#menu').slideDown('slow');
+    showGuessUI();
+    updateView();
+  };
+
+  async function openGame(id) {
+    let game = await getGame(id);
+    currentGameId = id;
+    $('#menu').slideUp('slow');
+    $('#guesser').slideDown('slow');
+    updateGuessView(game);
   }
 
   async function updateView() {
@@ -50,7 +117,7 @@ $(document).ready(async function() {
         historyHTML = historyHTML.concat(html);
       });
     }
-    $('#history').append(historyHTML);
+    $('#history').html(historyHTML);
   }
 
   function historicalGameHTML(game) {
@@ -63,7 +130,7 @@ $(document).ready(async function() {
       phrase = phrase.concat(`<p class="phrase" style="background-color: ${game.colors.wordColor}; color: ${game.colors.foreColor}">${letter.toUpperCase()}</p>`);
     });
 
-    return `<div class="row my-3">
+    return `<div class="row my-3" onclick="openGame(${game.id});">
     <div class="col-1">
         ${level}
     </div>
