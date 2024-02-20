@@ -76,7 +76,7 @@ class Font {
   /**
    * A predefined Color object that defines the default color values.
    */
-  Colors.DEFAULT = new Colors("#fefae0", "#283618", "#606c38");
+  Colors.DEFAULT = new Colors("#fefae0", "#283618", "#9aac5d");
   
   /**
    * The class to represent a Metadata object.
@@ -280,31 +280,18 @@ router.post('/api/v1/:sid/games', async (req, res) => {
   let games;
 
   if (sessions.has(sid)) {
-    // console.log(`Sessions already has this session.`);
-
     // Get the map of games already associated to the sessionID. 
     games = sessions.get(sid);
   }
   else {
-    // console.log(`Creating new pair for this session.`);
-
     // Create a map of games associated with the sessionID.
     games = new Map();
     sessions.set(sid, games);
   }
-//   console.log(`Session size = ${sessions.size}`);
-//   console.log(JSON.stringify(Object.fromEntries(sessions)));
-  
   // Get the new id, create the game, add to the map of games.
   let id = games.size.toString();
   const newGame = new Game(color, font, id, level, targetWord);
   games.set(id, newGame);
-
-//   console.log(`ID = ${id}`);
-//   console.log(`NewGame = ${JSON.stringify(newGame)}`);
-//   console.log(`Games = ${JSON.stringify(Object.fromEntries(games))}`);
-  console.log(`Sessions = ${JSON.stringify(Object.fromEntries(sessions.get(sid)))}`);
-
   res.status(200).json( JSON.stringify(newGame) );
 });
 

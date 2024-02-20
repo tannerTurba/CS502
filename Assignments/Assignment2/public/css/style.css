@@ -2,11 +2,6 @@ div.bar {
   border-radius: 5px;
   height: 70px;
 }
-select {
-  width: 150px;
-  height: 50px;
-  border-radius: 5px;
-}
 input[type="color"] {
   margin: 0px 0px;
   padding: 10px 10px;
@@ -40,4 +35,14 @@ input#guessInput {
   background-size: contain;
   background-repeat: repeat-x;
   background-position: center;
+}
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.protest-riot-regular {
+  font-family: "Protest Riot", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }

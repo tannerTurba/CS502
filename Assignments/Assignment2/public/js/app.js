@@ -6,12 +6,12 @@ $(document).ready(async function() {
     // Set font options using metadata.
     metadata.fonts.forEach((font) => {
       $('#font').append($('<option>', {
-        value: font.family, 
-        text: font.family,
+        value: font.rule,
         id: font.family
-      }));
-      $(`option[value='${font.family}']`).addClass(font.rule);
-      // $(`option[value='${font.family}']`).css("font-family", `'${font.family}', ${font.category}`);
+      }).append($('<span>', {
+        class: font.rule,
+        text: font.family
+      })));
       $('head').append(`<link href="${font.url}" rel="stylesheet">`);
     });
   
@@ -43,7 +43,6 @@ $(document).ready(async function() {
   }
 
   $('guessForm').submit(async function() {
-    // event.preventDefault();
     let guess = $('#guessInput').val().toUpperCase();
     if (guess !== "") {
       let gameState = await makeGuess(currentGameId, guess);
@@ -60,6 +59,14 @@ $(document).ready(async function() {
     updateGuessView(game);
   }
 
+  function generateBlockWord(word, fontRule, wordColor, blockColor) {
+    let phrase = "";
+    word.split("").forEach((letter) => {
+      phrase = phrase.concat(`<p class="phrase ${fontRule}" style="background-color: ${wordColor}; color: ${blockColor}">${letter.toUpperCase()}</p>`);
+    });
+    return phrase;
+  }
+
   function updateGuessView(game) {
     if ($('#imageContainer').hasClass('winImage')) {
       $('#imageContainer').removeClass('winImage');
@@ -67,16 +74,10 @@ $(document).ready(async function() {
     else if ($('#imageContainer').hasClass('loseImage')) {
       $('#imageContainer').removeClass('loseImage');
     }
-      let phrase = "";
-      game.view.split("").forEach((letter) => {
-        phrase = phrase.concat(`<p class="phrase ${game.font.rule}" style="background-color: ${game.colors.wordColor}; color: ${game.colors.foreColor}">${letter.toUpperCase()}</p>`);
-      });
+      let phrase = generateBlockWord(game.view, game.font, game.colors.wordColor, game.colors.foreColor);
       $('#displayView').html(phrase);
   
-      phrase = "";
-      game.guesses.split("").forEach((letter) => {
-        phrase = phrase.concat(`<p class="phrase ${game.font.rule}" style="background-color: ${game.colors.guessColor}; color: ${game.colors.foreColor}">${letter.toUpperCase()}</p>`);
-      });
+      phrase = generateBlockWord(game.guesses, game.font, game.colors.guessColor, game.colors.foreColor);
       $('#displayGuesses').html(phrase);
       $('#guessesRemaining').text(`${game.remaining} guesses remaining.`);
   
@@ -140,10 +141,7 @@ $(document).ready(async function() {
     const remaining = game.remaining;
     const answer = game.target;
     const status = game.status;
-    let phrase = "";
-    game.view.split("").forEach((letter) => {
-      phrase = phrase.concat(`<p class="phrase ${game.font.rule}" style="background-color: ${game.colors.wordColor}; color: ${game.colors.foreColor}">${letter.toUpperCase()}</p>`);
-    });
+    let phrase = generateBlockWord(game.view, game.font, game.colors.wordColor, game.colors.foreColor);
 
     return `<div class="row my-3" onclick="openGame(${game.id});">
     <div class="col-1">
