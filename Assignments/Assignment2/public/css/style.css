@@ -29,3 +29,15 @@ p.phrase {
 input#guessInput {
   width: 75px;
 }
+.winImage {
+  background-image: url('../images/winner.gif');
+  background-size: auto;
+  background-repeat: repeat-x;
+  background-position: center;
+}
+.loseImage {
+  background-image: url('../images/cry.gif');
+  background-size: contain;
+  background-repeat: repeat-x;
+  background-position: center;
+}

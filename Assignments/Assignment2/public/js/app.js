@@ -51,7 +51,12 @@ $(document).ready(async function() {
   }
 
   function updateGuessView(game) {
-    if (game.status === 'unfinished') {
+    if ($('#imageContainer').hasClass('winImage')) {
+      $('#imageContainer').removeClass('winImage');
+    }
+    else if ($('#imageContainer').hasClass('loseImage')) {
+      $('#imageContainer').removeClass('loseImage');
+    }
       let phrase = "";
       game.view.split("").forEach((letter) => {
         phrase = phrase.concat(`<p class="phrase" style="background-color: ${game.colors.wordColor}; color: ${game.colors.foreColor}">${letter.toUpperCase()}</p>`);
@@ -63,19 +68,19 @@ $(document).ready(async function() {
         phrase = phrase.concat(`<p class="phrase" style="background-color: ${game.colors.guessColor}; color: ${game.colors.foreColor}">${letter.toUpperCase()}</p>`);
       });
       $('#displayGuesses').html(phrase);
-  
       $('#guessesRemaining').text(`${game.remaining} guesses remaining.`);
-    }
-    else { 
+  
+    if (game.status === 'victory') { 
       $('#guessesRemaining').css('visibility', 'hidden');
       $('#guessInput').css('visibility', 'hidden');
       $('#guessBtn').css('visibility', 'hidden');
-      if (game.status === 'victory') {
-        // $('#winGif').css();
-      }
-      else {
-        // $('#loseGif').css();
-      }
+      $('#imageContainer').addClass('winImage');
+    }
+    else if (game.status === 'loss') {
+      $('#guessesRemaining').css('visibility', 'hidden');
+      $('#guessInput').css('visibility', 'hidden');
+      $('#guessBtn').css('visibility', 'hidden');
+      $('#imageContainer').addClass('loseImage');
     }
   }
 
@@ -93,8 +98,8 @@ $(document).ready(async function() {
   
   function closeGuesser() {
     let x = 0;
-    $('#guesser').slideUp('slow');
-    $('#menu').slideDown('slow');
+    $('#guesser').slideUp('fast');
+    $('#menu').slideDown('fast');
     showGuessUI();
     updateView();
   };
