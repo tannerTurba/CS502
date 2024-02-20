@@ -25,9 +25,9 @@ class Font {
    * Predefined Font objects, which represent the supported fonts.
    */
   Font.FONTS = {
-    PROTEST_RIOT: new Font("sans-serif", "Protest Riot", "regular", "https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap"),
-    ROBOTO: new Font("sans-serif", "Roboto", "regular", "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"),
-    NOTO_SERIF: new Font("serif", "Noto Serif", "normal", "https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap")
+    PROTEST_RIOT: new Font("sans-serif", "Protest Riot", "protest-riot-regular", "https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap"),
+    ROBOTO: new Font("sans-serif", "Roboto", "roboto-regular", "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"),
+    NOTO_SERIF: new Font("serif", "Noto Serif", "noto-serif-400", "https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap")
   };
   
   /**

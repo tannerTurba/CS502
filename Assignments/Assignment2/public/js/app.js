@@ -1,7 +1,6 @@
 let currentGameId = '';
 
 $(document).ready(async function() {
-    let sid = await getSID();
     let metadata = await getMetadata();
   
     // Set font options using metadata.
@@ -11,7 +10,8 @@ $(document).ready(async function() {
         text: font.family,
         id: font.family
       }));
-      $(`option[value='${font.family}']`).css("font-family", `'${font.family}', ${font.category}`);
+      $(`option[value='${font.family}']`).addClass(font.rule);
+      // $(`option[value='${font.family}']`).css("font-family", `'${font.family}', ${font.category}`);
       $('head').append(`<link href="${font.url}" rel="stylesheet">`);
     });
   
@@ -41,6 +41,16 @@ $(document).ready(async function() {
       $('#guessInput').val('');
     }
   }
+
+  $('guessForm').submit(async function() {
+    // event.preventDefault();
+    let guess = $('#guessInput').val().toUpperCase();
+    if (guess !== "") {
+      let gameState = await makeGuess(currentGameId, guess);
+      updateGuessView(gameState);
+      $('#guessInput').val('');
+    }
+  });
   
   async function newGameBtnClick() {
     let game = await createGame();
@@ -59,13 +69,13 @@ $(document).ready(async function() {
     }
       let phrase = "";
       game.view.split("").forEach((letter) => {
-        phrase = phrase.concat(`<p class="phrase" style="background-color: ${game.colors.wordColor}; color: ${game.colors.foreColor}">${letter.toUpperCase()}</p>`);
+        phrase = phrase.concat(`<p class="phrase ${game.font.rule}" style="background-color: ${game.colors.wordColor}; color: ${game.colors.foreColor}">${letter.toUpperCase()}</p>`);
       });
       $('#displayView').html(phrase);
   
       phrase = "";
       game.guesses.split("").forEach((letter) => {
-        phrase = phrase.concat(`<p class="phrase" style="background-color: ${game.colors.guessColor}; color: ${game.colors.foreColor}">${letter.toUpperCase()}</p>`);
+        phrase = phrase.concat(`<p class="phrase ${game.font.rule}" style="background-color: ${game.colors.guessColor}; color: ${game.colors.foreColor}">${letter.toUpperCase()}</p>`);
       });
       $('#displayGuesses').html(phrase);
       $('#guessesRemaining').text(`${game.remaining} guesses remaining.`);
@@ -132,7 +142,7 @@ $(document).ready(async function() {
     const status = game.status;
     let phrase = "";
     game.view.split("").forEach((letter) => {
-      phrase = phrase.concat(`<p class="phrase" style="background-color: ${game.colors.wordColor}; color: ${game.colors.foreColor}">${letter.toUpperCase()}</p>`);
+      phrase = phrase.concat(`<p class="phrase ${game.font.rule}" style="background-color: ${game.colors.wordColor}; color: ${game.colors.foreColor}">${letter.toUpperCase()}</p>`);
     });
 
     return `<div class="row my-3" onclick="openGame(${game.id});">
