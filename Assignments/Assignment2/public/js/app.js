@@ -7,11 +7,14 @@ $(document).ready(async function() {
     metadata.fonts.forEach((font) => {
       $('#font').append($('<option>', {
         value: font.rule,
-        id: font.family
-      }).append($('<span>', {
-        class: font.rule,
+        id: font.family,
         text: font.family
-      })));
+      })
+      // .append($('<span>', {
+      //   class: font.rule,
+      //   text: font.family
+      // }))
+      );
       $('head').append(`<link href="${font.url}" rel="stylesheet">`);
     });
   
@@ -29,9 +32,22 @@ $(document).ready(async function() {
     $('#fore').val(metadata.defaults.colors.foreColor);
     $('#font').val(metadata.defaults.font.family);
     $('#level').val(metadata.defaults.level.name);
-
+    
+    document.querySelector('#font').addEventListener("change", function() {
+      console.log(this.value);
+      if (this.value == "noto-serif-regular") {
+        this.className = 'form-select-sm noto-serif-regular';
+      }
+      else if (this.value == "roboto-regular") {
+        this.className = 'form-select-sm roboto-regular';
+      }
+      else if (this.value == "protest-riot-regular") {
+         this.className = 'form-select-sm protest-riot-regular';
+      }
+    });
     await updateView();
   });
+  
 
   async function guessBtnClick() {
     let guess = $('#guessInput').val().toUpperCase();
