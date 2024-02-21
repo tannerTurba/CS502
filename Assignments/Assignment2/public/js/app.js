@@ -1,5 +1,8 @@
 let currentGameId = '';
 
+/**
+ * Initialize all webelements and set values with metadata. 
+ */
 $(document).ready(async function() {
     let metadata = await getMetadata();
   
@@ -9,12 +12,7 @@ $(document).ready(async function() {
         value: font.rule,
         id: font.family,
         text: font.family
-      })
-      // .append($('<span>', {
-      //   class: font.rule,
-      //   text: font.family
-      // }))
-      );
+      }));
       $('head').append(`<link href="${font.url}" rel="stylesheet">`);
     });
   
@@ -33,6 +31,7 @@ $(document).ready(async function() {
     $('#font').val(metadata.defaults.font.family);
     $('#level').val(metadata.defaults.level.name);
     
+    // Add an event listner to change font of select element, based on value.
     document.querySelector('#font').addEventListener("change", function() {
       console.log(this.value);
       if (this.value == "noto-serif-regular") {
@@ -45,36 +44,55 @@ $(document).ready(async function() {
          this.className = 'form-select-sm protest-riot-regular';
       }
     });
-    await updateView();
-  });
-  
 
-  async function guessBtnClick() {
-    let guess = $('#guessInput').val().toUpperCase();
-    if (guess !== "") {
-      let gameState = await makeGuess(currentGameId, guess);
-      updateGuessView(gameState);
-      $('#guessInput').val('');
-    }
-  }
-
-  $('guessForm').submit(async function() {
-    let guess = $('#guessInput').val().toUpperCase();
-    if (guess !== "") {
-      let gameState = await makeGuess(currentGameId, guess);
-      updateGuessView(gameState);
-      $('#guessInput').val('');
-    }
-  });
-  
-  async function newGameBtnClick() {
+    /**
+   * Add event listner to the new game button so a 
+   * game is created when clicked.
+   */
+  document.querySelector("#newGameBtn").addEventListener("click", async function() {
     let game = await createGame();
     currentGameId = game.id;
     $('#menu').slideUp('slow');
     $('#guesser').slideDown('slow');
     updateGuessView(game);
-  }
+  });
 
+  /**
+   * Add event listner to guess button so a guess is added to a 
+   * game object when submitted.
+   */
+  document.querySelector('#guessBtn').addEventListener("click", async function() {
+    let guess = $('#guessInput').val().toUpperCase();
+    if (guess !== "") {
+      let gameState = await makeGuess(currentGameId, guess);
+      updateGuessView(gameState);
+      $('#guessInput').val('');
+    }
+  });
+
+    /**
+   * Add an event listner to the close button so the guessing view
+   * closes when clicked.
+   */
+    document.querySelector("#closeBtn").addEventListener("click", function() {
+      $('#guesser').slideUp('fast');
+      $('#menu').slideDown('fast');
+      showGuessUI();
+      updateView();
+    });
+
+    // Initialize the main view.
+    await updateView();
+  });
+  
+  /**
+   * Creates a colored block-word.
+   * @param {string} word The work to make into a block-word.
+   * @param {string} fontRule The CSS rule to apply to the word.
+   * @param {string} wordColor A string representation of the hex color to use on the word.
+   * @param {string} blockColor A string representation of the hex color to use on the color block.
+   * @returns The HTML containing a colored block-word.
+   */
   function generateBlockWord(word, fontRule, wordColor, blockColor) {
     let phrase = "";
     word.split("").forEach((letter) => {
@@ -83,82 +101,104 @@ $(document).ready(async function() {
     return phrase;
   }
 
+  /**
+   * Adds a guess to a Game object.
+   * @param {Game} game A game object to add a guess to.
+   */
   function updateGuessView(game) {
+    // Remove any images that are being displayed.
     if ($('#imageContainer').hasClass('winImage')) {
       $('#imageContainer').removeClass('winImage');
     }
     else if ($('#imageContainer').hasClass('loseImage')) {
       $('#imageContainer').removeClass('loseImage');
     }
-      let phrase = generateBlockWord(game.view, game.font, game.colors.wordColor, game.colors.foreColor);
-      $('#displayView').html(phrase);
+
+    // Block-up the game's view to see progress.
+    let phrase = generateBlockWord(game.view, game.font, game.colors.wordColor, game.colors.foreColor);
+    $('#displayView').html(phrase);
+
+    // Block-up the game's guesses to see progress.
+    phrase = generateBlockWord(game.guesses, game.font, game.colors.guessColor, game.colors.foreColor);
+    $('#displayGuesses').html(phrase);
+    $('#guessesRemaining').text(`${game.remaining} guesses remaining.`);
   
-      phrase = generateBlockWord(game.guesses, game.font, game.colors.guessColor, game.colors.foreColor);
-      $('#displayGuesses').html(phrase);
-      $('#guessesRemaining').text(`${game.remaining} guesses remaining.`);
-  
+    // If the game has ended, show the appropriate image.
     if (game.status === 'victory') { 
-      $('#guessesRemaining').css('visibility', 'hidden');
-      $('#guessInput').css('visibility', 'hidden');
-      $('#guessBtn').css('visibility', 'hidden');
+      hideGuessUI();
       $('#imageContainer').addClass('winImage');
     }
     else if (game.status === 'loss') {
-      $('#guessesRemaining').css('visibility', 'hidden');
-      $('#guessInput').css('visibility', 'hidden');
-      $('#guessBtn').css('visibility', 'hidden');
+      hideGuessUI();
       $('#imageContainer').addClass('loseImage');
     }
   }
 
+  /**
+   * Hide the guessing view UI elements.
+   */
   function hideGuessUI() {
     $('#guessesRemaining').css('visibility', 'hidden');
     $('#guessInput').css('visibility', 'hidden');
     $('#guessBtn').css('visibility', 'hidden');
   }
 
+  /**
+   * Show the guessing view UI elements.
+   */
   function showGuessUI() {
     $('#guessesRemaining').css('visibility', 'visible');
     $('#guessInput').css('visibility', 'visible');
     $('#guessBtn').css('visibility', 'visible');
   }
-  
-  function closeGuesser() {
-    let x = 0;
-    $('#guesser').slideUp('fast');
-    $('#menu').slideDown('fast');
-    showGuessUI();
-    updateView();
-  };
 
+  /**
+   * Opens a specified game to the guessing view.
+   * @param {string} id A game ID.
+   */
   async function openGame(id) {
+    // Get the game obj.
     let game = await getGame(id);
     currentGameId = id;
+
+    // Swap views and update the guess view.
     $('#menu').slideUp('slow');
     $('#guesser').slideDown('slow');
     updateGuessView(game);
   }
 
+  /**
+   * Updates the main view.
+   */
   async function updateView() {
-    // Populate game history.
+    // Clear and populate the game history.
     let historyHTML = "";
     let allGames = await getAllGames();
     if (!allGames.msg) {
+      // Get the HTML to display historical games.
       allGames.forEach((game) => {
         let html = historicalGameHTML(game);
         historyHTML = historyHTML.concat(html);
       });
     }
+    // Display historical games.
     $('#history').html(historyHTML);
   }
 
+  /**
+   * Gets HTML for historical game data to display on the main page.
+   * @param {Game} game A historical game obj.
+   * @returns HTML that displays the historical game data.
+   */
   function historicalGameHTML(game) {
+    // Get data to view and create the block-words.
     const level = game.level.name;
     const remaining = game.remaining;
     const answer = game.target;
     const status = game.status;
     let phrase = generateBlockWord(game.view, game.font, game.colors.wordColor, game.colors.foreColor);
 
+    // Add all data to the HTML and return.
     return `<div class="row my-3" onclick="openGame(${game.id});">
     <div class="col-1">
         ${level}
@@ -178,6 +218,10 @@ $(document).ready(async function() {
     </div>\n`;
   }
   
+  /**
+   * Gets the sessionID of the current session.
+   * @returns The sessionID of the current session.
+   */
   async function getSID() {
     return fetch('/api/v1/sid')
       .then(response => {
@@ -194,6 +238,10 @@ $(document).ready(async function() {
       });
   }
   
+  /**
+   * Gets the metadate for the web app.
+   * @returns The metadate of the web app.
+   */
   async function getMetadata() {
     return fetch('/api/v1/meta')
       .then(response => {
@@ -210,6 +258,10 @@ $(document).ready(async function() {
       });
   }
   
+  /**
+   * Gets all the Game objects associated with the current sessionID.
+   * @returns A collection of Game objects.
+   */
   async function getAllGames() {
     const sessionID = await getSID();
     let games = await fetch(`/api/v1/${sessionID}/games`)
@@ -229,6 +281,10 @@ $(document).ready(async function() {
       return games;
   }
   
+  /**
+   * Creates a Game object that will be associated with the current sessionID.
+   * @returns A new Game object.
+   */
   async function createGame() {
     // Get game config.
     const sessionID = await getSID();
@@ -245,6 +301,7 @@ $(document).ready(async function() {
       wordColor: wordColor
     };
   
+    // Use a POST call to create the Game on the backend.
     let game = await fetch (`/api/v1/${sessionID}/games?level=${level}`, {
       method: 'POST',
       headers: {
@@ -268,9 +325,13 @@ $(document).ready(async function() {
       return game;
   }
   
+  /**
+   * Gets a Game object that is associated with the specified gameID.
+   * @param {string} gameID The gameID of the desired game.
+   * @returns A Game object
+   */
   async function getGame(gameID) {
     const sessionID = await getSID();
-  
     return fetch(`/api/v1/${sessionID}/games/${gameID}`)
       .then(response => {
         if (!response.ok) {
@@ -286,9 +347,14 @@ $(document).ready(async function() {
       });
   } 
   
+  /**
+   * Adds a guess to the specified game and gets the updated game instance.
+   * @param {string} gameID The gameID to add a guess to.
+   * @param {string} letter The letter that was guessed.
+   * @returns A Game object of the updated game.
+   */
   async function makeGuess(gameID, letter) {
     const sessionID = await getSID();
-  
     return fetch(`/api/v1/${sessionID}/games/${gameID}/guesses?guess=${letter}`, {
       method: 'POST'
     })

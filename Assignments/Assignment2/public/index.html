@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>Wheel of Fortune - Tanner Turba</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <title>Wheel of Fortune - Tanner Turba</title>
         <script type="text/javascript" src="./js/app.js"></script>
         <link rel="stylesheet" href="./css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     </head>
     <body>
         <div class="container" id="menu">
             <div class="container card bg-light m-4 mx-auto text-left">
                 <div class="row">
-                    <div class="col d-inline-flex my-auto">
+                    <div class="col-1 d-inline-flex my-auto mx-3">
                         <label for="font" class="mx-auto col-form-label">Font</label>
                         <select name="font" class="form-select-sm" id="font"></select>
-                        <label for="level" class="mx-auto col-form-label">Level</h5>
-                        <select name="level" class="form-select-md" id="level"></select>
+                    </div>
+                    <div class="col-1 d-inline-flex my-auto mx-4">
+                        <label for="level" class="mx-auto col-form-label">Level</label>
+                        <select name="level" class="form-select-sm" id="level"></select>
                     </div>
                     <div class="col d-inline-flex">
-                        <div class="input-group p-1 d-inline-flex p-2 color-picker">
+                        <div class="input-group p-1 d-inline-flex p-2">
                             <span class="input-group-text">Word</span>
-                            <input type="color" class="form-control color-picker" id="word">
+                            <input type="color" class="form-control" id="word">
                         </div>
-                        <div class="input-group p-1 d-inline-flex p-2 color-picker">
+                        <div class="input-group p-1 d-inline-flex p-2">
                             <span class="input-group-text">Guess</span>
-                            <input type="color" class="form-control color-picker" id="guess">
+                            <input type="color" class="form-control" id="guess">
                         </div>
-                        <div class="input-group p-1 d-inline-flex p-2 color-picker">
+                        <div class="input-group p-1 d-inline-flex p-2">
                             <span class="input-group-text">Fore</span>
-                            <input type="color" class="form-control color-picker" id="fore">
+                            <input type="color" class="form-control" id="fore">
                         </div>
                     </div>
                     <div class="col float-end">
-                        <button type="button" class="btn btn-primary float-end my-3" id="newGameBtn" onclick="newGameBtnClick();">New Game</button>
+                        <button type="button" class="btn btn-primary float-end my-3" id="newGameBtn">New Game</button>
                     </div>
                 </div>
             </div>
@@ -72,13 +74,11 @@
                         <p id="guessesRemaining"></p>
                     </div>
                     <div class="col-2 d-inline-flex my-auto mx-0">
-                        <!-- <form id="guessForm"> -->
-                            <input type="text" name="guessInput" id="guessInput">
-                            <button type="button" id="guessBtn" class="btn btn-primary mx-1" onclick="guessBtnClick();">Guess</button>
-                        <!-- </form> -->
+                        <input type="text" name="guessInput" id="guessInput" style="width: 75px;">
+                        <button type="button" id="guessBtn" class="btn btn-primary mx-1">Guess</button>
                     </div>
                     <div class="col-8 float-end">
-                        <button type="button" class="btn-close mx-auto float-end" aria-label="Close" id="closeBtn" onclick="closeGuesser();"></button>
+                        <button type="button" class="btn-close mx-auto float-end" aria-label="Close" id="closeBtn" style="background-color: red;"></button>
                     </div>
                 </div>
                 <div class="row my-3">

@@ -1,6 +1,5 @@
 var fs = require('fs');
 var express = require('express');
-const { Console } = require('console');
 var router = express.Router();
 
 /**
@@ -140,22 +139,21 @@ class Font {
      * Adds a guess to the list of guessed letters.
      */
     addGuess(guess) {
-        console.log("adding guess");
-        if (this.guesses === undefined) {
-            this.guesses = guess;
-        }
-        else {
-            this.guesses = this.guesses.concat(guess);
-        }
+      if (this.guesses === undefined) {
+        this.guesses = guess;
+      }
+      else {
+        this.guesses = this.guesses.concat(guess);
+      }
     }
     
     /**
      * The possible statuses that the game can be. 
      */
     static STATUSES = {
-        UNFINISHED: 'unfinished',
-        LOSS: 'loss',
-        VICTORY: 'victory'
+      UNFINISHED: 'unfinished',
+      LOSS: 'loss',
+      VICTORY: 'victory'
     };
   }
   
@@ -176,23 +174,33 @@ const sessions = new Map();
 const fonts = [Font.FONTS.PROTEST_RIOT, Font.FONTS.ROBOTO, Font.FONTS.NOTO_SERIF];
 const levels = [Level.LEVELS.EASY, Level.LEVELS.MEDIUM, Level.LEVELS.HARD];
 
+/**
+ * Choose a word from the word list, based on minimum and maximum length requirements.
+ * @param {number} min The minimum word length
+ * @param {number} max The maximum word length
+ * @returns A string representation of the secret word.
+ */
 async function getWordFromList(min, max) {
     return new Promise((resolve, reject) => {
-        fs.readFile('./public/wordlist.txt', 'utf8', (err, data) => {
-            if (err) {
-                reject(err)
-            }
-            else {
-                let allWords = data.split(/\s+/);
-                let result = allWords.filter((word) => {
-                    return min <= word.length && word.length <= max
-                });
-                let index = Math.floor(Math.random() * result.length);
-                let randomWord = result[index];
-                resolve(randomWord);
-            }
+      // Open the file.
+      fs.readFile('./public/wordlist.txt', 'utf8', (err, data) => {
+      if (err) {
+        reject(err)
+      }
+      else {
+        // Filter all the words based on length.
+        let allWords = data.split(/\s+/);
+        let result = allWords.filter((word) => {
+          return min <= word.length && word.length <= max
         });
+
+        // Choose a random word and resolve the Promise.
+        let index = Math.floor(Math.random() * result.length);
+        let randomWord = result[index];
+        resolve(randomWord);
+      }
     });
+  });
 }
 
 /* GET home page. */
@@ -225,16 +233,15 @@ router.get('/api/v1/fonts', (req, res) => {
 
 /* GET a list of games associated with the sid. */
 router.get('/api/v1/:sid/games', (req, res) => {
-    const sid = req.params.sid;
-    const games = sessions.get(sid);
-    
-    if (games) {
-        console.log(JSON.stringify(Object.fromEntries(games)));
-        res.status(200).json( JSON.stringify(Array.from(games.values())) );
-    }
-    else {
-        res.status(200).json( JSON.stringify(new Error(`No games associated with '${sid}'`)) );
-    }
+  const sid = req.params.sid;
+  const games = sessions.get(sid);
+  
+  if (games) {
+    res.status(200).json( JSON.stringify(Array.from(games.values())) );
+  }
+  else {
+    res.status(200).json( JSON.stringify(new Error(`No games associated with '${sid}'`)) );
+  }
 });
 
 /* GET the game associated with sid and gid. */
@@ -260,8 +267,10 @@ router.get('/api/v1/:sid/games/:gid', (req, res) => {
 
 /* POST a new game object assciated with the sid. */
 router.post('/api/v1/:sid/games', async (req, res) => {
-  // Get sessionID and the game obj from the request.
+  // Get parameters from the request.
   const sid = req.params.sid;
+  const font = req.headers['x-font'];
+  const color = new Colors(req.body.guessColor, req.body.foreColor, req.body.wordColor);
   let level;
   if (req.query.level === "Easy") {
     level = Level.LEVELS.EASY;
@@ -272,11 +281,10 @@ router.post('/api/v1/:sid/games', async (req, res) => {
   else {
     level = Level.LEVELS.HARD;
   }
-  const font = req.headers['x-font'];
-  const color = new Colors(req.body.guessColor, req.body.foreColor, req.body.wordColor);
+
+  // Get the target word.
   let targetWord = await getWordFromList(level.minLength, level.maxLength);
   targetWord = targetWord.toUpperCase();
-
   let games;
 
   if (sessions.has(sid)) {
@@ -288,6 +296,7 @@ router.post('/api/v1/:sid/games', async (req, res) => {
     games = new Map();
     sessions.set(sid, games);
   }
+
   // Get the new id, create the game, add to the map of games.
   let id = games.size.toString();
   const newGame = new Game(color, font, id, level, targetWord);
@@ -306,46 +315,51 @@ router.post('/api/v1/:sid/games/:gid/guesses', (req, res) => {
   if (games) {
     const game = games.get(gid.toString());
     if (game) {
-        if (game.guesses.includes(guess)) {
-            /* Do nothing... */
-        }
-        else if (game.target.includes(guess)) {
-            game.addGuess(guess);
-            let newView = "";
-            for (let i = 0; i < game.target.length; i++) {
-                if (game.view[i] !== '_') {
-                    newView = newView.concat(game.view[i]);
-                }
-                else {
-                    if (guess === game.target[i]) {
-                        newView = newView.concat(guess);
-                    }
-                    else {
-                        newView = newView.concat('_');
-                    }
-                }
+      // Check if the new guess has already been guessed.
+      if (game.guesses.includes(guess)) {
+        /* Already guessed, do nothing... */
+      }
+      else if (game.target.includes(guess)) {
+        // Guessed right. Add the new guess to the game obj and update the view.
+        game.addGuess(guess);
+        let newView = "";
+        for (let i = 0; i < game.target.length; i++) {
+          if (game.view[i] !== '_') {
+            newView = newView.concat(game.view[i]);
+          }
+          else {
+            if (guess === game.target[i]) {
+              newView = newView.concat(guess);
             }
-            game.view = newView;
+            else {
+              newView = newView.concat('_');
+            }
+          }
         }
-        else {
-            game.addGuess(guess);
-            game.remaining--;
-        }
+        game.view = newView;
+      }
+      else {
+        // Guessed wrong. Add the guess to the guess list.
+        game.addGuess(guess);
+        game.remaining--;
+      }
 
-        console.log(`game.view = ${game.view}`);
-        if (!game.view.includes('_')) {
-            game.status = Game.STATUSES.VICTORY;
-        }
-        else if (game.remaining == 0) {
-            game.status = Game.STATUSES.LOSS;
-        }
-        res.status(200).json( JSON.stringify(game) );
+      // Determine the state of the game and return.
+      if (!game.view.includes('_')) {
+        game.status = Game.STATUSES.VICTORY;
+      }
+      else if (game.remaining == 0) {
+        game.status = Game.STATUSES.LOSS;
+      }
+      res.status(200).json( JSON.stringify(game) );
     }
     else {
+      // GameID not associated with the sessionID
       let error = new Error(`The game '${gid}' is not associated with the session '${sid}'.`)
       res.status(200).json( JSON.stringify(error) );
     }
   }
+  // The sessionID does not exist.
   let error = new Error(`The session '${sid}' does not exist.`)
   res.status(200).json( JSON.stringify(error) );
 });

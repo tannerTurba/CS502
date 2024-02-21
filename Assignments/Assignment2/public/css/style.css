@@ -1,7 +1,3 @@
-div.bar {
-  border-radius: 5px;
-  height: 70px;
-}
 input[type="color"] {
   margin: 0px 0px;
   padding: 10px 10px;
@@ -9,20 +5,10 @@ input[type="color"] {
   width: 60px;
   flex: 0 1 60px;
 }
-div.color-picker {
-  width: 135px;
-}
-input.color-picker {
-  padding: 15px;
-  width: 100px;
-}
 p.phrase {
   margin: auto 2px;
   width: 1em;
   text-align: center;
-}
-input#guessInput {
-  width: 75px;
 }
 .winImage {
   background-image: url('../images/winner.gif');
