@@ -310,59 +310,64 @@ router.post('/:sid/games/:gid/guesses', (req, res) => {
   const gid = req.params.gid;
   const guess = req.query['guess'].toUpperCase();
 
-  // Error checking in case session or game does not exist.
-  const games = sessions.get(sid);
-  if (games) {
-    const game = games.get(gid.toString());
-    if (game) {
-      // Check if the new guess has already been guessed.
-      if (game.guesses.includes(guess)) {
-        /* Already guessed, do nothing... */
-        res.status(200).json( JSON.stringify(new Error(`'${guess}' was guessed already.`)) );
-      }
-      else if (game.target.includes(guess)) {
-        // Guessed right. Add the new guess to the game obj and update the view.
-        game.addGuess(guess);
-        let newView = "";
-        for (let i = 0; i < game.target.length; i++) {
-          if (game.view[i] !== '_') {
-            newView = newView.concat(game.view[i]);
-          }
-          else {
-            if (guess === game.target[i]) {
-              newView = newView.concat(guess);
+  if (guess.length != 1) {
+    res.status(200).json( JSON.stringify(new Error("Only one letter can be guessed at a time.")) );
+  }
+  else {
+    // Error checking in case session or game does not exist.
+    const games = sessions.get(sid);
+    if (games) {
+      const game = games.get(gid.toString());
+      if (game) {
+        // Check if the new guess has already been guessed.
+        if (game.guesses.includes(guess)) {
+          /* Already guessed, do nothing... */
+          res.status(200).json( JSON.stringify(new Error(`'${guess}' was guessed already.`)) );
+        }
+        else if (game.target.includes(guess)) {
+          // Guessed right. Add the new guess to the game obj and update the view.
+          game.addGuess(guess);
+          let newView = "";
+          for (let i = 0; i < game.target.length; i++) {
+            if (game.view[i] !== '_') {
+              newView = newView.concat(game.view[i]);
             }
             else {
-              newView = newView.concat('_');
+              if (guess === game.target[i]) {
+                newView = newView.concat(guess);
+              }
+              else {
+                newView = newView.concat('_');
+              }
             }
           }
+          game.view = newView;
         }
-        game.view = newView;
+        else {
+          // Guessed wrong. Add the guess to the guess list.
+          game.addGuess(guess);
+          game.remaining--;
+        }
+  
+        // Determine the state of the game and return.
+        if (!game.view.includes('_')) {
+          game.status = Game.STATUSES.VICTORY;
+        }
+        else if (game.remaining == 0) {
+          game.status = Game.STATUSES.LOSS;
+        }
+        res.status(200).json( JSON.stringify(game) );
       }
       else {
-        // Guessed wrong. Add the guess to the guess list.
-        game.addGuess(guess);
-        game.remaining--;
+        // GameID not associated with the sessionID
+        let error = new Error(`The game '${gid}' is not associated with the session '${sid}'.`)
+        res.status(200).json( JSON.stringify(error) );
       }
-
-      // Determine the state of the game and return.
-      if (!game.view.includes('_')) {
-        game.status = Game.STATUSES.VICTORY;
-      }
-      else if (game.remaining == 0) {
-        game.status = Game.STATUSES.LOSS;
-      }
-      res.status(200).json( JSON.stringify(game) );
     }
-    else {
-      // GameID not associated with the sessionID
-      let error = new Error(`The game '${gid}' is not associated with the session '${sid}'.`)
-      res.status(200).json( JSON.stringify(error) );
-    }
+    // The sessionID does not exist.
+    let error = new Error(`The session '${sid}' does not exist.`)
+    res.status(200).json( JSON.stringify(error) );
   }
-  // The sessionID does not exist.
-  let error = new Error(`The session '${sid}' does not exist.`)
-  res.status(200).json( JSON.stringify(error) );
 });
 
 module.exports = router;

@@ -70,8 +70,8 @@ $(document).ready(async function() {
       }
       else {
         updateGuessView(gameState);
-        $('#guessInput').val('');
       }
+      $('#guessInput').val('');
     }
   });
 
