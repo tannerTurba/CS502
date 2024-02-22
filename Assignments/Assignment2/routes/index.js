@@ -209,7 +209,7 @@ router.get('/', (req, res) => {
 });
 
 /* GET SID. */
-router.get('/api/v1/sid', (req, res) => {
+router.get('/sid', (req, res) => {
   if (req.sessionID) {
     res.status(200).json({ sid: req.sessionID });
   }
@@ -219,7 +219,7 @@ router.get('/api/v1/sid', (req, res) => {
 });
 
 /* GET a metadate obj describing all user-configurable settings. */
-router.get('/api/v1/meta', (req, res) => {
+router.get('/meta', (req, res) => {
   // Create the default config for the metadate and respond.
   const defaults = new Defaults(Font.FONTS.NOTO_SERIF, Level.LEVELS.MEDIUM, Colors.DEFAULT);
   const metadata = new Metadata(fonts, levels, defaults)
@@ -227,12 +227,12 @@ router.get('/api/v1/meta', (req, res) => {
 });
 
 /* GET a list of supported fonts. */
-router.get('/api/v1/fonts', (req, res) => {
+router.get('/fonts', (req, res) => {
   res.status(200).json( JSON.stringify(fonts) );
 });
 
 /* GET a list of games associated with the sid. */
-router.get('/api/v1/:sid/games', (req, res) => {
+router.get('/:sid/games', (req, res) => {
   const sid = req.params.sid;
   const games = sessions.get(sid);
   
@@ -245,7 +245,7 @@ router.get('/api/v1/:sid/games', (req, res) => {
 });
 
 /* GET the game associated with sid and gid. */
-router.get('/api/v1/:sid/games/:gid', (req, res) => {
+router.get('/:sid/games/:gid', (req, res) => {
   const sid = req.params.sid;
   const gid = req.params.gid;
   const games = sessions.get(sid);
@@ -266,7 +266,7 @@ router.get('/api/v1/:sid/games/:gid', (req, res) => {
 });
 
 /* POST a new game object assciated with the sid. */
-router.post('/api/v1/:sid/games', async (req, res) => {
+router.post('/:sid/games', async (req, res) => {
   // Get parameters from the request.
   const sid = req.params.sid;
   const font = req.headers['x-font'];
@@ -305,7 +305,7 @@ router.post('/api/v1/:sid/games', async (req, res) => {
 });
 
 /* POST a new guess object. */
-router.post('/api/v1/:sid/games/:gid/guesses', (req, res) => {
+router.post('/:sid/games/:gid/guesses', (req, res) => {
   const sid = req.params.sid;
   const gid = req.params.gid;
   const guess = req.query['guess'].toUpperCase();
@@ -318,6 +318,7 @@ router.post('/api/v1/:sid/games/:gid/guesses', (req, res) => {
       // Check if the new guess has already been guessed.
       if (game.guesses.includes(guess)) {
         /* Already guessed, do nothing... */
+        res.status(200).json( JSON.stringify(new Error(`'${guess}' was guessed already.`)) );
       }
       else if (game.target.includes(guess)) {
         // Guessed right. Add the new guess to the game obj and update the view.

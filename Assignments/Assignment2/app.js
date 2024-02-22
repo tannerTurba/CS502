@@ -20,12 +20,7 @@ app.use(session({
 }));
 
 app.use('/', router);
-app.use('/api/v1/sid', router);
-app.use('/api/v1/meta', router);
-app.use('/api/v1/fonts', router);
-app.use('/api/v1/:sid/games/:gid', router);
-app.use('/api/v1/:sid/games', router);
-app.use('/api/v1/:sid/games/:gid/guesses', router);
+app.use('/api/v1', router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

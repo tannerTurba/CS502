@@ -65,8 +65,13 @@ $(document).ready(async function() {
     let guess = $('#guessInput').val().toUpperCase();
     if (guess !== "") {
       let gameState = await makeGuess(currentGameId, guess);
-      updateGuessView(gameState);
-      $('#guessInput').val('');
+      if (gameState.msg) {
+        alert(gameState.msg);
+      }
+      else {
+        updateGuessView(gameState);
+        $('#guessInput').val('');
+      }
     }
   });
 
