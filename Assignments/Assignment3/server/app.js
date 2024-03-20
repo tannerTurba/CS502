@@ -1,5 +1,6 @@
 var express = require('express');
 var session = require('express-session');
+const cors = require('cors');
 var mongoose = require('mongoose');
 
 var path = require('path');
@@ -16,6 +17,7 @@ var authentication = require('./routes/authentication');
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
 
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,7 +30,9 @@ app.use(session({
 
 app.use('/', routes);
 app.use('/', authentication);
-app.use('/api/v2', routes);
+app.use('/api/v1', routes);
+
+mongoose.connect( 'mongodb://localhost:27017/hw3', {} );
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

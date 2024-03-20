@@ -12,15 +12,14 @@ router.post( '/logout', function( req, res, next ) {
 router.post( '/login', ( req, res, next ) => {
   req.session.regenerate( async function( err ) { 
       let user = await users.findByEmail( req.body.email );
-      let hashedPwd = bcrypt.hash(req.body.password);
-      if( user && user.password == hashedPwd ) {
+      if( user && await bcrypt.compare(req.body.password, user.password)) {
            req.session.user = user;
            delete user.password;
            res.json( user );
         } else {
            res.status( 403 ).send( 'Error with email/password' );
         }
-     } );  
+     } );
 } );
 
 router.get( '/user', function( req, res, next ) {

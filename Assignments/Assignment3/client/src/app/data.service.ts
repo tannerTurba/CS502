@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Metadata } from './metadata';
+import { Game } from './game';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class DataService {
    * @returns The sessionID of the current session.
    */
   async getSID(): Promise<string> {
-    return fetch('/api/v1/sid')
+    return fetch('http://localhost:3000/api/v1/sid')
       .then(response => {
         if (!response.ok) {
           console.log('Failed to get SID');
@@ -33,7 +34,7 @@ export class DataService {
    * @returns The metadate of the web app.
    */
   async getMetadata(): Promise<Metadata> {
-    return fetch('/api/v1/meta')
+    return fetch('http://localhost:3000/api/v1/meta')
       .then(response => {
         if (!response.ok) {
           console.log('Failed to get Metadata!');
@@ -52,9 +53,9 @@ export class DataService {
    * Gets all the Game objects associated with the current sessionID.
    * @returns A collection of Game objects.
    */
-  async getAllGames(): Promise<string> {
+  async getAllGames(): Promise<Game[]> {
     const sessionID = await this.getSID();
-    let games = await fetch(`/api/v1/${sessionID}/games`)
+    let games = await fetch(`http://localhost:3000/api/v1/${sessionID}/games`)
       .then(response => {
         if (!response.ok) {
           console.log(`Failed to get games for session ${sessionID}!`);
@@ -85,7 +86,7 @@ export class DataService {
     };
   
     // Use a POST call to create the Game on the backend.
-    let game = await fetch (`/api/v1/${sessionID}/games?level=${level}`, {
+    let game = await fetch (`http://localhost:3000/api/v1/${sessionID}/games?level=${level}`, {
       method: 'POST',
       headers: {
         'X-font' : font, 
@@ -115,7 +116,7 @@ export class DataService {
    */
   async getGame(gameID: string): Promise<string> {
     const sessionID = await this.getSID();
-    return fetch(`/api/v1/${sessionID}/games/${gameID}`)
+    return fetch(`http://localhost:3000/api/v1/${sessionID}/games/${gameID}`)
       .then(response => {
         if (!response.ok) {
           console.log(`Failed to get game '${gameID}' for session '${sessionID}'.`);
@@ -138,7 +139,7 @@ export class DataService {
    */
   async makeGuess(gameID: string, letter: string): Promise<string> {
     const sessionID = await this.getSID();
-    return fetch(`/api/v1/${sessionID}/games/${gameID}/guesses?guess=${letter}`, {
+    return fetch(`http://localhost:3000/api/v1/${sessionID}/games/${gameID}/guesses?guess=${letter}`, {
       method: 'POST'
     })
       .then(response => {

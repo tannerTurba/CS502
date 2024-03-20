@@ -62,14 +62,14 @@ class Font {
   class Colors {
     /**
      * Creates a Color object.
-     * @param {string} guessColor the color of the guess background.
-     * @param {string} foreColor the color of the text background.
-     * @param {string} wordColor the color of the text.
+     * @param {string} guess the color of the guess background.
+     * @param {string} fore the color of the text background.
+     * @param {string} word the color of the text.
      */
     constructor(guessColor, foreColor, wordColor) {
-      this.guessColor = guessColor;
-      this.foreColor = foreColor;
-      this.wordColor = wordColor;
+      this.guess = guessColor;
+      this.fore = foreColor;
+      this.word = wordColor;
     }
   }
   /**
@@ -223,6 +223,7 @@ router.get('/meta', (req, res) => {
   // Create the default config for the metadate and respond.
   const defaults = new Defaults(Font.FONTS.NOTO_SERIF, Level.LEVELS.MEDIUM, Colors.DEFAULT);
   const metadata = new Metadata(fonts, levels, defaults)
+  console.log(metadata);
   res.status(200).json( JSON.stringify(metadata) );
 });
 

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MenuComponent } from './menu/menu.component';
+import { GameListComponent } from './game-list/game-list.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
-    MenuComponent,
+    GameListComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
