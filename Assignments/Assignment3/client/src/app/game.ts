@@ -17,4 +17,5 @@ export interface Game {
     timestamp: number;
     timeToComplete: number;
     view: string;
+    msg: string;
 }

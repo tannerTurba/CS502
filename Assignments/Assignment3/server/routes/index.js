@@ -223,7 +223,6 @@ router.get('/meta', (req, res) => {
   // Create the default config for the metadate and respond.
   const defaults = new Defaults(Font.FONTS.NOTO_SERIF, Level.LEVELS.MEDIUM, Colors.DEFAULT);
   const metadata = new Metadata(fonts, levels, defaults)
-  console.log(metadata);
   res.status(200).json( JSON.stringify(metadata) );
 });
 
@@ -268,6 +267,7 @@ router.get('/:sid/games/:gid', (req, res) => {
 
 /* POST a new game object assciated with the sid. */
 router.post('/:sid/games', async (req, res) => {
+  console.log("Creating new game...");
   // Get parameters from the request.
   const sid = req.params.sid;
   const font = req.headers['x-font'];

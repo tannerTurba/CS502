@@ -10,18 +10,18 @@ input[type="color"] {
     width: 1em;
     text-align: center;
   }
-  /* .winImage {
-    background-image: url('../images/winner.gif');
+  .winImage {
+    background-image: url('./assets/images/winner.gif');
     background-size: auto;
     background-repeat: repeat-x;
     background-position: center;
   }
   .loseImage {
-    background-image: url('../images/cry.gif');
+    background-image: url('./assets/images/cry.gif');
     background-size: contain;
     background-repeat: repeat-x;
     background-position: center;
-  } */
+  }
   .roboto-regular {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
