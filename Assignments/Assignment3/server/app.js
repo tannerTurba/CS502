@@ -30,7 +30,7 @@ app.use(session({
 
 app.use('/', routes);
 app.use('/', authentication);
-app.use('/api/v1', routes);
+app.use('/api/v2', routes);
 
 mongoose.connect( 'mongodb://localhost:27017/hw3', {} );
 
