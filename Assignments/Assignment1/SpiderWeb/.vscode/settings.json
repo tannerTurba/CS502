@@ -1,8 +1,0 @@
-{
-    "java.project.sourcePaths": ["src"],
-    "java.project.outputPath": "bin",
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "/Users/tannerturba/Library/Mobile Documents/com~apple~CloudDocs/Documents/CS 502/Assignment1/jsoup-1.17.2.jar"
-    ]
-}
