@@ -1,0 +1,30 @@
+<div [class]="'container card border bg-light m-4 mx-auto text-left ' " id="imageContainer">
+    <div class="row my-3">
+        <div class="col-2 my-auto">
+            <p id="guessesRemaining">
+                {{(this.gameState$ | async)!.remaining}} guesses remaining.
+            </p>
+        </div>
+        <div class="col-2 d-inline-flex my-auto mx-0">
+            <input type="text" name="guessInput" id="guessInput" style="width: 75px;" pattern="[A-Za-z]{1}" />
+            <button type="button" id="guessBtn" class="btn btn-primary mx-1"
+                (click)="makeGuess">Guess</button>
+        </div>
+        <div class="col-8 float-end">
+            <button type="button" class="btn-close mx-auto float-end" aria-label="Close" 
+                id="closeBtn" style="background-color: red;" (click)="goBack"></button>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-7">
+            <span class="float-start d-inline-flex" id="displayView">
+                {{getViewDisplay()}}
+            </span>
+        </div>
+        <div class="col-5">
+            <span class="mx-3 float-end d-inline-flex" id="displayGuesses">
+                {{getGuessDisplay()}}
+            </span>
+        </div>
+    </div>
+</div>

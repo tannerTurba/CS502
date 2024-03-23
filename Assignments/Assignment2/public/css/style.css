@@ -1,0 +1,42 @@
+input[type="color"] {
+  margin: 0px 0px;
+  padding: 10px 10px;
+  height: 54px;
+  width: 60px;
+  flex: 0 1 60px;
+}
+p.phrase {
+  margin: auto 2px;
+  width: 1em;
+  text-align: center;
+}
+.winImage {
+  background-image: url('../images/winner.gif');
+  background-size: auto;
+  background-repeat: repeat-x;
+  background-position: center;
+}
+.loseImage {
+  background-image: url('../images/cry.gif');
+  background-size: contain;
+  background-repeat: repeat-x;
+  background-position: center;
+}
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.protest-riot-regular {
+  font-family: "Protest Riot", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.noto-serif-regular {
+  font-family: "Noto Serif", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
