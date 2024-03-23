@@ -4,7 +4,7 @@
             <p id="guessesRemaining"></p>
         </div>
         <div class="col-2 d-inline-flex my-auto mx-0">
-            <input type="text" name="guessInput" id="guessInput" style="width: 75px;">
+            <input type="text" name="guessInput" id="guessInput" style="width: 75px;" pattern="[A-Za-z]{1}" />
             <button type="button" id="guessBtn" class="btn btn-primary mx-1"
                 (click)="makeGuess">Guess</button>
         </div>

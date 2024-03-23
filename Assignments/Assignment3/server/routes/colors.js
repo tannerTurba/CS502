@@ -8,4 +8,15 @@ async function getAll() {
     return await Colors.getAll();
 }
 
-module.exports = { create, getAll };
+async function find( guess, fore, word ) {
+    let color = await Colors.findOne( {guess: guess, fore: fore, word: word} );
+    if (color !== null) {
+        return color._id;
+    }
+    else {
+        let newColor = await create(guess, fore, word);
+        return newColor._id;
+    }
+}
+
+module.exports = { create, getAll, find };

@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
  * { 
  *   fonts : <Font[]>,
  *   levels : <Level[]>,
- *   defaults : <Defaults>
  * }
  */ 
 var metadataSchema = new Schema({
@@ -16,10 +15,6 @@ var metadataSchema = new Schema({
       levels : {
          type: [Schema.Types.Level],
          ref: 'Levels'
-      }, 
-      defaults : {
-         type: Schema.Types.Defaults,
-         ref: 'Defaults'
       }
 } );
 

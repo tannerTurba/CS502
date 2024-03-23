@@ -2,163 +2,76 @@ import { Injectable } from '@angular/core';
 import { Metadata } from './metadata';
 import { Game } from './game';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Font } from './font';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-
+  apiVersion: string = 'api/v2';
   constructor(private http: HttpClient) { }
 
-  /**
-   * Gets the sessionID of the current session.
-   * @returns The sessionID of the current session.
-   */
-  async getSID(): Promise<string> {
-    return fetch('http://localhost:3000/api/v1/sid')
-      .then(response => {
-        if (!response.ok) {
-          console.log('Failed to get SID');
-        }
-        return response.json();
-      })
-      .then(data => {
-        return data.sid;
-      })
-      .catch(error => {
-        console.error('Error fetching /api/v1/sid: ', error);
-      });
-  }
-  
   /**
    * Gets the metadate for the web app.
    * @returns The metadate of the web app.
    */
-  async getMetadata(): Promise<Metadata> {
-    return fetch('http://localhost:3000/api/v1/meta')
-      .then(response => {
-        if (!response.ok) {
-          console.log('Failed to get Metadata!');
-        }
-        return response.json();
-      })
-      .then(data => {
-        return JSON.parse(data);
-      })
-      .catch(error => {
-        console.error('Error fetching /api/v1/meta: ', error);
-      });
+  getMetadata(): Observable<Metadata> {
+    return this.http.get<Metadata>(`${this.apiVersion}/meta`);
+  }
+
+  /**
+   * Gets all the available Fonts.
+   * @returns A collection of Font objects.
+   */
+  getFonts(): Observable<[Font]> {
+    return this.http.get<[Font]>(`${this.apiVersion}/fonts`);
   }
   
   /**
    * Gets all the Game objects associated with the current sessionID.
    * @returns A collection of Game objects.
    */
-  async getAllGames(): Promise<Game[]> {
-    const sessionID = await this.getSID();
-    let games = await fetch(`http://localhost:3000/api/v1/${sessionID}/games`)
-      .then(response => {
-        if (!response.ok) {
-          console.log(`Failed to get games for session ${sessionID}!`);
-        }
-        return response.json();
-      })
-      .then(data => {
+  getAllGames(userId: string): Observable<[Game]> {
+    return this.http.get<[Game]>(`${this.apiVersion}/users/${userId}/games`);
+  }
 
-        return JSON.parse(data);
-      })
-      .catch(error => {
-        console.error('Error fetching /api/v1/:sid/games: ', error);
-      });
-      return games;
+  /**
+   * Retrieves a Game.
+   * @param userId The user who the game belongs to.
+   * @param gameId The game to retrieve.
+   * @returns The specified game.
+   */
+  getGame(userId: string, gameId: string): Observable<Game> {
+    return this.http.get<Game>(`${this.apiVersion}/users/${userId}/games/${gameId}`);
   }
   
   /**
    * Creates a Game object that will be associated with the current sessionID.
    * @returns A new Game object.
    */
-  async createGame(level: string, font: string, wordColor: string, guessColor: string, foreColor: string): Promise<Game> {
-    // Get game config.
-    const sessionID = await this.getSID();
+  createGame(userId: string, level: string, font: string, word: string, guess: string, fore: string): Observable<Game> {
     const colorObj = {
-      guessColor: guessColor,
-      foreColor: foreColor,
-      wordColor: wordColor
+      guess: guess,
+      fore: fore,
+      word: word
     };
-  
-    // Use a POST call to create the Game on the backend.
-    let game = await fetch (`http://localhost:3000/api/v1/${sessionID}/games?level=${level}`, {
-      method: 'POST',
-      headers: {
-        'X-font' : font, 
-        'Content-Type' : 'application/json'
-      },
-      body: JSON.stringify(colorObj)
-    })
-      .then(response => {
-        if (!response.ok) {
-          console.log(`Failed to create a game for session '${sessionID}'.`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        return JSON.parse(data);
-      })
-      .catch(error => {
-        console.error(`Error fetching /api/v1/:sessionID/games: `, error);
-      })
-      return game;
-  }
-  
-  /**
-   * Gets a Game object that is associated with the specified gameID.
-   * @param {string} gameID The gameID of the desired game.
-   * @returns A Game object
-   */
-  async getGame(gameID: string): Promise<string> {
-    const sessionID = await this.getSID();
-    return fetch(`http://localhost:3000/api/v1/${sessionID}/games/${gameID}`)
-      .then(response => {
-        if (!response.ok) {
-          console.log(`Failed to get game '${gameID}' for session '${sessionID}'.`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        return JSON.parse(data);
-      })
-      .catch(error => {
-        console.error('Error fetching /api/v1/:sessionID/games/:gameId: ', error);
-      });
-  } 
 
-  makeGuess(gameID: string, letter: string): Observable<Game> {
-    return this.http.get<Game>(`http://localhost:3000/api/v1/games/${gameID}/guesses?guess=${letter}`);
+    const headers = new HttpHeaders()
+      .set('X-font', font)
+      .set('Content-Type', 'application/json');
+
+    return this.http.post<Game>(`${this.apiVersion}/users/${userId}/games?level=${level}`, colorObj, { headers });
   }
-  
-  // /**
-  //  * Adds a guess to the specified game and gets the updated game instance.
-  //  * @param {string} gameID The gameID to add a guess to.
-  //  * @param {string} letter The letter that was guessed.
-  //  * @returns A Game object of the updated game.
-  //  */
-  // async makeGuess(gameID: string, letter: string): Observable<Game> {
-  //   const sessionID = await this.getSID();
-  //   return fetch(`http://localhost:3000/api/v1/${sessionID}/games/${gameID}/guesses?guess=${letter}`, {
-  //     method: 'POST'
-  //   })
-  //     .then(response => {
-  //       if (!response.ok) {
-  //         console.log(`Failed to make a guess in game '${gameID}' for '${sessionID}'.`);
-  //       }
-  //       return response.json();
-  //     })
-  //     .then(data => {
-  //       return JSON.parse(data);
-  //     })
-  //     .catch(error => {
-  //       console.error(`Error fetching /api/v1/sessionID/games/gameID: `, error);
-  //     });
-  // }
+
+  /**
+   * Adds a guess to the specified game and gets the updated game instance.
+   * @param userId The user who the game belongs to.
+   * @param gameId The gameId to add a guess to.
+   * @param guess The letter that was guessed.
+   * @returns A Game object of the updated game.
+   */
+  makeGuess(userId: string, gameId: string, guess: string): Observable<Game> {
+    return this.http.post<Game>(`${this.apiVersion}/users/${userId}/games/${gameId}/guesses?guess=${guess}`, {});
+  }
 }
