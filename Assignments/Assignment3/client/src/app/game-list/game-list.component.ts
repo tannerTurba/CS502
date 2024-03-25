@@ -3,28 +3,34 @@ import { MenuComponent } from './menu/menu.component';
 import { ListItemComponent } from './list-item/list-item.component';
 import { Game } from '../game';
 import { DataService } from '../data.service';
+import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-game-list',
   standalone: true,
   imports: [
     MenuComponent,
-    ListItemComponent
+    ListItemComponent,
+    CommonModule
   ],
   templateUrl: './game-list.component.html',
   styleUrl: './game-list.component.css'
 })
 export class GameListComponent implements OnInit {
-  constructor(private data: DataService) { }
-  gameList: Game[] = [];
+  games$: Observable<[Game]>;
+  userId: string;
+
+  constructor(
+    private data: DataService,
+    private route: ActivatedRoute
+  ) { 
+    this.userId = this.route.snapshot.paramMap.get('uid')!;
+    this.games$ = this.data.getAllGames(this.userId);
+  }
 
   ngOnInit(): void {
-    this.data.getAllGames()
-      .then(games => {
-        this.gameList = games as Game[];
-      })
-      .catch(error => {
-        console.error("Failed to get all games: ", error);
-      });
+    
   }
 }
