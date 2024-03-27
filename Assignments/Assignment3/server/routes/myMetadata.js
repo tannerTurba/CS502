@@ -21,7 +21,6 @@ async function create( fonts, levels ) {
 };
 
 async function getAll() {
-    await init();
     return await Metadata.find( {} );
 }
 

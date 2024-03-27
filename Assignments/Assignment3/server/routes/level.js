@@ -20,12 +20,10 @@ async function create(rounds, minLength, maxLength, name) {
 };
 
 async function getAll() {
-    await init();
     return await Level.find( {} );
 };
 
 async function find(name) {
-    await init();
     return await Level.findOne({ name : name });
 }
 

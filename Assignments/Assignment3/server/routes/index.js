@@ -3,7 +3,10 @@ var express = require('express');
 var router = express.Router();
 var Game = require('./game');
 var Font = require('./font');
+var Level = require('./level');
 var Metadata = require('./myMetadata');
+var Users = require('./users');
+var mongoose = require('mongoose');
 
 /**
    * The class to represent an Error object.
@@ -45,6 +48,22 @@ async function getWordFromList(min, max) {
     }
   });
 });
+}
+
+async function init() {
+  // remove all db documents
+  const db = mongoose.connection.db;
+  const collections = await db.listCollections().toArray();
+  collections
+      .map((collection) => collection.name)
+      .forEach(async (collectionName) => {
+      db.dropCollection(collectionName);
+  });
+
+  await Level.init();
+  await Font.init();
+  await Metadata.init();
+  await Users.init();
 }
 
 router.all('*', function(req, res, next) {

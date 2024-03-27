@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Font = require('./fontModel');
 
 /* metadata is an object of type
  * { 
@@ -9,8 +10,10 @@ const Schema = mongoose.Schema;
  */ 
 var metadataSchema = new Schema({
       fonts : {
-         type: [Schema.Types.ObjectId],
-         ref: 'Font'
+         type: [{
+            type: Schema.Types.ObjectId,
+            ref: Font
+         }],
       }, 
       levels : {
          type: [Schema.Types.ObjectId],

@@ -20,12 +20,10 @@ async function create( category, family, rule, url ) {
 };
 
 async function getAll() {
-    await init();
     return await Font.find( {} );
 };
 
 async function find(rule) {
-    await init()
     return await Font.findOne({ rule: rule });
 }
 
