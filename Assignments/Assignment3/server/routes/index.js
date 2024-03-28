@@ -2,9 +2,9 @@ var fs = require('fs');
 var express = require('express');
 var router = express.Router();
 var Game = require('./game');
-var Font = require('./font');
-var Level = require('./level');
-var Metadata = require('./myMetadata');
+var Font = require('./fontModel');
+var Level = require('./levelModel');
+var Metadata = require('./myMetadataModel');
 var Users = require('./users');
 var mongoose = require('mongoose');
 
@@ -66,7 +66,7 @@ router.all('/users/:uid', function(req, res, next) {
 /* GET a metadate obj describing all user-configurable settings. */
 router.get('/meta', async (req, res, next) => {
   req.session.regenerate( async function( err ) { 
-    let mData = await Metadata.getAll();
+    let mData = await Metadata.find({});
     res.status(200).json(mData);
   });
 });
@@ -74,7 +74,7 @@ router.get('/meta', async (req, res, next) => {
 /* GET a list of supported fonts. */
 router.get('/fonts', async (req, res, next) => {
   req.session.regenerate( async function( err ) { 
-    let fonts = await Font.getAll();
+    let fonts = await Font.find({});
     res.status(200).json(fonts);
   });
 });
