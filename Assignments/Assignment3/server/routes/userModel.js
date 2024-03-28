@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Defaults = require('./defaultsModel');
 
 /* user is an object of type
  * { 
@@ -12,8 +13,10 @@ var userSchema = mongoose.Schema({
         email : String,
         password : String,
         defaults : {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Defaults'
+            type : {
+               type: mongoose.Schema.Types.ObjectId,
+               ref: Defaults
+            }
         }
 } );
 

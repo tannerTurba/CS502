@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+var Font = require('./fontModel');
+var Level = require('./levelModel');
+var Colors = require('./colorsModel');
 
 /* Defaults is an object of type
  * { 
@@ -10,16 +13,22 @@ const Schema = mongoose.Schema;
  */ 
 var defaultsSchema = new Schema({
         font : {
-            type: Schema.Types.ObjectId,
-            ref: 'Font'
+            type : {
+                type: Schema.Types.ObjectId,
+                ref: Font
+            }
         }, 
         level : {
-            type: Schema.Types.ObjectId,
-            ref: 'Level'
+            type: {
+                type: Schema.Types.ObjectId,
+                ref: Level
+            }
         }, 
         colors : {
-            type: Schema.Types.ObjectId,
-            ref: 'Colors'
+            type : {
+                type: Schema.Types.ObjectId,
+                ref: Colors
+            }
         }
 } );
 

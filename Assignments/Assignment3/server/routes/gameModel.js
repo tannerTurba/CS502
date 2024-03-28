@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Colors = require('./colorsModel');
+const Font = require('./fontModel');
+const Level = require('./levelModel');
 
 /* Game is an object of type
  * { 
@@ -20,18 +23,24 @@ const Schema = mongoose.Schema;
 var gameSchema = new Schema({
         userId : String,
         colors : {
-            type: Schema.Types.ObjectId,
-            ref: 'Colors'
+            type: {
+                type: Schema.Types.ObjectId,
+                ref: Colors
+            }
         },
         font : {
-            type: Schema.Types.ObjectId, 
-            ref: 'Font'
+            type: {
+                type: Schema.Types.ObjectId, 
+                ref: Font
+            }
         },
         guesses : String, 
         _id : String, 
         level : {
-            type: Schema.Types.ObjectId,
-            ref: 'Level'
+            type: {
+                type: Schema.Types.ObjectId,
+                ref: Level
+            }
         },
         remaining : Number, 
         status : String, 

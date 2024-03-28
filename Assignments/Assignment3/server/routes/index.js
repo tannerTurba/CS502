@@ -50,7 +50,7 @@ async function getWordFromList(min, max) {
 });
 }
 
-async function init() {
+router.get('/init', async function(req, res, next) {
   // remove all db documents
   const db = mongoose.connection.db;
   const collections = await db.listCollections().toArray();
@@ -64,7 +64,7 @@ async function init() {
   await Font.init();
   await Metadata.init();
   await Users.init();
-}
+});
 
 router.all('*', function(req, res, next) {
   console.log(req.method, req.path);

@@ -10,10 +10,10 @@ const Schema = mongoose.Schema;
  * }
  */ 
 var levelSchema = new Schema({
-        rounds : Number, 
-        minLength : Number, 
-        maxLength : Number, 
-        name : String
+      rounds : Number, 
+      minLength : Number, 
+      maxLength : Number, 
+      name : String
 } );
 
 levelSchema.set('toJSON', {

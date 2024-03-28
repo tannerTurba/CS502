@@ -1,5 +1,5 @@
 var User = require('./userModel');
-var Defaults = require('./defaultsModel');
+var Defaults = require('./defaults');
 
 async function init( ) {
     let userCount = await User.countDocuments();
@@ -14,7 +14,7 @@ async function init( ) {
                 return new User( {
                         email : info[0],
                         password : info[1],
-                        defaults : defaults
+                        defaults : defaults._id
                     } );
                 });
     
@@ -27,17 +27,14 @@ async function findAll( ) {
     return await User.find( {} );
 }
 
-
 async function findById( id ) {
     await init();
     return await User.findOne( { '_id' : id });
 }
-
 
 async function findByEmail( email ) {
     await init();
     return await User.findOne( { 'email' : email } );
 }
 
-
-module.exports = { findByEmail, findById, findAll };
+module.exports = { findByEmail, findById, findAll, init };

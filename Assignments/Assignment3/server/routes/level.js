@@ -7,16 +7,13 @@ let LEVELS = [
 ];
 
 async function init() {
-    let levelCount = await Level.countDocuments();
-    if (levelCount === 0) {
-        LEVELS.forEach(level => {
-            create(level.rounds, level.minLength, level.maxLength, level.name);
-        });
-    }
+    LEVELS.forEach(level => {
+        create(level.rounds, level.minLength, level.maxLength, level.name);
+    });
 }
 
 async function create(rounds, minLength, maxLength, name) {
-    return await new Level( {rounds : rounds, minLength : minLength, maxLength : maxLength, name : name} ).save();
+    return (new Level( {rounds : rounds, minLength : minLength, maxLength : maxLength, name : name} )).save();
 };
 
 async function getAll() {

@@ -7,7 +7,7 @@ async function create(font, level, colors) {
     let dbColor = await Colors.find(colors.guess, colors.fore, colors.word);
     let dbFont = await Font.find(font);
     let dbLevel = await Level.find(level);
-    return await Defaults.create( {font : dbFont, level : dbLevel, colors : dbColor} ).save();
+    return (await Defaults.create( {font : dbFont, level : dbLevel, colors : dbColor} )).save();
 };
 
 async function getAll() {

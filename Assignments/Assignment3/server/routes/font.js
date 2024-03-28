@@ -7,16 +7,13 @@ let FONTS = [
 ];
 
 async function init() {
-    let fontCount = await Font.countDocuments();
-    if (fontCount === 0) {
-        FONTS.forEach(font => {
-            create(font.category, font.family, font.rule, font.url);
-        });
-    }
+    FONTS.forEach(font => {
+        create(font.category, font.family, font.rule, font.url);
+    });
 }
 
 async function create( category, family, rule, url ) {
-    return (await Font.create( {category : category, family : family, rule : rule, url : url} )).save();
+    return (new Font( {category : category, family : family, rule : rule, url : url} )).save();
 };
 
 async function getAll() {

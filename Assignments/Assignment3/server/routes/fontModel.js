@@ -10,10 +10,10 @@ const Schema = mongoose.Schema;
  * }
  */ 
 var fontSchema = new Schema({
-        category : String,
-        family : String, 
-        rule : String, 
-        url : String
+      category : String,
+      family : String, 
+      rule : String, 
+      url : String
 } );
 
 fontSchema.set('toJSON', {

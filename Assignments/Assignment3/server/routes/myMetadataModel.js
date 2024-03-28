@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 const Font = require('./fontModel');
+const Level = require('./levelModel');
+const Schema = mongoose.Schema;
 
 /* metadata is an object of type
  * { 
@@ -9,16 +10,16 @@ const Font = require('./fontModel');
  * }
  */ 
 var metadataSchema = new Schema({
-      fonts : {
-         type: [{
-            type: Schema.Types.ObjectId,
-            ref: Font
-         }],
-      }, 
-      levels : {
-         type: [Schema.Types.ObjectId],
-         ref: 'Level'
-      }
+   // fonts : [Font.schema],
+   // levels : [Level.schema],
+   fonts : [{
+      type : mongoose.Schema.Types.ObjectId,
+      ref : 'Font'
+   }],
+   levels : [{
+      type : mongoose.Schema.Types.ObjectId,
+      ref : 'Level'
+   }]
 } );
 
 metadataSchema.set('toJSON', {
