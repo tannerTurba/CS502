@@ -17,7 +17,7 @@ async function init() {
     await Level.init();
     await Font.init();
     await Metadata.init();
-    await Users.init();
+    // await Users.init();
 }
 
 module.exports = { init };

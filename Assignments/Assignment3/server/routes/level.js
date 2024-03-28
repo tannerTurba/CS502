@@ -7,21 +7,22 @@ let LEVELS = [
 ];
 
 async function init() {
-    LEVELS.forEach(level => {
-        create(level.rounds, level.minLength, level.maxLength, level.name);
+    LEVELS.forEach(async function(level) {
+        await Level.create( {
+            rounds : level.rounds, 
+            minLength : level.minLength, 
+            maxLength : level.maxLength, 
+            name : level.name
+        } );
     });
 }
 
-async function create(rounds, minLength, maxLength, name) {
-    return (new Level( {rounds : rounds, minLength : minLength, maxLength : maxLength, name : name} )).save();
-};
-
 async function getAll() {
-    return await Level.find( {} );
+    return await Level.find({});
 };
 
-async function find(name) {
+async function getLevel(name) {
     return await Level.findOne({ name : name });
 }
 
-module.exports = { create, getAll, init, find };
+module.exports = { init, getAll, getLevel };

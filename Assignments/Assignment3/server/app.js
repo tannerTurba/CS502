@@ -34,8 +34,10 @@ app.use('/', authentication);
 app.use('/api/v2', routes);
 
 mongoose.connect( 'mongodb://localhost:27017/hw3', {} )
-  .then( x => {
-    db.init();
+  .then( () => {
+    db.init().then(() => {
+      console.log('done')
+    });
   });
 
 // catch 404 and forward to error handler

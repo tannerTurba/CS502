@@ -1,20 +1,19 @@
-var Metadata = require('./myMetadataModel');
-var Font = require('./font.js');
-var Level = require('./level.js');
+var MyMetadata = require('./myMetadataModel');
+var Font = require('./fontModel.js');
+var Level = require('./levelModel.js');
 
 async function init() {
-    let fonts = await Font.getAll();
-    let levels = await Level.getAll();
-    await create( fonts, levels );
+    let fonts = await Font.find({});
+    let levels = await Level.find({});
+
+    console.log(`Fonts = \n${JSON.stringify(fonts)}`);
+    console.log(`Levels = \n${JSON.stringify(levels)}`);
+    await MyMetadata.create( {fonts : fonts, levels : levels} );
 }
 
-async function create( fonts, levels ) {
-    return (new Metadata( {fonts : fonts, levels : levels} )).save();
-};
-
 async function getAll() {
-    // return await Metadata.find().populate("fonts");
-    return await Metadata.find();
+    // return await Metadata.find().populate(["fonts", "levels"]);
+    return await MyMetadata.find();
 }
 
 module.exports = { getAll, init };

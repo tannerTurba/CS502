@@ -7,21 +7,22 @@ let FONTS = [
 ];
 
 async function init() {
-    FONTS.forEach(font => {
-        create(font.category, font.family, font.rule, font.url);
+    FONTS.forEach(async function(font) {
+        await Font.create( {
+            category : font.category, 
+            family : font.family, 
+            rule : font.rule, 
+            url : font.url
+        } );
     });
 }
 
-async function create( category, family, rule, url ) {
-    return (new Font( {category : category, family : family, rule : rule, url : url} )).save();
-};
-
 async function getAll() {
-    return await Font.find( {} );
+    return await Font.find({});
 };
 
-async function find(rule) {
+async function getFont(rule) {
     return await Font.findOne({ rule: rule });
 }
 
-module.exports = { create, getAll, init, find };
+module.exports = { init, getAll, getFont };

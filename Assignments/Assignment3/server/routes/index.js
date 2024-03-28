@@ -50,22 +50,6 @@ async function getWordFromList(min, max) {
 });
 }
 
-router.get('/init', async function(req, res, next) {
-  // remove all db documents
-  const db = mongoose.connection.db;
-  const collections = await db.listCollections().toArray();
-  collections
-      .map((collection) => collection.name)
-      .forEach(async (collectionName) => {
-      db.dropCollection(collectionName);
-  });
-
-  await Level.init();
-  await Font.init();
-  await Metadata.init();
-  await Users.init();
-});
-
 router.all('*', function(req, res, next) {
   console.log(req.method, req.path);
   next();
