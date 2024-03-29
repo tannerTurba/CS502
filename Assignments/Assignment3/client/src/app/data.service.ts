@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Font } from './font';
 import { User } from './user';
+import { Defaults } from './defaults';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,14 @@ export class DataService {
 
   logout(): Observable<string> {
     return this.http.post<string>(`${this.apiVersion}/logout`, {});
+  }
+
+  setDefaults(userId: string, defaults: Defaults): Observable<Defaults | string> {
+    return this.http.put<Defaults>(`${this.apiVersion}/users/${userId}/defaults`, defaults);
+  }
+
+  getDefaults(userId: string): Observable<Defaults> {
+    return this.http.get<Defaults>(`${this.apiVersion}/users/${userId}/defaults`);
   }
 
   /**

@@ -1,8 +1,8 @@
 <div class="container card bg-light m-4 mx-auto text-left">
     <div class="row">
         <div class="col-1 d-inline-flex my-auto mx-3">
-            <label for="font" class="mx-auto col-form-label" (click)="styleFont()">Font</label>
-            <select name="font" class="form-select-sm mx-2" id="font">
+            <label for="font" class="mx-auto col-form-label">Font</label>
+            <select name="font" class="'form-select-sm mx-2' {{(defaults$ | async)?.font?.rule}}" id="font" (click)="styleFont()" [value]="(defaults$ | async)?.font?.rule">
                 @for (font of (metadata$ | async)?.fonts; track font) {
                     <option [value]="font.rule" [id]="font.family">{{font.family}}</option>
                 }
@@ -10,7 +10,7 @@
         </div>
         <div class="col-1 d-inline-flex my-auto mx-4">
             <label for="level" class="mx-auto col-form-label">Level</label>
-            <select name="level" class="form-select-sm mx-2" id="level">
+            <select name="level" class="form-select-sm mx-2" id="level" [value]="(defaults$ | async)?.level?.name">
                 @for (level of (metadata$ | async)?.levels; track level.name) {
                     <option [value]="level.name">{{level.name}}</option>
                 }
@@ -19,15 +19,15 @@
         <div class="col d-inline-flex">
             <div class="input-group p-1 d-inline-flex p-2">
                 <span class="input-group-text">Word</span>
-                <input type="color" class="form-control" id="word">
+                <input type="color" class="form-control" id="word" [value]="(defaults$ | async)?.colors?.word">
             </div>
             <div class="input-group p-1 d-inline-flex p-2">
                 <span class="input-group-text">Guess</span>
-                <input type="color" class="form-control" id="guess">
+                <input type="color" class="form-control" id="guess" [value]="(defaults$ | async)?.colors?.guess">
             </div>
             <div class="input-group p-1 d-inline-flex p-2">
                 <span class="input-group-text">Fore</span>
-                <input type="color" class="form-control" id="fore">
+                <input type="color" class="form-control" id="fore" [value]="(defaults$ | async)?.colors?.fore">
             </div>
         </div>
         <div class="col float-end">

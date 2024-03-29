@@ -81,14 +81,23 @@ router.post( '/login', ( req, res, next ) => {
     } );
 } );
 
-router.get( '/user', function( req, res, next ) {
-  var user = req.session.user;
-  if( user ) {
-     res.json( user );
-  } else {
-     res.status( 403 ).json( 'Forbidden' );
-  }
-} );
+router.put('/users/:uid/defaults', async (req, res, next) => {
+  let userId = req.params.uid;
+  let newDefaults = req.body.defaults;
+  req.session.regenerate( async function( err ) { 
+    let mData = await User.findOneAndUpdate( { _id: userId }, { default: newDefaults });
+    res.status(200).json(newDefaults);
+  });
+})
+
+router.get('/users/:uid/defaults', async (req, res, next) => {
+  let userId = req.params.uid;
+  req.session.regenerate( async function( err ) { 
+    let user = await User.findOne( { _id: userId });
+    console.log(user);
+    res.status(200).json( user.defaults );
+  });
+});
 
 /* Verifies a session user matches their request data */
 router.all('/users/:uid', function(req, res, next) {
@@ -119,14 +128,15 @@ router.get('/fonts', async (req, res, next) => {
 router.get('/users/:uid/games', async (req, res, next) => {
   req.session.regenerate( async function( err ) { 
     const uid = req.params.uid;
-    const games = await Game.find( { userId: uid } );
+    return await Game.find( { userId: uid } );
+    // const games = await Game.find( { userId: uid } );
 
-    if (games.length !== 0) {
-      res.status(200).json( games );
-    }
-    else {
-      res.status(200).json(new Error(`No games associated with '${uid}'`));
-    }
+    // if (games.length !== 0) {
+    //   res.status(200).json( games );
+    // }
+    // else {
+    //   // res.status(200).json(new Error(`No games associated with '${uid}'`));
+    // }
   });
 });
 
