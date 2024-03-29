@@ -1,12 +1,13 @@
 var fs = require('fs');
 var express = require('express');
 var router = express.Router();
-var Game = require('./game');
+var Game = require('./gameModel');
 var Font = require('./fontModel');
 var Level = require('./levelModel');
 var Metadata = require('./myMetadataModel');
-var Users = require('./users');
-var mongoose = require('mongoose');
+var Colors = require('./colorsModel');
+var User = require('./userModel');
+var bcrypt = require('bcrypt');
 
 /**
    * The class to represent an Error object.
@@ -55,6 +56,41 @@ router.all('*', function(req, res, next) {
   next();
 });
 
+router.all('*', function(req, res, next) {
+  console.log(req.method, req.path);
+  next();
+});
+
+router.post( '/logout', function( req, res, next ) {
+req.session.regenerate( function(err) { // create a new session id
+   res.json( 'ok' );
+ } );
+});
+
+router.post( '/login', ( req, res, next ) => {
+ req.session.regenerate( async function( err ) { 
+     let user = await User.findOne( { email: req.body.email } );
+     if( user && await bcrypt.compare(req.body.password, user.password)) {
+          req.session.user = user;
+          user.password = "[REDACTED]";
+          console.log(user);
+          res.json( user );
+       } else {
+          res.status( 200 ).json( 'Error with email/password' );
+       }
+    } );
+} );
+
+router.get( '/user', function( req, res, next ) {
+  var user = req.session.user;
+  if( user ) {
+     res.json( user );
+  } else {
+     res.status( 403 ).json( 'Forbidden' );
+  }
+} );
+
+/* Verifies a session user matches their request data */
 router.all('/users/:uid', function(req, res, next) {
   var user = req.session.user;
   if (user._id == uid) {
@@ -66,7 +102,7 @@ router.all('/users/:uid', function(req, res, next) {
 /* GET a metadate obj describing all user-configurable settings. */
 router.get('/meta', async (req, res, next) => {
   req.session.regenerate( async function( err ) { 
-    let mData = await Metadata.find({});
+    let mData = await Metadata.findOne({});
     res.status(200).json(mData);
   });
 });
@@ -83,7 +119,7 @@ router.get('/fonts', async (req, res, next) => {
 router.get('/users/:uid/games', async (req, res, next) => {
   req.session.regenerate( async function( err ) { 
     const uid = req.params.uid;
-    const games = await Game.getAll(uid);
+    const games = await Game.find( { userId: uid } );
 
     if (games.length !== 0) {
       res.status(200).json( games );
@@ -94,12 +130,12 @@ router.get('/users/:uid/games', async (req, res, next) => {
   });
 });
 
-  /* GET the game associated with the gid. */
+/* GET the game associated with the gid. */
 router.get('/users/:uid/games/:gid', async (req, res, next) => {
   req.session.regenerate( async function( err ) { 
     const uid = req.params.uid;
     const gid = req.params.gid;
-    const games = await Game.getGame(uid, gid);
+    const games = await Game.find( { userId: uid, _id: gid } );
 
     if (games.length !== 0) {
       res.status(200).json( games );
@@ -108,6 +144,7 @@ router.get('/users/:uid/games/:gid', async (req, res, next) => {
       const error = new Error(`The game '${gid}' is not associated with the user '${uid}'.`)
       res.status(200).json( error );
     }
+    // Unreachable!!
     const error = new Error(`The user '${uid}' does not exist.`)
     res.status(200).json( error );
   });
@@ -118,18 +155,20 @@ router.post('/users/:uid/games', async (req, res, next) => {
   req.session.regenerate( async function( err ) { 
     // Get parameters from the request.
     const uid = req.params.uid;
-    const font = req.headers['x-font'];
-    const level = req.query.level;
-    const color = { 
-      "guess" : req.body.guess, 
-      "fore" : req.body.fore, 
-      "word" : req.body.word 
-    };
+    const font = await Font.find( { rule: req.headers['x-font'] } );
+    const level = await Level.find( { name: req.query.level } );
+    const color = await Colors.create( { 
+      guess: req.body.guess, 
+      fore: req.body.fore, 
+      word: req.body.word 
+    });
     
     // Get the target word.
     let targetWord = await getWordFromList(level.minLength, level.maxLength);
     targetWord = targetWord.toUpperCase();
-    let newGame = await Game.create(uid, color, font, level, targetWord, );
+
+    let newGame = await Game.create( {userId: uid, colors: color, font: font, guesses: "", level: level, 
+      status: "unfinished", target: targetWord, timestamp: Date.now(), timeToComplete: "", view: "".padStart(targetWord.length, "_")} );
     res.status(200).json( newGame );
   });
 });
@@ -144,7 +183,7 @@ router.post('/users/:uid/games/:gid/guesses', async (req, res, next) => {
     if (guess.length != 1) {
       res.status(200).json( new Error("Only one letter can be guessed at a time.") );
     }
-    let result = await Game.addGuess(uid, gid, guess);
+    let result = await addGuess(uid, gid, guess);
 
     if (typeof result === 'string' || result instanceof String) {
       res.status(200).json( new Error(result) );
@@ -154,5 +193,55 @@ router.post('/users/:uid/games/:gid/guesses', async (req, res, next) => {
     }
   });
 });
+
+async function addGuess(userId, gameId, guess) {
+  let game = await Game.findById(gameId);
+  if (game.userId !== userId) {
+    return `The game '${gameId}' is not associated with the user '${userId}'.`;
+  }
+  else if (game.guesses.includes(guess)) {
+    /* Already guessed, do nothing... */
+    return `'${guess}' was guessed already.`;
+  }
+
+  let isRight = game.target.includes(guess);
+  let newGuess = game.guesses.concat(guess);
+  if (isRight) {
+    let newView = "";
+    for (let i = 0; i < game.target.length; i++) {
+      if (game.view[i] !== '_') {
+        newView = newView.concat(game.view[i]);
+      }
+      else if (guess === game.target[i]) {
+        newView = newView.concat(guess);
+      }
+      else {
+        newView = newView.concat('_');
+      }
+    }
+
+    // Determine the state of the game and return.
+    let newStatus;
+    if (!game.view.includes('_')) {
+      newStatus = 'victory';
+      let completionTime = Date.now() - game.timestamp;
+      return await Game.updateOne( {_id : gameId}, {guesses: newGuess, view: newView, status: newStatus, timeToComplete: completionTime} );
+    }
+    else if (game.remaining == 0) {
+      newStatus = 'loss';
+      let completionTime = Date.now() - game.timestamp;
+      return await Game.updateOne( {_id : gameId}, {guesses: newGuess, view: newView, status: newStatus, timeToComplete: completionTime} );
+    }
+    return await Game.updateOne( {_id : gameId}, {guesses: newGuess, view: newView, status: newStatus} );
+  }
+  else {
+    let newRemaining = game.remaining--;
+    let newStatus = 'unfinished';
+    if (game.remaining == 0) {
+      newStatus = 'loss';
+    }
+    return await Game.updateOne( {_id : gameId}, {guesses: newGuess, remaining: newRemaining, status: newStatus} );
+  }
+}
 
 module.exports = router;

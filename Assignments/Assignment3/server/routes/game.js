@@ -1,7 +1,7 @@
-// var Game = require('./gameModel');
-// var Colors = require('./colors');
-// var Font = require('./font');
-// var Level = require('./level');
+var Game = require('./gameModel');
+var Colors = require('./colors');
+var Font = require('./font');
+var Level = require('./level');
 
 // async function create(userId, colors, font, level, target) {
 //     let dbColor = await Colors.find(colors.guess, colors.fore, colors.word);

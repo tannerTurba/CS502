@@ -4,6 +4,7 @@ import { Game } from './game';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Font } from './font';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,18 @@ import { Font } from './font';
 export class DataService {
   apiVersion: string = 'api/v2';
   constructor(private http: HttpClient) { }
+
+  login(email: string, password: string): Observable<User | string> {
+    const userCredentials = {
+      email: email,
+      password: password
+    };
+    return this.http.post<User>(`${this.apiVersion}/login`, userCredentials);
+  }
+
+  logout(): Observable<string> {
+    return this.http.post<string>(`${this.apiVersion}/logout`, {});
+  }
 
   /**
    * Gets the metadate for the web app.

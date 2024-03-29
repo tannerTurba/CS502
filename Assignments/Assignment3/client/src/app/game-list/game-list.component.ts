@@ -31,6 +31,8 @@ export class GameListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.games$.subscribe((res) => {
+      console.log(res);
+    })
   }
 }

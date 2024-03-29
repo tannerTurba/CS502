@@ -5,6 +5,7 @@ var Colors = require('./colorsModel.js');
 var Defaults = require('./defaultsModel.js');
 var User = require('./userModel.js');
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 let LEVELS = [
     { rounds: 8, minLength: 3, maxLength: 5, name: "Easy"},
@@ -17,6 +18,12 @@ let FONTS = [
     { category: "sans-serif", family: "Roboto", rule: "roboto-regular", url: "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" },
     { category: "serif", family: "Noto Serif", rule: "noto-serif-regular", url: "https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" }
 ];
+
+let USERS = [
+    { email: "bilbo@mordor.org", password: "111111111" },
+    { email: "frodo@mordor.org", password: "222222222" },
+    { email: "samwise@mordor.org", password: "333333333" },
+]
 
 let DEFAULT_COLOR = { guess: "#fefae0", fore: "#283618", word: "#9aac5d" };
 
@@ -56,15 +63,14 @@ async function initUsers() {
     let level = await Level.findOne( { name: 'Easy' } );
     let defaults = await Defaults.create( { level: level, font: font, colors: color } );
 
-    const userDb = [["bilbo@mordor.org", "111111111"], ["frodo@mordor.org", "222222222"], ["samwise@mordor.org", "333333333"]].map( info => {
-            return new User( {
-                    email : info[0],
-                    password : info[1],
-                    defaults : defaults
-                } );
-            });
-
-    return await User.insertMany( userDb );
+    for (let i = 0; i < USERS.length; i++) {
+        let user = USERS[i];
+        await User.create({
+            email: user.email,
+            password: await bcrypt.hash(user.password, 10),
+            defaults: defaults
+        });
+    }
 };
 
 async function init() {

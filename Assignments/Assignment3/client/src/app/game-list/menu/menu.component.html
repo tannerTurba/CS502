@@ -1,7 +1,7 @@
 <div class="container card bg-light m-4 mx-auto text-left">
     <div class="row">
         <div class="col-1 d-inline-flex my-auto mx-3">
-            <label for="font" class="mx-auto col-form-label" (click)="styleFont">Font</label>
+            <label for="font" class="mx-auto col-form-label" (click)="styleFont()">Font</label>
             <select name="font" class="form-select-sm mx-2" id="font">
                 @for (font of (metadata$ | async)?.fonts; track font) {
                     <option [value]="font.rule" [id]="font.family">{{font.family}}</option>
@@ -11,7 +11,7 @@
         <div class="col-1 d-inline-flex my-auto mx-4">
             <label for="level" class="mx-auto col-form-label">Level</label>
             <select name="level" class="form-select-sm mx-2" id="level">
-                @for (level of (metadata$ | async)?.levels; track level) {
+                @for (level of (metadata$ | async)?.levels; track level.name) {
                     <option [value]="level.name">{{level.name}}</option>
                 }
             </select>
@@ -31,12 +31,16 @@
             </div>
         </div>
         <div class="col float-end">
-            <button type="button" class="btn btn-primary float-end my-3" id="newGameBtn"
-            (click)="createGame">
+            <button type="button" class="btn btn-primary float-end my-3 mx-1"
+            (click)="logout()">
+                Logout
+            </button>
+            <button type="button" class="btn btn-primary float-end my-3 mx-1" id="newGameBtn"
+            (click)="createGame()">
                 New Game
             </button>
-            <button type="button" class="btn btn-primary float-end my-3 mx-2" 
-            (click)="setTheme" id="setThemeBtn">
+            <button type="button" class="btn btn-primary float-end my-3 mx-1" 
+            (click)="setTheme()" id="setThemeBtn">
                 Set Theme
             </button>
         </div>

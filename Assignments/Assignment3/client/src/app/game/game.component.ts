@@ -28,7 +28,8 @@ export class GameComponent {
     this.gameState$ = this.data.getGame(this.userId, this.gameId);
   }
 
-  makeGuess(guess:string): void {
+  makeGuess(): void {
+    let guess = "";
     this.userId = this.route.snapshot.paramMap.get('uid')!;
     this.gameId = this.route.snapshot.paramMap.get('gid')!;
 

@@ -3,6 +3,7 @@ import { DataService } from '../../data.service';
 import { Metadata } from '../../metadata';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -15,7 +16,7 @@ export class MenuComponent implements OnInit {
   metadata$: Observable<Metadata>;
   // fonts$: Observable<[Font]>;
 
-  constructor(private data: DataService) {
+  constructor(private data: DataService, private router: Router) {
     this.metadata$ = this.data.getMetadata();
   }
 
@@ -42,10 +43,18 @@ export class MenuComponent implements OnInit {
     alert("set theme button clicked!");
   }
 
+  logout(): void {
+    alert("logout button clicked!");
+    this.data.logout().subscribe((res) => {
+      console.log(res);
+      this.router.navigateByUrl(`login`);
+    });
+  }
+
   ngOnInit(): void {
-    this.metadata$.subscribe((metadata) => {
+    this.metadata$.subscribe((meta) => {
       // Set font options using metadata.
-      metadata.fonts.forEach((font) => {
+      meta.fonts.forEach((font) => {
         let fontLink = document.createElement('link');
         fontLink.setAttribute('href', font.url);
         fontLink.setAttribute('rel', 'stylesheet');

@@ -20,10 +20,8 @@
         </div>
     </div>
     <div>
-        <app-list-item>
-            @for (game of games$ | async; track game) {
-                <!-- Add game list components -->
-            } 
-        </app-list-item>
+        @for (game of (games$ | async); track game) {
+            <app-list-item [game]="game" />
+        } 
     </div>
 </div>
