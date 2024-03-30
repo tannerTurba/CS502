@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
 import { Game } from '../../game';
 
 @Component({
   selector: 'app-list-item',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, RouterModule],
   templateUrl: './list-item.component.html',
   styleUrl: './list-item.component.css'
 })
@@ -21,11 +21,11 @@ export class ListItemComponent {
    * @param blockColor A string representation of the hex color to use on the color block.
    * @returns The HTML containing a colored block-word.
    */
-  generateBlockWord(word: string, fontRule: string, wordColor: string, blockColor: string): string {
-    let phrase = "";
+  generateBlockWord(word: string, fontRule: string, wordColor: string, blockColor: string): void {
+    let view = "";
     word.split("").forEach((letter) => {
-      phrase = phrase.concat(`<p class="phrase ${fontRule}" style="background-color: ${wordColor}; color: ${blockColor}">${letter.toUpperCase()}</p>`);
+      view += `<p class="phrase ${fontRule}" style="background-color: ${wordColor}; color: ${blockColor}">${letter.toUpperCase()}</p>`;
     });
-    return phrase;
+    document.getElementById('view')!.innerHTML = view;
   }
 }

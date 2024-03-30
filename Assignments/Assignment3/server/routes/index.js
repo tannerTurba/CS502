@@ -73,7 +73,6 @@ router.post( '/login', ( req, res, next ) => {
      if( user && await bcrypt.compare(req.body.password, user.password)) {
           req.session.user = user;
           user.password = "[REDACTED]";
-          console.log(user);
           res.json( user );
        } else {
           res.status( 200 ).json( 'Error with email/password' );
@@ -94,7 +93,6 @@ router.get('/users/:uid/defaults', async (req, res, next) => {
   let userId = req.params.uid;
   req.session.regenerate( async function( err ) { 
     let user = await User.findOne( { _id: userId });
-    console.log(user);
     res.status(200).json( user.defaults );
   });
 });
@@ -128,7 +126,9 @@ router.get('/fonts', async (req, res, next) => {
 router.get('/users/:uid/games', async (req, res, next) => {
   req.session.regenerate( async function( err ) { 
     const uid = req.params.uid;
-    return await Game.find( { userId: uid } );
+    let games = await Game.find( { userId: uid } );
+    console.log(games);
+    res.status(200).json(games);
     // const games = await Game.find( { userId: uid } );
 
     // if (games.length !== 0) {
@@ -145,7 +145,7 @@ router.get('/users/:uid/games/:gid', async (req, res, next) => {
   req.session.regenerate( async function( err ) { 
     const uid = req.params.uid;
     const gid = req.params.gid;
-    const games = await Game.find( { userId: uid, _id: gid } );
+    const games = await Game.findOne( { userId: uid, _id: gid } );
 
     if (games.length !== 0) {
       res.status(200).json( games );
@@ -155,8 +155,8 @@ router.get('/users/:uid/games/:gid', async (req, res, next) => {
       res.status(200).json( error );
     }
     // Unreachable!!
-    const error = new Error(`The user '${uid}' does not exist.`)
-    res.status(200).json( error );
+    // const error = new Error(`The user '${uid}' does not exist.`)
+    // res.status(200).json( error );
   });
 });
 
@@ -165,8 +165,8 @@ router.post('/users/:uid/games', async (req, res, next) => {
   req.session.regenerate( async function( err ) { 
     // Get parameters from the request.
     const uid = req.params.uid;
-    const font = await Font.find( { rule: req.headers['x-font'] } );
-    const level = await Level.find( { name: req.query.level } );
+    const font = await Font.findOne( { rule: req.headers['x-font'] } );
+    const level = await Level.findOne( { name: req.query.level } );
     const color = await Colors.create( { 
       guess: req.body.guess, 
       fore: req.body.fore, 
@@ -177,7 +177,7 @@ router.post('/users/:uid/games', async (req, res, next) => {
     let targetWord = await getWordFromList(level.minLength, level.maxLength);
     targetWord = targetWord.toUpperCase();
 
-    let newGame = await Game.create( {userId: uid, colors: color, font: font, guesses: "", level: level, 
+    let newGame = await Game.create( {userId: uid, colors: color, font: font, guesses: "", level: level, remaining: level.rounds,
       status: "unfinished", target: targetWord, timestamp: Date.now(), timeToComplete: "", view: "".padStart(targetWord.length, "_")} );
     res.status(200).json( newGame );
   });
@@ -192,14 +192,18 @@ router.post('/users/:uid/games/:gid/guesses', async (req, res, next) => {
 
     if (guess.length != 1) {
       res.status(200).json( new Error("Only one letter can be guessed at a time.") );
+      return;
     }
     let result = await addGuess(uid, gid, guess);
 
     if (typeof result === 'string' || result instanceof String) {
       res.status(200).json( new Error(result) );
+      return;
     }
     else {
+      result = await Game.findById(gid);
       res.status(200).json( result );
+      return;
     }
   });
 });
@@ -232,7 +236,8 @@ async function addGuess(userId, gameId, guess) {
 
     // Determine the state of the game and return.
     let newStatus;
-    if (!game.view.includes('_')) {
+    console.log(game.target == newView);
+    if (game.target == newView) {
       newStatus = 'victory';
       let completionTime = Date.now() - game.timestamp;
       return await Game.updateOne( {_id : gameId}, {guesses: newGuess, view: newView, status: newStatus, timeToComplete: completionTime} );
@@ -245,9 +250,9 @@ async function addGuess(userId, gameId, guess) {
     return await Game.updateOne( {_id : gameId}, {guesses: newGuess, view: newView, status: newStatus} );
   }
   else {
-    let newRemaining = game.remaining--;
+    let newRemaining = game.remaining - 1;
     let newStatus = 'unfinished';
-    if (game.remaining == 0) {
+    if (newRemaining == 0) {
       newStatus = 'loss';
     }
     return await Game.updateOne( {_id : gameId}, {guesses: newGuess, remaining: newRemaining, status: newStatus} );

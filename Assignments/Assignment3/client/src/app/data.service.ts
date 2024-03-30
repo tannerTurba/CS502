@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Font } from './font';
 import { User } from './user';
 import { Defaults } from './defaults';
+import { Error } from './error';
 
 @Injectable({
   providedIn: 'root'
@@ -93,7 +94,7 @@ export class DataService {
    * @param guess The letter that was guessed.
    * @returns A Game object of the updated game.
    */
-  makeGuess(userId: string, gameId: string, guess: string): Observable<Game> {
+  makeGuess(userId: string, gameId: string, guess: string): Observable<Game|Error> {
     return this.http.post<Game>(`${this.apiVersion}/users/${userId}/games/${gameId}/guesses?guess=${guess}`, {});
   }
 }

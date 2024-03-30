@@ -5,8 +5,6 @@ import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Defaults } from '../../defaults';
-import { Font } from '../../font';
-import { Level } from '../../level';
 
 @Component({
   selector: 'app-menu',
@@ -30,19 +28,27 @@ export class MenuComponent implements OnInit {
     // Add an event listner to change font of select element, based on value.
     (document.getElementById('font') as HTMLInputElement)?.addEventListener("change", function() {
       if (this.value == "noto-serif-regular") {
-        this.className = 'form-select-sm noto-serif-regular';
+        this.classList.add('noto-serif-regular');
       }
       else if (this.value == "roboto-regular") {
-        this.className = 'form-select-sm roboto-regular';
+        this.classList.add('roboto-regular');
       }
       else if (this.value == "protest-riot-regular") {
-        this.className = 'form-select-sm protest-riot-regular';
+        this.classList.add('protest-riot-regular');
       }
     });
   }
 
   createGame(): void {
-    alert("new game button clicked!");
+    let word = (document.getElementById('word') as HTMLInputElement).value;
+    let guess = (document.getElementById('guess') as HTMLInputElement).value;
+    let fore = (document.getElementById('fore') as HTMLInputElement).value;
+    let font = (document.getElementById('font') as HTMLInputElement).value;
+    let level = (document.getElementById('level') as HTMLInputElement).value;
+
+    this.data.createGame(this.userId, level, font, word, guess, fore).subscribe((game) => {
+      this.router.navigateByUrl(`users/${this.userId}/games/${game._id}`);
+    });
   }
 
   setTheme(): void {
@@ -74,8 +80,8 @@ export class MenuComponent implements OnInit {
   logout(): void {
     this.data.logout().subscribe((res) => {
       console.log(res);
-      this.router.navigateByUrl(`login`);
     });
+    this.router.navigateByUrl(`login`);
   }
 
   ngOnInit(): void {

@@ -23,5 +23,10 @@
         @for (game of (games$ | async); track game) {
             <app-list-item [game]="game" />
         } 
+        @empty {
+            <div class="row my-3 text-secondary">
+                <h6 class="text-center">No available games</h6>
+            </div>
+        }
     </div>
 </div>

@@ -1,9 +1,12 @@
-<div class="row my-3" [routerLink]="['/game', game._id]">
+<div class="row my-3" [routerLink]="['./', game._id]">
     <div class="col-1">
-        {{ game.level }}
+        {{ game.level.name }}
     </div>
-    <div class="col-6 d-inline-flex">
-        {{ generateBlockWord(game.view, game.font.rule, game.colors.word, game.colors.fore) }}
+    <div class="col-6 d-inline-flex" id="view">
+        @for (letter of game.view; track letter) {
+            <p class="phrase {{game.font.rule}}" [style.background-color]="game.colors.word" [style.color]="game.colors.fore">{{letter.toUpperCase()}}</p>
+        }
+        <!-- {{ generateBlockWord(game.view, game.font.rule, game.colors.word, game.colors.fore) }} -->
     </div>
     <div class="col-2">
         {{ game.remaining }}

@@ -8,7 +8,6 @@ var gameSchema = new mongoose.Schema({
     colors : Colors.schema,
     font : Font.schema,
     guesses : String, 
-    _id : String, 
     level : Level.schema,
     remaining : Number, 
     status : String, 
