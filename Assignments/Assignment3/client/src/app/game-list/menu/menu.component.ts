@@ -52,7 +52,6 @@ export class MenuComponent implements OnInit {
   }
 
   setTheme(): void {
-    alert("set theme button clicked!");
     let word = (document.getElementById('word') as HTMLInputElement).value;
     let guess = (document.getElementById('guess') as HTMLInputElement).value;
     let fore = (document.getElementById('fore') as HTMLInputElement).value;
@@ -106,6 +105,13 @@ export class MenuComponent implements OnInit {
         fontLink.setAttribute('rel', 'stylesheet');
         document.getElementsByTagName('head')[0].appendChild(fontLink);
       });
+    });
+
+    this.defaults$.subscribe((res) => {
+      console.log(`#font>option[value='${res.font.rule}']`);
+      console.log(`#level>option[value='${res.level.name}']`);
+      (document.querySelector(`#font>option[value='${res.font.rule}']`) as HTMLInputElement)!.setAttribute('selected', 'true');
+      (document.querySelector(`#level>option[value='${res.level.name}']`) as HTMLInputElement)!.setAttribute('selected', 'true');
     });
   }
 }

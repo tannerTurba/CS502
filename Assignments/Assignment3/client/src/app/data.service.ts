@@ -28,7 +28,9 @@ export class DataService {
   }
 
   setDefaults(userId: string, defaults: Defaults): Observable<Defaults | string> {
-    return this.http.put<Defaults>(`${this.apiVersion}/users/${userId}/defaults`, defaults);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.put<Defaults>(`${this.apiVersion}/users/${userId}/defaults`, defaults, { headers: headers });
   }
 
   getDefaults(userId: string): Observable<Defaults> {

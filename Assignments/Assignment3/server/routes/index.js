@@ -56,11 +56,6 @@ router.all('*', function(req, res, next) {
   next();
 });
 
-router.all('*', function(req, res, next) {
-  console.log(req.method, req.path);
-  next();
-});
-
 router.post( '/logout', function( req, res, next ) {
 req.session.regenerate( function(err) { // create a new session id
    res.json( 'ok' );
@@ -82,9 +77,9 @@ router.post( '/login', ( req, res, next ) => {
 
 router.put('/users/:uid/defaults', async (req, res, next) => {
   let userId = req.params.uid;
-  let newDefaults = req.body.defaults;
+  let newDefaults = req.body;
   req.session.regenerate( async function( err ) { 
-    let mData = await User.findOneAndUpdate( { _id: userId }, { default: newDefaults });
+    let mData = await User.findOneAndUpdate( { _id: userId }, { defaults: newDefaults });
     res.status(200).json(newDefaults);
   });
 })
@@ -127,17 +122,9 @@ router.get('/users/:uid/games', async (req, res, next) => {
   req.session.regenerate( async function( err ) { 
     const uid = req.params.uid;
     let games = await Game.find( { userId: uid } );
-    console.log(games);
+    games.target = "[REDACTED]";
     res.status(200).json(games);
-    // const games = await Game.find( { userId: uid } );
-
-    // if (games.length !== 0) {
-    //   res.status(200).json( games );
-    // }
-    // else {
-    //   // res.status(200).json(new Error(`No games associated with '${uid}'`));
-    // }
-  });
+  })
 });
 
 /* GET the game associated with the gid. */
@@ -146,6 +133,7 @@ router.get('/users/:uid/games/:gid', async (req, res, next) => {
     const uid = req.params.uid;
     const gid = req.params.gid;
     const games = await Game.findOne( { userId: uid, _id: gid } );
+    games.target = "[REDACTED]";
 
     if (games.length !== 0) {
       res.status(200).json( games );
@@ -154,9 +142,6 @@ router.get('/users/:uid/games/:gid', async (req, res, next) => {
       const error = new Error(`The game '${gid}' is not associated with the user '${uid}'.`)
       res.status(200).json( error );
     }
-    // Unreachable!!
-    // const error = new Error(`The user '${uid}' does not exist.`)
-    // res.status(200).json( error );
   });
 });
 
@@ -179,6 +164,7 @@ router.post('/users/:uid/games', async (req, res, next) => {
 
     let newGame = await Game.create( {userId: uid, colors: color, font: font, guesses: "", level: level, remaining: level.rounds,
       status: "unfinished", target: targetWord, timestamp: Date.now(), timeToComplete: "", view: "".padStart(targetWord.length, "_")} );
+    newGame.target = "[REDACTED]";
     res.status(200).json( newGame );
   });
 });
