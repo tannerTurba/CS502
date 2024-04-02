@@ -3,12 +3,11 @@ import { Routes } from '@angular/router';
 import { GameListComponent } from './game-list/game-list.component';
 import { GameComponent } from './game/game.component';
 import { LoginComponent } from './login/login.component';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', title: 'Wheel of Fortuner - Login', component: LoginComponent },
-    // { path: '', redirectTo: 'games', pathMatch: 'full' },
-    // { path: 'games', title: 'Wheel of Fortuner - Game List', component: GameListComponent },
-    { path: 'users/:uid/games', title: 'Wheel of Fortuner - Game List', component: GameListComponent },
-    { path: 'users/:uid/games/:gid', title: 'Wheel of Fortuner - Game', component: GameComponent }
+    { path: 'users/:uid/games', title: 'Wheel of Fortuner - Game List', component: GameListComponent, canActivate: [authGuard] },
+    { path: 'users/:uid/games/:gid', title: 'Wheel of Fortuner - Game', component: GameComponent, canActivate: [authGuard] }
 ];
