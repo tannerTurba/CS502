@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MenuComponent } from './menu/menu.component';
 import { ListItemComponent } from './list-item/list-item.component';
 import { Game } from '../game';
@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
   templateUrl: './game-list.component.html',
   styleUrl: './game-list.component.css'
 })
-export class GameListComponent implements OnInit {
+export class GameListComponent {
   games$: Observable<[Game]>;
   userId: string;
 
@@ -28,11 +28,5 @@ export class GameListComponent implements OnInit {
   ) { 
     this.userId = this.route.snapshot.paramMap.get('uid')!;
     this.games$ = this.data.getAllGames(this.userId);
-  }
-
-  ngOnInit(): void {
-    this.games$.subscribe((res) => {
-      console.log(res);
-    })
   }
 }

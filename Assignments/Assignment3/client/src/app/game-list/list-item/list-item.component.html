@@ -6,7 +6,6 @@
         @for (letter of game.view; track letter) {
             <p class="phrase {{game.font.rule}}" [style.background-color]="game.colors.word" [style.color]="game.colors.fore">{{letter.toUpperCase()}}</p>
         }
-        <!-- {{ generateBlockWord(game.view, game.font.rule, game.colors.word, game.colors.fore) }} -->
     </div>
     <div class="col-2">
         {{ game.remaining }}

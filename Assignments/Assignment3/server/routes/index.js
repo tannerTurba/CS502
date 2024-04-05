@@ -51,15 +51,23 @@ async function getWordFromList(min, max) {
 });
 }
 
-router.all('*', function(req, res, next) {
-  console.log(req.method, req.path);
-  next();
+/* Verifies a session user matches their request data */
+router.all('*/users/:uid*', function(req, res, next) {
+  var user = req.session.user;
+  if (user._id == req.params.uid) {
+    next();
+  }
+  else {
+    req.session.regenerate( function(err) { // create a new session id
+      req.session.user = null;
+    });
+  }
 });
 
 router.post( '/logout', function( req, res, next ) {
-req.session.regenerate( function(err) { // create a new session id
-   res.json( 'ok' );
- } );
+  req.session.destroy(() => {
+    res.json( 'ok' )
+  });
 });
 
 router.post( '/login', ( req, res, next ) => {
@@ -86,112 +94,89 @@ router.put('/users/:uid/defaults', async (req, res, next) => {
 
 router.get('/users/:uid/defaults', async (req, res, next) => {
   let userId = req.params.uid;
-  req.session.regenerate( async function( err ) { 
-    let user = await User.findOne( { _id: userId });
-    res.status(200).json( user.defaults );
-  });
-});
-
-/* Verifies a session user matches their request data */
-router.all('/users/:uid', function(req, res, next) {
-  var user = req.session.user;
-  if (user._id == uid) {
-    next();
-  }
-  res.status( 403 ).send( 'Forbidden' );
+  let user = await User.findOne( { _id: userId });
+  res.status(200).json( user.defaults );
 });
 
 /* GET a metadate obj describing all user-configurable settings. */
 router.get('/meta', async (req, res, next) => {
-  req.session.regenerate( async function( err ) { 
-    let mData = await Metadata.findOne({});
-    res.status(200).json(mData);
-  });
+  let mData = await Metadata.findOne({});
+  res.status(200).json(mData);
 });
 
 /* GET a list of supported fonts. */
 router.get('/fonts', async (req, res, next) => {
-  req.session.regenerate( async function( err ) { 
-    let fonts = await Font.find({});
-    res.status(200).json(fonts);
-  });
+  let fonts = await Font.find({});
+  res.status(200).json(fonts);
 });
 
 /* GET a list of games. */
 router.get('/users/:uid/games', async (req, res, next) => {
-  req.session.regenerate( async function( err ) { 
-    const uid = req.params.uid;
-    let games = await Game.find( { userId: uid } );
-    games.target = "[REDACTED]";
-    res.status(200).json(games);
-  })
+  const uid = req.params.uid;
+  let games = await Game.find( { userId: uid } );
+  games.target = "[REDACTED]";
+  res.status(200).json(games);
 });
 
 /* GET the game associated with the gid. */
 router.get('/users/:uid/games/:gid', async (req, res, next) => {
-  req.session.regenerate( async function( err ) { 
-    const uid = req.params.uid;
-    const gid = req.params.gid;
-    const games = await Game.findOne( { userId: uid, _id: gid } );
-    games.target = "[REDACTED]";
+  const uid = req.params.uid;
+  const gid = req.params.gid;
+  const games = await Game.findOne( { userId: uid, _id: gid } );
+  games.target = "[REDACTED]";
 
-    if (games.length !== 0) {
-      res.status(200).json( games );
-    }
-    else {
-      const error = new Error(`The game '${gid}' is not associated with the user '${uid}'.`)
-      res.status(200).json( error );
-    }
-  });
+  if (games.length !== 0) {
+    res.status(200).json( games );
+  }
+  else {
+    const error = new Error(`The game '${gid}' is not associated with the user '${uid}'.`)
+    res.status(200).json( error );
+  }
 });
 
 /* POST a new game object. */
 router.post('/users/:uid/games', async (req, res, next) => {
-  req.session.regenerate( async function( err ) { 
-    // Get parameters from the request.
-    const uid = req.params.uid;
-    const font = await Font.findOne( { rule: req.headers['x-font'] } );
-    const level = await Level.findOne( { name: req.query.level } );
-    const color = await Colors.create( { 
-      guess: req.body.guess, 
-      fore: req.body.fore, 
-      word: req.body.word 
-    });
-    
-    // Get the target word.
-    let targetWord = await getWordFromList(level.minLength, level.maxLength);
-    targetWord = targetWord.toUpperCase();
-
-    let newGame = await Game.create( {userId: uid, colors: color, font: font, guesses: "", level: level, remaining: level.rounds,
-      status: "unfinished", target: targetWord, timestamp: Date.now(), timeToComplete: "", view: "".padStart(targetWord.length, "_")} );
-    newGame.target = "[REDACTED]";
-    res.status(200).json( newGame );
+  // Get parameters from the request.
+  const uid = req.params.uid;
+  const font = await Font.findOne( { rule: req.headers['x-font'] } );
+  const level = await Level.findOne( { name: req.query.level } );
+  const color = await Colors.create( { 
+    guess: req.body.guess, 
+    fore: req.body.fore, 
+    word: req.body.word 
   });
+  
+  // Get the target word.
+  let targetWord = await getWordFromList(level.minLength, level.maxLength);
+  targetWord = targetWord.toUpperCase();
+
+  let newGame = await Game.create( {userId: uid, colors: color, font: font, guesses: "", level: level, remaining: level.rounds,
+    status: "unfinished", target: targetWord, timestamp: Date.now(), timeToComplete: "", view: "".padStart(targetWord.length, "_")} );
+  newGame.target = "[REDACTED]";
+  res.status(200).json( newGame );
 });
 
 /* POST a new guess object. */
 router.post('/users/:uid/games/:gid/guesses', async (req, res, next) => {
-  req.session.regenerate( async function( err ) { 
-    const uid = req.params.uid;
-    const gid = req.params.gid;
-    const guess = req.query['guess'].toUpperCase();
+  const uid = req.params.uid;
+  const gid = req.params.gid;
+  const guess = req.query['guess'].toUpperCase();
 
-    if (guess.length != 1) {
-      res.status(200).json( new Error("Only one letter can be guessed at a time.") );
-      return;
-    }
-    let result = await addGuess(uid, gid, guess);
+  if (guess.length != 1) {
+    res.status(200).json( new Error("Only one letter can be guessed at a time.") );
+    return;
+  }
+  let result = await addGuess(uid, gid, guess);
 
-    if (typeof result === 'string' || result instanceof String) {
-      res.status(200).json( new Error(result) );
-      return;
-    }
-    else {
-      result = await Game.findById(gid);
-      res.status(200).json( result );
-      return;
-    }
-  });
+  if (typeof result === 'string' || result instanceof String) {
+    res.status(200).json( new Error(result) );
+    return;
+  }
+  else {
+    result = await Game.findById(gid);
+    res.status(200).json( result );
+    return;
+  }
 });
 
 async function addGuess(userId, gameId, guess) {
@@ -222,7 +207,6 @@ async function addGuess(userId, gameId, guess) {
 
     // Determine the state of the game and return.
     let newStatus;
-    console.log(game.target == newView);
     if (game.target == newView) {
       newStatus = 'victory';
       let completionTime = Date.now() - game.timestamp;

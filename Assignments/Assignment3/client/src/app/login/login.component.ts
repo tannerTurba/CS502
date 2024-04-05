@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,47 +18,50 @@ export class LoginComponent {
     email: '',
     password: ''
   });
+  emailFeedback: string = '';
+  pwdFeedback: string = '';
+  generalFeedback: string = '';
 
   constructor(
     private data: DataService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   onSubmit(): void {
-    let emailFeedback = document.getElementById('emailFeedback') as HTMLElement;
-    let pwdFeedback = document.getElementById('pwdFeedback') as HTMLElement;
-    let generalFeedback = document.getElementById('generalFeedback') as HTMLElement;
-
-    emailFeedback.innerText = "";
-    pwdFeedback.innerText = "";
-    generalFeedback.innerText = "";
-
     let email = this.loginForm.value.email;
     let password = this.loginForm.value.password;
     let checksPassed: boolean = true
 
     if (email?.length == 0) {
-      emailFeedback.innerText = "Enter an email address";
+      this.emailFeedback = "Enter an email address";
       checksPassed = false;
     }
     else if (!email?.includes('@')) {
-      emailFeedback.innerText = "Email must contain '@' character";
+      this.emailFeedback = "Email must contain '@' character";
       checksPassed = false;
+    }
+    else {
+      this.emailFeedback = "";
     }
 
     if (password!.length == 0) {
-      pwdFeedback.innerText = "Enter a password";
+      this.pwdFeedback = "Enter a password";
       checksPassed = false;
+    }
+    else {
+      this.pwdFeedback = "";
     }
     
     if (checksPassed) {
       this.data.login(email!, password!).subscribe((res) => {
         if (typeof res === "string") {
-          generalFeedback.innerText = res;
+          this.generalFeedback = res;
         }
         else {
           let userData:User = res;
+          this.authService.currentUser = res;
           this.router.navigateByUrl(`users/${userData._id}/games`);
         }
       });
