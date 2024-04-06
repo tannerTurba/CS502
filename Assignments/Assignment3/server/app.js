@@ -8,7 +8,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index.js');
 var app = express();
-var authentication = require('./routes/authentication');
 var db = require('./routes/db');
 
 app.use(cors());
