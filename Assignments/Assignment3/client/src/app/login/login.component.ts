@@ -5,6 +5,7 @@ import { DataService } from '../data.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { setAuthUser } from '../globals';
 
 @Component({
   selector: 'app-login',
@@ -61,7 +62,9 @@ export class LoginComponent {
         }
         else {
           let userData:User = res;
-          this.authService.currentUser = res;
+          // this.authService.currentUser = res;
+          // setAuthUser(res);
+          sessionStorage.setItem('uid', res._id);
           this.router.navigateByUrl(`users/${userData._id}/games`);
         }
       });

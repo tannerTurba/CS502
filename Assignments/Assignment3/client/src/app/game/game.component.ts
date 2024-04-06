@@ -16,7 +16,35 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './game.component.css'
 })
 export class GameComponent {
-  gameState!: Game;
+  gameState: Game = {
+    userId: "",
+    colors: {
+        guess: "",
+        fore: "",
+        word: ""
+    },
+    font: {
+        category: "",
+        family: "",
+        rule: "",
+        url: ""
+    },
+    guesses: "",
+    level: {
+        rounds: 0,
+        minLength: 0,
+        maxLenth: 0,
+        name: ""
+    },
+    remaining: 0,
+    status: "",
+    target: "",
+    timestamp: 0,
+    timeToComplete: 0,
+    _id: "",
+    view: "",
+    msg: ""
+}
   userId: string;
   gameId: string;
   image: string = '';
