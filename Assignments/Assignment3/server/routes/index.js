@@ -86,10 +86,12 @@ router.post( '/login', ( req, res, next ) => {
 router.put('/users/:uid/defaults', async (req, res, next) => {
   let userId = req.params.uid;
   let newDefaults = req.body;
-  req.session.regenerate( async function( err ) { 
+  console.log('setting defaults');
+  console.log(JSON.stringify(newDefaults));
+  // req.session.regenerate( async function( err ) { 
     let mData = await User.findOneAndUpdate( { _id: userId }, { defaults: newDefaults });
     res.status(200).json(newDefaults);
-  });
+  // });
 })
 
 router.get('/users/:uid/defaults', async (req, res, next) => {

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Defaults } from '../../defaults';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../auth.service';
+import { setAuthUser } from '../../globals';
 
 @Component({
   selector: 'app-menu',
@@ -22,21 +23,21 @@ export class MenuComponent {
   }
   defaults: Defaults = {
     font: {
-      category: '',
-      family: '',
-      rule: '',
-      url: '',
+      category: "sans-serif",
+      family: "Protest Riot",
+      rule: "protest-riot-regular",
+      url: "https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap"
     },
     level: {
-      rounds: 0,
-      minLength: 0,
-      maxLenth: 0,
-      name: '',
+      rounds: 8,
+      minLength: 3,
+      maxLenth: 5,
+      name: "Easy"
     },
     colors: {
-      guess: '',
-      fore: '',
-      word: '',
+      guess: "#fefae0",
+      fore: "#283618",
+      word: "#9aac5d"
     }
   };
 
@@ -73,6 +74,8 @@ export class MenuComponent {
   logout(): void {
     this.data.logout().subscribe();
     this.router.navigateByUrl(`login`);
-    this.authService.currentUser = null;
+    // this.authService.currentUser = null;
+    // setAuthUser(null);
+    sessionStorage.setItem('uid', '');
   }
 }

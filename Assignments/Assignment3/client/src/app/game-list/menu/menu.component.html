@@ -2,7 +2,7 @@
     <div class="row" *ngIf="defaults">
         <div class="col-1 d-inline-flex my-auto mx-3">
             <label for="font" class="mx-auto col-form-label">Font</label>
-            <select name="font" [class]="'form-select-sm mx-2 ' + (defaults.font.rule)" id="font" [(ngModel)]="defaults.font!">
+            <select name="font" [class]="'form-select-sm mx-2 ' + (defaults.font.rule)" id="font" [(ngModel)]="defaults.font">
                 @for (font of metadata.fonts; track font; let first = $first) {
                     <option [ngValue]="font" [id]="font.family" [attr.selected]="first ? true : null">{{font.family}}</option>
                 }

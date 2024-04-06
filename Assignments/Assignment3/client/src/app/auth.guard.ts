@@ -11,18 +11,18 @@ export const profileGuard: CanActivateFn = (
   | Promise<boolean | UrlTree>
   | boolean
   | UrlTree => {
-
-  let auth = inject(AuthService);
-  const currentUser = auth.currentUser;
+  
+  let router = inject(Router);
+  const currentUserId = sessionStorage.getItem('uid') as string;
+  const requestId = route.params["uid"];
 
   // Redirects to another route
-  const isAnonymous = !currentUser;
-  if (isAnonymous && auth.isNavigated) {
-    return inject(Router).createUrlTree(["/"]);
+  if (currentUserId === '' && router.navigated) {
+    return router
+    // .createUrlTree(["/login"]);
+    .navigateByUrl(`/login`);
   }
 
   // Grants or deny access to this route
-  const requestId = route.params["uid"];
-  const attemptsToAccessItsOwnPage = currentUser?._id === requestId;
-  return attemptsToAccessItsOwnPage || !auth.isNavigated;
+  return currentUserId === requestId
 };
