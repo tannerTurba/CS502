@@ -25,7 +25,7 @@ let USERS = [
     { email: "samwise@mordor.org", password: "333333333" },
 ]
 
-let DEFAULT_COLOR = { guess: "#fefae0", fore: "#283618", word: "#9aac5d" };
+let DEFAULT_COLOR = { guess: "#435375", fore: "#e2f5cc", word: "#5d94ac" };
 
 async function initLevels() {
     for (let i = 0; i < LEVELS.length; i++) {
