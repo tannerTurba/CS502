@@ -1,7 +1,6 @@
 import { inject } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
-import { AuthService } from "./auth.service";
 
 export const profileGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
@@ -18,9 +17,7 @@ export const profileGuard: CanActivateFn = (
 
   // Redirects to another route
   if (currentUserId === '' && router.navigated) {
-    return router
-    // .createUrlTree(["/login"]);
-    .navigateByUrl(`/login`);
+    return router.navigate([`/login`]);
   }
 
   // Grants or deny access to this route

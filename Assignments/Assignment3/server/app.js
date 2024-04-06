@@ -11,13 +11,6 @@ var app = express();
 var authentication = require('./routes/authentication');
 var db = require('./routes/db');
 
-// var createError = require('http-errors');
-// var logger = require('morgan');
-
-// app.use(logger('dev'));
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
@@ -29,8 +22,6 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// app.use('/', routes);
-// app.use('/', authentication);
 app.use('/api/v2', routes);
 
 mongoose.connect( 'mongodb://localhost:27017/hw3', {} )

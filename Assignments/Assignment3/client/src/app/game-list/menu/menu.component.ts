@@ -5,8 +5,6 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Defaults } from '../../defaults';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../auth.service';
-import { setAuthUser } from '../../globals';
 
 @Component({
   selector: 'app-menu',
@@ -41,7 +39,7 @@ export class MenuComponent {
     }
   };
 
-  constructor(private data: DataService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
+  constructor(private data: DataService, private router: Router, private route: ActivatedRoute) {
     this.userId = this.route.snapshot.paramMap.get('uid')!;
     this.data.getMetadata().subscribe((meta: Metadata) => {
       this.metadata = meta;
@@ -74,8 +72,6 @@ export class MenuComponent {
   logout(): void {
     this.data.logout().subscribe();
     this.router.navigateByUrl(`login`);
-    // this.authService.currentUser = null;
-    // setAuthUser(null);
     sessionStorage.setItem('uid', '');
   }
 }
