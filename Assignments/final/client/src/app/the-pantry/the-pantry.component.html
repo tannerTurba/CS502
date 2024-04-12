@@ -1,14 +1,17 @@
 <app-navbar />
 <div class="mx-10 my-5 text-4xl flex justify-between">
-    <h1 class="text-green-600 dark:text-green-500">My Ingredients</h1>
+    <h1 class="text-green-600 dark:text-green-500">The Pantry</h1>
     <div class="">
+        <button type="button" class="text-sm bg-stone-100 dark:text-stone-100 dark:bg-stone-700 dark:hover:bg-stone-600 dark:border-stone-600 hover:bg-stone-200 border border-stone-300 rounded-lg px-2 h-11 ml-3 focus:ring-stone-100 dark:focus:ring-stone-700 focus:ring-2 focus:outline-none">
+            Leave Household
+        </button>
         <button type="button" class="text-sm bg-stone-100 dark:text-stone-100 dark:bg-stone-700 dark:hover:bg-stone-600 dark:border-stone-600 hover:bg-stone-200 border border-stone-300 rounded-lg px-2 h-11 ml-3 focus:ring-stone-100 dark:focus:ring-stone-700 focus:ring-2 focus:outline-none">
             Add Ingredient
         </button>
-        <button type="button" data-dropdown-toggle="filterDropdown" class="text-sm w-[95px] bg-stone-100 dark:text-stone-100 dark:bg-stone-700 dark:hover:bg-stone-600 dark:border-stone-600 hover:bg-stone-200 border border-stone-300 rounded-lg px-2 h-11 ml-3 focus:ring-stone-100 dark:focus:ring-stone-700 focus:ring-2 focus:outline-none">
+        <button type="button" data-dropdown-toggle="pantryFilterDropdown" class="text-sm w-[95px] bg-stone-100 dark:text-stone-100 dark:bg-stone-700 dark:hover:bg-stone-600 dark:border-stone-600 hover:bg-stone-200 border border-stone-300 rounded-lg px-2 h-11 ml-3 focus:ring-stone-100 dark:focus:ring-stone-700 focus:ring-2 focus:outline-none">
             Filter
         </button>
-        <div id="filterDropdown" class="z-10 hidden bg-white divide-y divide-stone-100 rounded-lg shadow w-44 dark:bg-stone-700">
+        <div id="pantryFilterDropdown" class="z-10 hidden bg-white divide-y divide-stone-100 rounded-lg shadow w-44 dark:bg-stone-700">
             <ul class="py-2 text-sm text-stone-700 dark:text-stone-200" aria-labelledby="dropdownDefaultButton">
                 <li>
                     <a href="#" class="block px-4 py-2 hover:bg-stone-100 dark:hover:bg-stone-600 dark:hover:text-white">Keyword</a>
@@ -19,16 +22,18 @@
                 <li>
                     <a href="#" class="block px-4 py-2 hover:bg-stone-100 dark:hover:bg-stone-600 dark:hover:text-white">Macro</a>
                 </li>
+                <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-stone-100 dark:hover:bg-stone-600 dark:hover:text-white">Members</a>
+                </li>
             </ul>
         </div>
     </div>
 </div>
 <div class="grid grid-cols-4 gap-4 justify-items-center mx-8">
-    <app-ingredient-card />
-    <app-ingredient-card />
-    <app-ingredient-card />
-    <app-ingredient-card />
-    <app-ingredient-card />
-    <app-ingredient-card />
+    <app-pantry-card />
+    <app-pantry-card />
+    <app-pantry-card />
+    <app-pantry-card />
+    <app-pantry-card />
     <app-add-card />
 </div>

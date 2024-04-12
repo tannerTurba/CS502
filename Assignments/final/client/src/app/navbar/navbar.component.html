@@ -8,14 +8,29 @@
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
               <!-- Current: "bg-stone-900 text-white", Default: "text-stone-300 hover:bg-stone-700 hover:text-white" -->
-              <a routerLink="" class="bg-stone-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">My Ingredients</a>
-              <a routerLink="" class="text-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">The Pantry</a>
+              <a routerLink="/my-ingredients" class="bg-stone-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">My Ingredients</a>
+              <a routerLink="/the-pantry" class="text-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">The Pantry</a>
               <a routerLink="" class="text-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Messages</a>
             </div>
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">  
-          <app-dropdown-menu />
+          <div class="relative ml-3">
+            <button type="button" data-dropdown-toggle="dropdown" class="text-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="user-menu-button">
+              My Account
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdown" class="z-10 hidden bg-white divide-y divide-stone-100 rounded-lg shadow w-44 dark:bg-stone-700">
+              <ul class="py-2 text-sm text-stone-700 dark:text-stone-200" aria-labelledby="dropdownDefaultButton">
+                <li>
+                  <a routerLink="" class="block px-4 py-2 hover:bg-stone-100 dark:hover:bg-stone-600 dark:hover:text-white">Your profile</a>
+                </li>
+                <li>
+                  <a routerLink="/login" class="block px-4 py-2 hover:bg-stone-100 dark:hover:bg-stone-600 dark:hover:text-white">Sign out</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
