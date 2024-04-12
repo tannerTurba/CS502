@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { IngredientCardComponent } from '../ingredient-card/ingredient-card.component';
 import { AddCardComponent } from '../add-card/add-card.component';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-my-ingredients',
@@ -14,6 +15,9 @@ import { AddCardComponent } from '../add-card/add-card.component';
   templateUrl: './my-ingredients.component.html',
   styleUrl: './my-ingredients.component.css'
 })
-export class MyIngredientsComponent {
+export class MyIngredientsComponent implements OnInit {
+  ngOnInit(): void {
+    initFlowbite();
+  }
 
 }
