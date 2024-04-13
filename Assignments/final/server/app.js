@@ -21,9 +21,9 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.use('/api/v2', routes);
+app.use('/api/v1', routes);
 
-mongoose.connect( 'mongodb://localhost:27017/cellarium', {} )
+mongoose.connect( 'mongodb://localhost:27017/cellarium', { useNewUrlParser: true, useUnifiedTopology: true } )
   .then( () => {
     db.init();
   });

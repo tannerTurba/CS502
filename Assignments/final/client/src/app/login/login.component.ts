@@ -40,10 +40,6 @@ export class LoginComponent {
       this.usernameFeedback = "Enter an username address";
       checksPassed = false;
     }
-    else if (!username?.includes('@')) {
-      this.usernameFeedback = "username must contain '@' character";
-      checksPassed = false;
-    }
     else {
       this.usernameFeedback = "";
     }
@@ -64,7 +60,7 @@ export class LoginComponent {
         else {
           let userData:User = res;
           sessionStorage.setItem('uid', res._id);
-          this.router.navigateByUrl(`users/${userData._id}/games`);
+          this.router.navigateByUrl(`users/${userData._id}/my-ingredients`);
         }
       });
     }

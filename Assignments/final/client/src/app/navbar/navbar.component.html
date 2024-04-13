@@ -8,9 +8,9 @@
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
               <!-- Current: "bg-stone-900 text-white", Default: "text-stone-300 hover:bg-stone-700 hover:text-white" -->
-              <a routerLink="/my-ingredients" class="bg-stone-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">My Ingredients</a>
-              <a routerLink="/the-pantry" class="text-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">The Pantry</a>
-              <a routerLink="" class="text-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Messages</a>
+              <a [routerLink]="'/users/' + uid + '/my-ingredients'" class="bg-stone-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">My Ingredients</a>
+              <a [routerLink]="'/users/' + uid + '/the-pantry'" class="text-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">The Pantry</a>
+              <a [routerLink]="'/users/' + uid + '/messages'" class="text-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Messages</a>
             </div>
           </div>
         </div>

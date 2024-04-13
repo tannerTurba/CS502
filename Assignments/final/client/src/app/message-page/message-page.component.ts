@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { IngredientCardComponent } from '../ingredient-card/ingredient-card.component';
-import { AddCardComponent } from '../add-card/add-card.component';
 import { initFlowbite } from 'flowbite';
+import { RequestBubbleComponent } from '../request-bubble/request-bubble.component';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-my-ingredients',
+  selector: 'app-message-page',
   standalone: true,
   imports: [
     NavbarComponent,
-    IngredientCardComponent,
-    AddCardComponent
+    RequestBubbleComponent
   ],
-  templateUrl: './my-ingredients.component.html',
-  styleUrl: './my-ingredients.component.css'
+  templateUrl: './message-page.component.html',
+  styleUrl: './message-page.component.css'
 })
-export class MyIngredientsComponent implements OnInit {
+export class MessagePageComponent implements OnInit {
   uid: string;
 
   constructor(

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,5 +11,12 @@ import { RouterModule } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  uid: string;
+
+  constructor(
+    private route: ActivatedRoute,
+  ) {
+    this.uid = this.route.snapshot.paramMap.get('uid')!;
+  }
 
 }

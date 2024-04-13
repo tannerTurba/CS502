@@ -1,0 +1,1355 @@
+{
+    "text": "skippy Peanut Butter",
+    "parsed": [],
+    "hints": [
+      {
+        "food": {
+          "foodId": "food_b8cnr22atpokstaw1u0iza40itnr",
+          "label": "Skippy Peanut Butter",
+          "knownAs": "Skippy Peanut Butter",
+          "nutrients": {
+            "ENERC_KCAL": 593.75,
+            "PROCNT": 21.875,
+            "FAT": 50,
+            "CHOCDF": 21.875,
+            "FIBTG": 6.25
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "ROASTED PEANUTS; SUGAR; HYDROGENATED VEGETABLE OILS (COTTON SEED; SOYBEAN AND RAPESEED) TO PREVENT SEPARATING; SALT.",
+          "image": "https://www.edamam.com/food-img/404/404b3a57a1a51cedc7479204cf59a50a.png",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            }
+          ],
+          "servingsPerContainer": 70
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 2240
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_b16dbqvb6r64kobatlp8xadymc9a",
+          "label": "Skippy, Peanut Butter",
+          "knownAs": "SKIPPY, PEANUT BUTTER",
+          "nutrients": {
+            "ENERC_KCAL": 594,
+            "PROCNT": 21.8799991607666,
+            "FAT": 50,
+            "CHOCDF": 18.75,
+            "FIBTG": 6.199999809265137
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "ROASTED PEANUTS; SUGAR; HYDROGENATED VEGETABLE OIL (COTTONSEED; SOYBEAN AND RAPESEED OIL) TO PREVENT SEPARATION; SALT.",
+          "image": "https://www.edamam.com/food-img/674/674dae2eaec782dc310f6186a3bda61a.png",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            }
+          ],
+          "servingsPerContainer": 16
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 512
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_acm2gsgayodikyamfrfm3btk8dyc",
+          "label": "Skippy Peanut Butter",
+          "knownAs": "Skippy Peanut Butter",
+          "nutrients": {
+            "ENERC_KCAL": 593.75,
+            "PROCNT": 21.875,
+            "FAT": 50,
+            "CHOCDF": 21.875,
+            "FIBTG": 6.25
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "ROASTED PEANUTS; SUGAR; HYDROGENATED VEGETABLE OILS (COTTONSEED; SOYBEAN AND RAPESEED) TO PREVENT SEPARATION; SALT.",
+          "image": "https://www.edamam.com/food-img/f4f/f4f0eaa7465cd40ad23fde3c76be0d46.png",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            }
+          ],
+          "servingsPerContainer": 14
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 448
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_ax4exqlazbla9sapum8n1bcaz5pr",
+          "label": "Skippy Peanut Butter, Creamy",
+          "knownAs": "Skippy Peanut Butter, Creamy",
+          "nutrients": {
+            "ENERC_KCAL": 593.75,
+            "PROCNT": 21.875,
+            "FAT": 50,
+            "CHOCDF": 21.875,
+            "FIBTG": 6.25
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "ROASTED PEANUTS; SUGAR; HYDROGENATED VEGETABLE OILS (COTTONSEED; SOYBEAN; AND RAPESEED) TO PREVENT SEPARATION; SALT",
+          "image": "https://www.edamam.com/food-img/4b7/4b7d6b0039798cb1055721feadf2366a.png",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            }
+          ],
+          "servingsPerContainer": 25
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 800
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_ascopv0ar0vf3bbzbehwia9l69cb",
+          "label": "Skippy Peanut Butter, Creamy",
+          "knownAs": "Skippy Peanut Butter, Creamy",
+          "nutrients": {
+            "ENERC_KCAL": 593.75,
+            "PROCNT": 21.875,
+            "FAT": 50,
+            "CHOCDF": 21.875,
+            "FIBTG": 6.25
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "ROASTED PEANUTS; SUGAR; HYDROGENATED VEGETABLE OILS (COTTONSEED; SOYBEAN AND RAPESEED) TO PREVENT SEPARATION; SALT.",
+          "image": "https://www.edamam.com/food-img/378/378db6e0b0f1ca9bfc36571b98b3a0c8.png",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            }
+          ],
+          "servingsPerContainer": 14
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 448
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_bagfg30a308bo2a0sm1bdbh30jph",
+          "label": "Skippy Smooth Peanut Butter",
+          "knownAs": "Skippy Smooth Peanut Butter",
+          "nutrients": {
+            "ENERC_KCAL": 612.3326958882,
+            "PROCNT": 22.100000381469727,
+            "FAT": 51.599998474121094,
+            "CHOCDF": 14.100000381469727
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "Roasted Peanuts (90%);  Sugar;  Hydrogenated Palm Oil;  Salt",
+          "image": "https://www.edamam.com/food-img/568/568d50f2896f52e702cb017b1877e58b.jpg",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 100
+            }
+          ]
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 100
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_akd9akjauxu0xvae2r4uta2qj8s6",
+          "label": "Skippy Peanut Butter Spread With Honey",
+          "knownAs": "Skippy Peanut Butter Spread With Honey",
+          "nutrients": {
+            "ENERC_KCAL": 625,
+            "PROCNT": 18.75,
+            "FAT": 50,
+            "CHOCDF": 28.125,
+            "FIBTG": 6.25
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "PEANUT BUTTER SPREAD (ROASTED PEANUTS; PALM OIL; PEANUT OIL; SALT); SUGAR; HONEY.",
+          "image": "https://www.edamam.com/food-img/13e/13efb5352078436cf1bb774c39230490.png",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            }
+          ],
+          "servingsPerContainer": 35
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 1120
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_afhcqb3a0j5xayaql17voaye50ks",
+          "label": "Skippy Peanut Butter Honey Nut",
+          "knownAs": "Skippy Peanut Butter Honey Nut",
+          "nutrients": {
+            "ENERC_KCAL": 625,
+            "PROCNT": 21.875,
+            "FAT": 50,
+            "CHOCDF": 21.875,
+            "FIBTG": 6.25
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "ROASTED PEANUTS; HONEY; PEANUT OIL; SUGAR; HYDROGENATED VEGETABLE OILS(COTTONSEED; SOYBEAN AND RAPESEED)TO PREVENT SEPARATION; MOLASSES; SALT.",
+          "image": "https://www.edamam.com/food-img/f4f/f4f0eaa7465cd40ad23fde3c76be0d46.png",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            }
+          ],
+          "servingsPerContainer": 14
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 448
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_bqrsd0abkmg0eybn53vvoa3cga5i",
+          "label": "Skippy, Peanut Butter Spread With Honey",
+          "knownAs": "SKIPPY, PEANUT BUTTER SPREAD WITH HONEY",
+          "nutrients": {
+            "ENERC_KCAL": 625,
+            "PROCNT": 18.75,
+            "FAT": 50,
+            "CHOCDF": 28.1200008392334,
+            "FIBTG": 6.199999809265137
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "PEANUT BUTTER; SPREAD (ROASTED PEANUTS; PALM OIL; PEANUT OIL; SALT); SUGAR; HONEY.",
+          "image": "https://www.edamam.com/food-img/8b4/8b449ec1f6736308d8546ef5c08e6dc2.jpg",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            }
+          ],
+          "servingsPerContainer": 13
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 416
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_aroqgufbps8sxnbtzgkjta7lixln",
+          "label": "Skippy, Peanut Butter Spread, Creamy",
+          "knownAs": "SKIPPY, PEANUT BUTTER SPREAD, CREAMY",
+          "nutrients": {
+            "ENERC_KCAL": 656,
+            "PROCNT": 21.8799991607666,
+            "FAT": 53.119998931884766,
+            "CHOCDF": 18.75,
+            "FIBTG": 6.199999809265137
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "ROASTED PEANUTS; SUGAR; PALM OIL; SALT.",
+          "image": "https://www.edamam.com/food-img/299/299a4b3386cc43fee1046f48ac93bcf2.png",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            }
+          ],
+          "servingsPerContainer": 13
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 416
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_a9ez40waoitnv2b5wk9vebqt5dnl",
+          "label": "Skippy Peanut Butter Creamy, 96.0 Oz",
+          "knownAs": "Skippy Peanut Butter Creamy, 96.0 Oz",
+          "nutrients": {
+            "ENERC_KCAL": 586.4296174117744,
+            "PROCNT": 21.605301694118005,
+            "FAT": 49.383546729412586,
+            "CHOCDF": 18.51883002352972,
+            "FIBTG": 6.172943341176573
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "Roasted Peanuts; Sugar; Hydrogenated Vegetable Oil; Cottonseed; Soybean; And Rapeseed Oil; To Prevent Separation; Salt",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+              "label": "Ounce",
+              "quantity": 1.1428571428571428
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            }
+          ],
+          "servingsPerContainer": 84.00000000000001
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32.399454999999996
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 2721.55422
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16.199727499999998
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_b5gk3m3avv5gm8ahkg6azacnt798",
+          "label": "Skippy Peanut Butter Spread With Honey Creamy",
+          "knownAs": "Skippy Peanut Butter Spread With Honey Creamy",
+          "nutrients": {
+            "ENERC_KCAL": 625,
+            "PROCNT": 18.75,
+            "FAT": 50,
+            "CHOCDF": 28.125,
+            "FIBTG": 6.25
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "PEANUT BUTTER SPREAD (ROASTED PEANUTS; PALM OIL; PEANUT OIL; SALT); SUGAR; HONEY.",
+          "image": "https://www.edamam.com/food-img/f4f/f4f0eaa7465cd40ad23fde3c76be0d46.png",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            }
+          ],
+          "servingsPerContainer": 13
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 416
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_ati8fwfaq497ayat6iqvta3kerfn",
+          "label": "Skippy Peanut Butter Roasted Honey Nut",
+          "knownAs": "Skippy Peanut Butter Roasted Honey Nut",
+          "nutrients": {
+            "ENERC_KCAL": 625,
+            "PROCNT": 21.875,
+            "FAT": 50,
+            "CHOCDF": 21.875,
+            "FIBTG": 6.25
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "ROASTED PEANUTS; HONEY; PEANUT OIL; SUGAR; HYDROGENATED VEGETABLE OILS (COTTONSEED; SOYBEAN AND RAPESEED) TO PREVENT SEPARATION; MOLASSES; SALT.",
+          "image": "https://www.edamam.com/food-img/cdb/cdb15cc4d06091db79a6fe11510ab59c.png",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            }
+          ],
+          "servingsPerContainer": 14
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 448
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_anwenkgb868l02aqdb9rxbc2qy60",
+          "label": "Skippy Peanut Butter Spread, Super Chunk",
+          "knownAs": "Skippy Peanut Butter Spread, Super Chunk",
+          "nutrients": {
+            "ENERC_KCAL": 593.75,
+            "PROCNT": 21.875,
+            "FAT": 50,
+            "CHOCDF": 21.875,
+            "FIBTG": 6.25
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "ROASTED PEANUTS; SUGAR; HYDROGENATED VEGETABLE OILS (COTTONSEED; SOYBEAN AND RAPESEED) TO PREVENT SEPARATION; SALT.",
+          "image": "https://www.edamam.com/food-img/82b/82b6ec706f32f763d7ecfb1bdbb7f005.png",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            }
+          ],
+          "servingsPerContainer": 35
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 1120
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_a5mvggbannilsxazm1miqar23qst",
+          "label": "Skippy Peanut Butter Creamy, 64.0 Oz",
+          "knownAs": "Skippy Peanut Butter Creamy, 64.0 oz",
+          "nutrients": {
+            "ENERC_KCAL": 586.4296174117744,
+            "PROCNT": 21.605301694118005,
+            "FAT": 49.383546729412586,
+            "CHOCDF": 21.605301694118005,
+            "FIBTG": 6.172943341176573
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "Roasted Peanuts; Sugar; Hydrogenated Vegetable Oils; Cottonseed; Soybean And Rapeseed; To Prevent Separation; Salt",
+          "image": "https://www.edamam.com/food-img/b41/b41af20abdf56167a23e00c92dc39da6.jpg",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+              "label": "Ounce",
+              "quantity": 1.1428571428571428
+            }
+          ],
+          "servingsPerContainer": 56
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32.399454999999996
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 1814.3694799999998
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16.199727499999998
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_a60ilboavp161pbygvy9ebn1snp8",
+          "label": "Skippy Peanut Butter Creamy, 18.0 Oz",
+          "knownAs": "Skippy Peanut Butter Creamy, 18.0 oz",
+          "nutrients": {
+            "ENERC_KCAL": 558.5043975350233,
+            "PROCNT": 20.576477803921907,
+            "FAT": 47.03194926610722,
+            "CHOCDF": 20.576477803921907,
+            "FIBTG": 5.878993658263402
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "Roasted Peanuts; Sugar; Partially Hydrogenated Vegetable Oils; Cottonseed; Soybean And Rapeseed; To Prevent Separation; Salt",
+          "image": "https://www.edamam.com/food-img/f3d/f3d9d7ed1c98c955e019ecaab47f1e60.jpg",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+              "label": "Ounce",
+              "quantity": 1.2
+            }
+          ],
+          "servingsPerContainer": 15
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 34.01942775
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 510.29141625
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 17.009713875
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_ascbm5vayu9ylsb506ym8bk4xg8l",
+          "label": "Skippy Peanut Butter Creamy, 36.4 Oz",
+          "knownAs": "Skippy Peanut Butter Creamy, 36.4 oz",
+          "nutrients": {
+            "ENERC_KCAL": 589.1914276458824,
+            "PROCNT": 21.707052597479876,
+            "FAT": 52.71712773673684,
+            "CHOCDF": 21.707052597479876,
+            "FIBTG": 6.2020150278513935
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "Roasted Peanuts; Sugar; Partially Hydrogenated Vegetable Oils; Rapeseed; Cottonseed; And Soybean; To Prevent Separation; Salt",
+          "image": "https://www.edamam.com/food-img/7b0/7b0d0302b19acb90221d8625f485b5e4.jpg",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+              "label": "Ounce",
+              "quantity": 1.1375000476837158
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            }
+          ],
+          "servingsPerContainer": 32
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 32.24758390649811
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 1031.9226850079394
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 16.123791953249054
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_axvsgawba1d0m1a0b0y4kbcj0y7g",
+          "label": "Skippy Chocolate Chip Swirl Peanut Butter",
+          "knownAs": "Skippy Chocolate Chip Swirl Peanut Butter",
+          "nutrients": {
+            "ENERC_KCAL": 601.5774377637,
+            "PROCNT": 24.700000762939453,
+            "FAT": 41.900001525878906,
+            "CHOCDF": 20.700000762939453
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "Roasted Peanuts (80%);  Chocolate Drops (10%): (Cocoa Mass;  Sugar;  Cocoa Butter;  Emulsifier: Lecithin);  Sugar;  Hydrogenated Palm Oil;  Salt",
+          "image": "https://www.edamam.com/food-img/72a/72a03624d6ae6958723bbe81d0a4845f.jpg",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 100
+            }
+          ]
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 100
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_axfzdnsb74fg69bn6h7nra6uzbqh",
+          "label": "Skippy Extra Smooth Peanut Butter 454g",
+          "knownAs": "Skippy Extra Smooth Peanut Butter 454G",
+          "nutrients": {
+            "ENERC_KCAL": 612.3326958882,
+            "PROCNT": 22.100000381469727,
+            "FAT": 51.599998474121094,
+            "CHOCDF": 14.100000381469727
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "Roasted Peanuts (90%);  Sugar;  Hydrogenated Palm Oil;  Salt",
+          "image": "https://www.edamam.com/food-img/263/263b2d1e29caf4909013cbeddfe25e60.jpeg",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 100
+            }
+          ]
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 100
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          }
+        ]
+      },
+      {
+        "food": {
+          "foodId": "food_b34pj01a7xjpugbdw2t0nbce0rs5",
+          "label": "Skippy Peanut Butter Extra Crunchy, 28.0 Oz",
+          "knownAs": "Skippy Peanut Butter Extra Crunchy, 28.0 oz",
+          "nutrients": {
+            "ENERC_KCAL": 598.3975687875247,
+            "PROCNT": 22.046226218487757,
+            "FAT": 50.3913742136863,
+            "CHOCDF": 22.046226218487757,
+            "FIBTG": 6.298921776710787
+          },
+          "brand": "Skippy",
+          "category": "Packaged foods",
+          "categoryLabel": "food",
+          "foodContentsLabel": "Roasted Peanuts; Sugar; Hydrogenated Vegetable Oils; Cottonseed; Soybean; Rapeseed; To Prevent Separation; Salt",
+          "image": "https://www.edamam.com/food-img/b00/b0025558e563ce55522755cfa7f799ed.png",
+          "servingSizes": [
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+              "label": "Tablespoon",
+              "quantity": 2
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+              "label": "Ounce",
+              "quantity": 1.12
+            },
+            {
+              "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+              "label": "Gram",
+              "quantity": 32
+            }
+          ],
+          "servingsPerContainer": 25
+        },
+        "measures": [
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+            "label": "Serving",
+            "weight": 31.751465900000003
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
+            "label": "Package",
+            "weight": 793.7866475000001
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+            "label": "Gram",
+            "weight": 1
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            "label": "Ounce",
+            "weight": 28.349523125
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "label": "Pound",
+            "weight": 453.59237
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
+            "label": "Kilogram",
+            "weight": 1000
+          },
+          {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
+            "label": "Tablespoon",
+            "weight": 15.875732950000002
+          }
+        ]
+      }
+    ],
+    "_links": {
+      "next": {
+        "title": "Next page",
+        "href": "https://api.edamam.com/api/food-database/v2/parser?session=40&app_id=35b313ca&app_key=5fe592b84538ad54e7a6d8f45f321e34&ingr=skippy+Peanut+Butter&nutrition-type=cooking"
+      }
+    }
+  }

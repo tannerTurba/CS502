@@ -1,0 +1,23 @@
+<app-navbar />
+<div class="mx-10 my-5 text-4xl flex justify-between">
+    <h1 class="text-green-600 dark:text-green-500">Messages</h1>
+</div>
+<div class="flex border-2 border-stone-900 justify-items-center mx-8 h-[700px]">
+    <div class="flex flex-col border-r border-stone-900 h-[700px] w-[300px] p-0">
+        <div class="flex flex-row border-b border-stone-700 h-[80px] w-[300px] justify-center text-center text-xl">
+            Jane Doe
+        </div>
+        <div class="flex flex-row border-b border-stone-700 h-[80px] w-[300px] justify-center text-center text-xl">
+            John Doe
+        </div>
+    </div>
+    <!-- <div class="flex flex-col h-[700px] p-0 w-full"> -->
+    <div class="grid grid-cols-2 gap-4 justify-items-between mx-8 w-full overflow-auto">
+        <app-request-bubble />
+        <app-request-bubble />
+        <app-request-bubble />
+        <app-request-bubble />
+        <app-request-bubble />
+        <app-request-bubble />
+    </div>
+</div>

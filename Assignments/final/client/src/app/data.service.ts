@@ -10,9 +10,9 @@ export class DataService {
   apiVersion: string = 'api/v1';
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<User | string> {
+  login(username: string, password: string): Observable<User | string> {
     const userCredentials = {
-      email: email,
+      username: username,
       password: password
     };
     return this.http.post<User>(`${this.apiVersion}/login`, userCredentials);
