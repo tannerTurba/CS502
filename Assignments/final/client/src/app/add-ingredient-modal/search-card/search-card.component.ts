@@ -44,7 +44,9 @@ export class SearchCardComponent {
   }
 
   addIngredient(): void {
-    this.data.addIngredient(this.uid, this.food).subscribe();
+    this.data.addIngredient(this.uid, this.food).subscribe((res) => {
+      this.food = res;
+    });
   }
 
   // updateQuantity(): void {

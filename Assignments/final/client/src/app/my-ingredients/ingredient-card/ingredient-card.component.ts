@@ -1,20 +1,29 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Food } from '../../food';
 import { DataService } from '../../data.service';
 import { FormsModule } from '@angular/forms';
+import { initFlowbite } from 'flowbite';
+import { InfoModalComponent } from '../../info-modal/info-modal.component';
 
 @Component({
   selector: 'app-ingredient-card',
   standalone: true,
-  imports: [FormsModule],
+  imports: [
+    FormsModule,
+    InfoModalComponent
+  ],
   templateUrl: './ingredient-card.component.html',
   styleUrl: './ingredient-card.component.css'
 })
-export class IngredientCardComponent {
+export class IngredientCardComponent implements OnInit {
   @Input() food!: Food;
   @Output() delete: EventEmitter<Food> = new EventEmitter();
 
   constructor(private data: DataService) { }
+
+  ngOnInit(): void {
+    initFlowbite();
+  }
 
   decrement(): void {
     this.food.quantity--;
