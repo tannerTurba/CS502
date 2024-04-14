@@ -12,50 +12,53 @@ let USERS = [
 
 let FOOD = [
     {
-        label: "Skippy Peanut Butter",
-        knownAs: "Skippy Peanut Butter",
+        foodId: "food_a60ilboavp161pbygvy9ebn1snp8",
+        label: "Skippy Peanut Butter Creamy, 18.0 Oz",
+        knownAs: "Skippy Peanut Butter Creamy, 18.0 oz",
         nutrients: {
-          ENERC_KCAL: 593.75,
-          PROCNT: 21.875,
-          FAT: 50,
-          CHOCDF: 21.875,
-          FIBTG: 6.25
+            ENERC_KCAL: 558.5043975350233,
+            PROCNT: 20.576477803921907,
+            FAT: 47.03194926610722,
+            CHOCDF: 20.576477803921907,
+            FIBTG: 5.878993658263402
         },
         brand: "Skippy",
         category: "Packaged foods",
         categoryLabel: "food",
-        foodContentsLabel: "ROASTED PEANUTS; SUGAR; HYDROGENATED VEGETABLE OILS (COTTON SEED; SOYBEAN AND RAPESEED) TO PREVENT SEPARATING; SALT.",
-        image: "https://www.edamam.com/food-img/404/404b3a57a1a51cedc7479204cf59a50a.png",
+        foodContentsLabel: "Roasted Peanuts; Sugar; Partially Hydrogenated Vegetable Oils; Cottonseed; Soybean And Rapeseed; To Prevent Separation; Salt",
+        image: "https://www.edamam.com/food-img/f3d/f3d9d7ed1c98c955e019ecaab47f1e60.jpg",
         servingSizes: [
-          {
-            uri: "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-            label: "Gram",
-            quantity: 32
-          },
-          {
+            {
             uri: "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
             label: "Tablespoon",
             quantity: 2
-          }
+            },
+            {
+            uri: "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
+            label: "Ounce",
+            quantity: 1.2
+            }
         ],
-        servingsPerContainer: 70
+        servingsPerContainer: 15,
+        quantity: 2
     }
 ];
 
 async function initUsers(foods) {
     for (let i = 0; i < USERS.length; i++) {
         let user = USERS[i];
-        await User.create({
+        let u = await User.create({
             username: user.username,
             password: await bcrypt.hash(user.password, 10),
             firstName: user.firstName,
             lastName: user.lastName,
             food: foods
         });
+        await initFood(u._id);
     }
 }
 
-async function initFood() {
+async function initFood(userId) {
     let foods = [];
     for (let i = 0; i < FOOD.length; i++) {
         let food = FOOD[i];
@@ -73,6 +76,7 @@ async function initFood() {
         }
 
         let f = await Food.create({
+            userId: userId,
             label: food.label,
             knownAs: food.knownAs,
             nutrients: nutrients,
@@ -82,7 +86,8 @@ async function initFood() {
             foodContentsLabel: food.foodContentsLabel,
             image: food.image,
             servingSizes: servingSizes,
-            servingsPerContainer: food.servingsPerContainer
+            servingsPerContainer: food.servingsPerContainer,
+            quantity: food.quantity
         });
         foods.push(f);
     }
@@ -98,8 +103,7 @@ async function init() {
         await data.dropCollection(names[i]);
     }
     
-    let foods = await initFood();
-    await initUsers(foods);
+    let users = await initUsers();
 }
 
 module.exports = { init };

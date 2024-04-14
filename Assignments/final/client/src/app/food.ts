@@ -2,6 +2,7 @@ import { Nutrients } from "./nutrients";
 import { ServingSize } from "./serving-size";
 
 export interface Food {
+    _id : string,
     label : string,
     knownAs : string,
     nutrients : Nutrients,
@@ -12,4 +13,6 @@ export interface Food {
     image : string, 
     servingSizes : [ServingSize],
     servingsPerContainer : number,
+    quantity: number,
+    userId: string
 }

@@ -24,11 +24,8 @@
     </div>
 </div>
 <div class="grid grid-cols-4 gap-4 justify-items-center mx-8">
-    <app-ingredient-card />
-    <app-ingredient-card />
-    <app-ingredient-card />
-    <app-ingredient-card />
-    <app-ingredient-card />
-    <app-ingredient-card />
+    @for (food of foods; track food) {
+        <app-ingredient-card [food]="food" (delete)="deleteIngredient($event)" />
+    }
     <app-add-card />
 </div>
