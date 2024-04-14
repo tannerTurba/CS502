@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Food } from '../food';
 import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
+import { AddIngredientModalComponent } from '../add-ingredient-modal/add-ingredient-modal.component';
 
 @Component({
   selector: 'app-my-ingredients',
@@ -15,7 +16,8 @@ import { CommonModule } from '@angular/common';
     NavbarComponent,
     IngredientCardComponent,
     AddCardComponent, 
-    CommonModule
+    CommonModule,
+    AddIngredientModalComponent
   ],
   templateUrl: './my-ingredients.component.html',
   styleUrl: './my-ingredients.component.css'

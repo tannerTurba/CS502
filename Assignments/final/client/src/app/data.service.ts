@@ -31,4 +31,9 @@ export class DataService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<Food>(`${this.apiVersion}/users/${uid}/ingredients/${fid}`, { quantity : quantity }, { headers: headers });
   }
+
+  addIngredient(uid: string, food: Food): Observable<Food> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<Food>(`${this.apiVersion}/users/${uid}/ingredients`, food, { headers: headers });
+  }
 }

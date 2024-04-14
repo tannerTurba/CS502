@@ -1,8 +1,13 @@
 <div class="max-w-sm bg-white border border-stone-200 rounded-lg dark:bg-stone-800 dark:border-stone-700 shadow-md w-[342px] min-h-[400px]">
-    <img class="object-scale-down object-center rounded-t-lg mx-auto box-border y-[272px]" [src]="food.image" alt="" />
+    @if (food.image == undefined || food.image == '') {
+        <img class="object-scale-down object-center rounded-t-lg mx-auto box-border y-[272px]" src="assets/images/empty.jpg" alt="" />
+    }
+    @else {
+        <img class="object-scale-down object-center rounded-t-lg mx-auto box-border y-[272px]" [src]="food.image" alt="" />
+    }
     <div class="p-5">
         <a href="#">
-            <h5 class="mb-2 text-xl font-bold tracking-tight text-green-600 dark:text-green-500">{{food.knownAs}}</h5>
+            <h5 class="mb-2 text-xl font-bold tracking-tight text-green-600 dark:text-green-500">{{food.label}}</h5>
         </a>
         
         <form class="flex flex-row max-w-xs mx-auto">

@@ -41,18 +41,37 @@ let FOOD = [
         ],
         servingsPerContainer: 15,
         quantity: 2
+    },
+    {
+        foodId: "food_b1z309nagt045vai2cy6jbx0zu11",
+        label: "Cheez-It",
+        knownAs: "cheez-it",
+        nutrients: {
+            ENERC_KCAL: 507.0,
+            PROCNT: 11.4,
+            FAT: 26.3,
+            CHOCDF: 57.4,
+            FIBTG: 2.4
+        },
+        brand: '',
+        category: "Generic foods",
+        categoryLabel: "food",
+        foodContentsLabel: '',
+        image: '', 
+        servingSizes: [],
+        servingsPerContainer: -1,
+        quantity: 3
     }
 ];
 
-async function initUsers(foods) {
+async function initUsers() {
     for (let i = 0; i < USERS.length; i++) {
         let user = USERS[i];
         let u = await User.create({
             username: user.username,
             password: await bcrypt.hash(user.password, 10),
             firstName: user.firstName,
-            lastName: user.lastName,
-            food: foods
+            lastName: user.lastName
         });
         await initFood(u._id);
     }
@@ -62,13 +81,7 @@ async function initFood(userId) {
     let foods = [];
     for (let i = 0; i < FOOD.length; i++) {
         let food = FOOD[i];
-        let nutrients = await Nutrients.create({
-            calories : food.nutrients.ENERC_KCAL, 
-            protein : food.nutrients.PROCNT,
-            fat : food.nutrients.FAT,
-            carbohydrates : food.nutrients.CHOCDF, 
-            fiber : food.nutrients.FIBTG
-        });
+        let nutrients = await Nutrients.create( food.nutrients );
         let servingSizes = [];
         for (let k = 0; k < food.servingSizes.length; k++) {
             let servingSize = food.servingSizes[k];

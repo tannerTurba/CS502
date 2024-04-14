@@ -2,15 +2,29 @@
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-          <div class="text-stone-700 bg-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-            Cellarium
-          </div>
+          <a [routerLink]="'/users/' + uid + '/my-ingredients'" class="text-stone-300 rounded-md px-3 py-2 text-xl font-medium">Cellarium</a>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
-              <!-- Current: "bg-stone-900 text-white", Default: "text-stone-300 hover:bg-stone-700 hover:text-white" -->
-              <a [routerLink]="'/users/' + uid + '/my-ingredients'" class="bg-stone-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">My Ingredients</a>
-              <a [routerLink]="'/users/' + uid + '/the-pantry'" class="text-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">The Pantry</a>
-              <a [routerLink]="'/users/' + uid + '/messages'" class="text-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Messages</a>
+              @if (this.currentRoute.includes('my-ingredients')) {
+                <a [routerLink]="'/users/' + uid + '/my-ingredients'" class="bg-stone-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">My Ingredients</a>
+              }
+              @else {
+                <a [routerLink]="'/users/' + uid + '/my-ingredients'" class="text-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">My Ingredients</a>
+              }
+
+              @if (this.currentRoute.includes('the-pantry')) {
+                <a [routerLink]="'/users/' + uid + '/the-pantry'" class="bg-stone-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">The Pantry</a>
+              }
+              @else {
+                <a [routerLink]="'/users/' + uid + '/the-pantry'" class="text-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">The Pantry</a>
+              }
+
+              @if (this.currentRoute.includes('messages')) {
+                <a [routerLink]="'/users/' + uid + '/messages'" class="bg-stone-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Messages</a>
+              }
+              @else {
+                <a [routerLink]="'/users/' + uid + '/messages'" class="text-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Messages</a>
+              }
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@ import { MessagePageComponent } from './message-page/message-page.component';
 import { profileGuard } from './auth.guard';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'the-pantry', pathMatch: 'full' },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', title: 'Cellarium | Login', component: LoginComponent},
     { path: 'sign-up', title: 'Cellarium | Sign Up', component: SignUpComponent },
     { path: 'users/:uid/my-ingredients', title: 'Cellarium | My Ingredients', component: MyIngredientsComponent },

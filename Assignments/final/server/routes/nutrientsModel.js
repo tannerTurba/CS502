@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 
 var nutrientsSchema = mongoose.Schema({
-   calories : Number, 
-   protein : Number,
-   fat : Number,
-   carbohydrates : Number, 
-   fiber : Number
+   ENERC_KCAL : Number, 
+   PROCNT : Number,
+   FAT : Number,
+   CHOCDF : Number, 
+   FIBTG : Number
 });
 
 var Nutrients = mongoose.model('Nutrients', nutrientsSchema );

@@ -1,7 +1,7 @@
 export interface Nutrients {
-    calories : number, 
-    protein : number,
-    fat : number,
-    carbohydrates : number, 
-    fiber : number
+    ENERC_KCAL : number, 
+    PROCNT : number,
+    FAT : number,
+    CHOCDF : number, 
+    FIBTG : number
 }

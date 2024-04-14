@@ -1,0 +1,36 @@
+<button data-modal-target="default-modal" data-modal-toggle="default-modal" type="button" class="text-sm bg-stone-100 dark:text-stone-100 dark:bg-stone-700 dark:hover:bg-stone-600 dark:border-stone-600 hover:bg-stone-200 border border-stone-300 rounded-lg px-2 h-11 ml-3 focus:ring-stone-100 dark:focus:ring-stone-700 focus:ring-2 focus:outline-none">
+    Add Ingredient
+</button>
+<div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-[75%] min-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-stone-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-stone-600">
+                <h3 class="text-xl font-semibold text-stone-900 dark:text-white">
+                    Add Ingredient
+                </h3>
+                <button type="button" class="text-stone-400 bg-transparent hover:bg-stone-200 hover:text-stone-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-stone-600 dark:hover:text-white" data-modal-hide="default-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form class="p-4 md:p-5" (ngSubmit)="keywordSearch($event)" [formGroup]="searchForm">
+                <div class="grid gap-4 mb-4 grid-cols-2 justify-items-center">
+                    <div class="col-span-2 relative">
+                        <input type="search" name="name" id="name" formControlName="keyword" class="bg-stone-50 border border-stone-300 focus:outline-none focus:ring-0 focus:border-green-500 text-stone-900 text-m rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[600px] p-4 dark:bg-stone-600 dark:border-stone-500 dark:placeholder-stone-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type an ingredient name" required="">
+                        <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Search</button>
+                    </div>
+                </div>
+            </form>
+            <div class="grid grid-cols-3 gap-4 justify-items-center mx-8">
+                @for (food of foods; track food) {
+                    <app-search-card [food]="food" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
