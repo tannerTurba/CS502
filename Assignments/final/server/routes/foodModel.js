@@ -4,6 +4,7 @@ var ServingSize = require('./servingSizeModel');
 
 var foodSchema = mongoose.Schema({
    userId : String,
+   foodId : String,
    label : String,
    knownAs : String,
    nutrients : Nutrients.schema,

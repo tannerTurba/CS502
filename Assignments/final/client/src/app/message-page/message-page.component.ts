@@ -3,6 +3,9 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { initFlowbite } from 'flowbite';
 import { RequestBubbleComponent } from '../request-bubble/request-bubble.component';
 import { ActivatedRoute } from '@angular/router';
+import { DataService } from '../data.service';
+import { User } from '../user';
+import { Message } from '../message';
 
 @Component({
   selector: 'app-message-page',
@@ -16,14 +19,26 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MessagePageComponent implements OnInit {
   uid: string;
+  selectedContact!: string;
+  directory!: [User];
+  messages!: [Message];
 
   constructor(
     private route: ActivatedRoute,
+    private data: DataService
   ) {
     this.uid = this.route.snapshot.paramMap.get('uid')!;
+    this.data.getMessageDirectory(this.uid).subscribe((res) => {
+      this.directory = res;
+      this.selectedContact = res[0]._id;
+      this.data.getUserMessages(this.uid, this.selectedContact).subscribe((res) => {
+        this.messages = res;
+      });
+    });
   }
 
   ngOnInit(): void {
     initFlowbite();
   }
+
 }

@@ -3,6 +3,7 @@ import { ServingSize } from "./serving-size";
 
 export interface Food {
     _id : string,
+    foodId : string,
     label : string,
     knownAs : string,
     nutrients : Nutrients,

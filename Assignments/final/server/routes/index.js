@@ -4,6 +4,8 @@ var User = require('./userModel');
 var Food = require('./foodModel');
 var Nutrients = require('./nutrientsModel');
 var ServingSize = require('./servingSizeModel');
+var Directory = require('./directoryModel');
+var Message = require('./messageModel');
 var bcrypt = require('bcrypt');
 
 // router.all('*', function(req, res, next) {
@@ -12,17 +14,17 @@ var bcrypt = require('bcrypt');
 // });
 
 /* Verifies a session user matches their request data */
-router.all('*/users/:uid*', function(req, res, next) {
-  var user = req.session.user;
-  if (user._id == req.params.uid) {
-    next();
-  }
-  else {
-    req.session.regenerate( function(err) { // create a new session id
-      req.session.user = null;
-    });
-  }
-});
+// router.all('*/users/:uid*', function(req, res, next) {
+//   var user = req.session.user;
+//   if (user._id == req.params.uid) {
+//     next();
+//   }
+//   else {
+//     req.session.regenerate( function(err) { // create a new session id
+//       req.session.user = null;
+//     });
+//   }
+// });
 
 router.post('/logout', function( req, res, next ) {
   req.session.destroy(() => {
@@ -50,16 +52,23 @@ router.get('/users/:uid/ingredients', async ( req, res, next ) => {
 });
 
 router.post('/users/:uid/ingredients/:fid', async ( req, res, next ) => {
+  const uid = req.params.uid;
   const fid = req.params.fid;
-  const quantity = req.body.quantity;
+  const increment = req.query.increment;
+  let quantity = req.body.quantity;
+
+  if (increment === 'true') {
+    let f = await Food.find( { _id: fid, userId: uid } );
+    quantity += f.quantity;
+  }
 
   let food = {};
   if (quantity > 0) {
-    await Food.updateOne( { _id: fid }, { quantity : quantity } );
+    await Food.updateOne( { _id: fid, userId: uid }, { quantity : quantity } );
     food = await Food.findById( { _id: fid } );
   }
   else {
-    await Food.deleteOne( { _id: fid } );
+    await Food.deleteOne( { _id: fid, userId: uid } );
   }
   res.status(200).json(food);
 });
@@ -91,6 +100,35 @@ router.post('/users/:uid/ingredients', async ( req, res, next ) => {
     quantity: food.quantity
   });
   res.status(200).json(f);
+});
+
+router.get('/users/:uid/messages', async ( req, res, next ) => {
+  const uid = req.params.uid;
+  let directory = await Directory.findOne({ ownerId: uid });
+  res.status(200).json(directory.contacts);
+});
+
+router.put('/users/:uid/messages/:mid', async ( req, res, next ) => {
+  const mid = req.params.mid;
+  const status = req.body.status;
+
+  await Message.findOneAndUpdate( { _id: mid }, { status: status } );
+  let message = await Message.findOne( { _id: mid } );
+  res.status(200).json(message);
+});
+
+router.get('/users/:uid/messages/:contactId', async ( req, res, next ) => {
+  const uid = req.params.uid;
+  const contactId = req.params.contactId;
+
+  let messages = await Message.find({
+    $or: [
+      { to: uid, from: contactId },
+      { to: contactId, from: uid }
+    ]
+  })
+  .sort({ dateSent: 1 });
+  res.status(200).json(messages);
 });
 
 module.exports = router;

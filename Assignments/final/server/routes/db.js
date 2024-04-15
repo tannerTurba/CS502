@@ -2,6 +2,8 @@ var User = require('./userModel.js');
 var Food = require('./foodModel.js');
 var ServingSize = require('./servingSizeModel.js');
 var Nutrients = require('./nutrientsModel.js');
+var Directory = require('./directoryModel.js');
+var Message = require('./messageModel.js');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
@@ -65,6 +67,7 @@ let FOOD = [
 ];
 
 async function initUsers() {
+    let users = [];
     for (let i = 0; i < USERS.length; i++) {
         let user = USERS[i];
         let u = await User.create({
@@ -74,7 +77,9 @@ async function initUsers() {
             lastName: user.lastName
         });
         await initFood(u._id);
+        users.push(u);
     }
+    return users;
 }
 
 async function initFood(userId) {
@@ -90,6 +95,7 @@ async function initFood(userId) {
 
         let f = await Food.create({
             userId: userId,
+            foodId: food.foodId,
             label: food.label,
             knownAs: food.knownAs,
             nutrients: nutrients,
@@ -107,6 +113,38 @@ async function initFood(userId) {
     return foods;
 }
 
+async function initMessages(to, from, foods) {
+    let messages = []
+    for (let i = 0; i < foods.length; i++) {
+        let food = foods[i];
+
+        let message = await Message.create({
+            to: to,
+            from: from,
+            food: food,
+            quantity: 5,
+            status: 'active',
+            dateSent: Date.now()
+        });
+        messages.push(message);
+    }
+    return messages;
+}
+
+async function initDirectory(owner, contacts) {
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+        let contactFoods = await Food.find( { userId: contact._id } );
+        let messages = await initMessages(owner._id, contact._id, contactFoods);
+    }
+
+    await Directory.create({
+        ownerId: owner._id,
+        contacts: contacts, 
+        // messages: messages
+    });
+}
+
 async function init() {
     // remove all db documents
     const data = mongoose.connection.db;
@@ -117,6 +155,8 @@ async function init() {
     }
     
     let users = await initUsers();
+    initDirectory(users[0], [users[1]]);
+    initDirectory(users[1], [users[0]]);
 }
 
 module.exports = { init };

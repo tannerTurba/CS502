@@ -6,7 +6,7 @@ var userSchema = mongoose.Schema({
    password : String,
    firstName : String,
    lastName : String, 
-   food : [Food.schema]
+   // food : [Food.schema]
 });
 
 var User = mongoose.model('User', userSchema );

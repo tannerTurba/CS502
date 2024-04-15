@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './user';
 import { Food } from './food';
+import { Message } from './message';
 
 @Injectable({
   providedIn: 'root'
@@ -27,13 +28,25 @@ export class DataService {
     return this.http.get<[Food]>(`${this.apiVersion}/users/${uid}/ingredients`);
   }
 
-  setQuantity(uid: string, fid: string, quantity: number): Observable<Food> {
+  setQuantity(uid: string, fid: string, quantity: number, increment: string): Observable<Food> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post<Food>(`${this.apiVersion}/users/${uid}/ingredients/${fid}`, { quantity : quantity }, { headers: headers });
+    return this.http.post<Food>(`${this.apiVersion}/users/${uid}/ingredients/${fid}`, { quantity : quantity }, { headers: headers, params: {increment: increment} });
   }
 
   addIngredient(uid: string, food: Food): Observable<Food> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<Food>(`${this.apiVersion}/users/${uid}/ingredients`, food, { headers: headers });
+  }
+
+  getMessageDirectory(uid: string): Observable<[User]> {
+    return this.http.get<[User]>(`${this.apiVersion}/users/${uid}/messages`);
+  }
+
+  getUserMessages(uid: string, contactId: string): Observable<[Message]> {
+    return this.http.get<[Message]>(`${this.apiVersion}/users/${uid}/messages/${contactId}`);
+  }
+
+  updateMessage(uid: string, mid: string, status: string): Observable<Message> {
+    return this.http.put<Message>(`${this.apiVersion}/users/${uid}/messages/${mid}`, { status: status });
   }
 }

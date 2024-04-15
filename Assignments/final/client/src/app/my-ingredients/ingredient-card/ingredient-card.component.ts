@@ -32,7 +32,7 @@ export class IngredientCardComponent implements OnInit {
       this.removeAll();
     }
     else {
-      this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity).subscribe((x) => {
+      this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity, 'false').subscribe((x) => {
         this.food = x;
       });
     }
@@ -40,7 +40,7 @@ export class IngredientCardComponent implements OnInit {
 
   increment(): void {
     this.food.quantity++;
-    this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity).subscribe((x) => {
+    this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity, 'false').subscribe((x) => {
       this.food = x;
     });
   }
@@ -50,6 +50,6 @@ export class IngredientCardComponent implements OnInit {
   }
 
   updateQuantity(): void {
-    this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity).subscribe();
+    this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity, 'false').subscribe();
   }
 }
