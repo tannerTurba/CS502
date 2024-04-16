@@ -87,6 +87,7 @@ router.post('/users/:uid/ingredients', async ( req, res, next ) => {
 
   let f = await Food.create({
     userId: uid,
+    foodId: food.foodId,
     label: food.label,
     knownAs: food.knownAs,
     nutrients: nutrients,

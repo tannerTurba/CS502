@@ -1,4 +1,4 @@
-<div id="{{food._id}}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<div id="modalId" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-4xl max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-stone-700">
@@ -7,7 +7,7 @@
                 <h3 class="text-xl font-medium text-stone-900 dark:text-white">
                     {{food.label}}
                 </h3>
-                <button type="button" class="text-stone-400 bg-transparent hover:bg-stone-200 hover:text-stone-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-stone-600 dark:hover:text-white" attr.data-modal-hide="{{food._id}}">
+                <button type="button" class="text-stone-400 bg-transparent hover:bg-stone-200 hover:text-stone-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-stone-600 dark:hover:text-white" data-modal-hide="modalId">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                     </svg>
@@ -20,15 +20,15 @@
                     <section class="border m-auto p-1 rounded-lg shadow-lg">	
                         <div class="border-b-[10px] border-stone-300 dark:border-stone-200">		
                             <h1 class="font-bold text-[38px] mb-1">Nutrition Facts</h1>		
-                            <div class="pt-4 pb-2 border-t border-stone-300 font-semibold">			
+                            <div class="pt-2 pb-2 border-t border-stone-300 font-semibold">			
                                 <span>Serving Size</span>			
-                                <span class="float-end">(100 Gram)</span>		
+                                <span class="float-end">({{nutrients.ingredients[0].parsed[0].servingSizes[0].quantity}} {{nutrients.ingredients[0].parsed[0].servingSizes[0].label}})</span>		
                             </div>	
                         </div>	
                         <table class="w-full text-left pt-1">		
                             <thead>			
                                 <tr>				
-                                    <th colspan="3" class="text-base font-bold mr-[-200px] mb-[-10px] block py-3">Amount Per 100 Grams</th>			
+                                    <th colspan="3" class="text-base font-bold mr-[-200px] mb-[-10px] block py-1">Amount Per {{nutrients.ingredients[0].parsed[0].servingSizes[0].quantity}} {{nutrients.ingredients[0].parsed[0].servingSizes[0].label}}</th>			
                                 </tr>		
                             </thead>		
                             <tbody>			
@@ -36,7 +36,7 @@
                                     <th colspan="2" class="text-[35px]">
                                         <b>Calories</b>
                                     </th>				
-                                    <td class="text-[35px] font-medium">304</td>			
+                                    <td class="text-[35px] font-medium">{{nutrients.calories}}</td>			
                                 </tr>			
                                 <tr class="border-t-[5px] border-stone-300 dark:border-stone-200">				
                                     <td colspan="3" class="text-[11px] text-right">
@@ -45,59 +45,54 @@
                                 </tr>			
                                 <tr class="border-t-[1px] border-stone-300 dark:border-stone-200">				
                                     <th colspan="2">
-                                        <b>Total Fat</b> 0.00g
+                                        <b>Total Fat</b> {{round(nutrients.totalNutrients.FAT.quantity) + nutrients.totalNutrients.FAT.unit}}
                                     </th>				
-                                    <td class="text-right"><b>0%</b></td>			
+                                    <td class="text-right"><b>{{round(nutrients.totalDaily.FAT.quantity)}}%</b></td>			
                                 </tr>			
                                 <tr class="border-t-[1px] border-stone-300 dark:border-stone-200">				
                                     <td class="w-4 border-t-0"></td>				
-                                    <th>Saturated Fat 0.00g</th>				
-                                    <td class="text-right"><b>0%</b></td>			
+                                    <th>Saturated Fat {{round(nutrients.totalNutrients.FASAT.quantity) + nutrients.totalNutrients.FASAT.unit}}</th>				
+                                    <td class="text-right"><b>{{round(nutrients.totalDaily.FASAT.quantity)}}%</b></td>			
                                 </tr>			
                                 <tr class="border-t-[1px] border-stone-300 dark:border-stone-200">				
                                     <td class="w-4 border-t-0"></td>				
-                                    <th>Trans Fat 0g</th>				
+                                    <th>Trans Fat {{round(nutrients.totalNutrients.FATRN.quantity) + nutrients.totalNutrients.FATRN.unit}}</th>				
                                     <td></td>			
                                 </tr>			
                                 <tr class="border-t-[1px] border-stone-300 dark:border-stone-200">				
                                     <th colspan="2">
-                                        <b>Cholesterol</b> 0.00mg
+                                        <b>Cholesterol</b> {{round(nutrients.totalNutrients.CHOLE.quantity) + nutrients.totalNutrients.CHOLE.unit}}
                                     </th>				
-                                    <td class="text-right"><b>0%</b></td>			
+                                    <td class="text-right"><b>{{round(nutrients.totalDaily.CHOLE.quantity)}}%</b></td>			
                                 </tr>			
                                 <tr class="border-t-[1px] border-stone-300 dark:border-stone-200">				
                                     <th colspan="2">
-                                        <b>Sodium</b> 4.00mg
+                                        <b>Sodium</b> {{round(nutrients.totalNutrients.NA.quantity) + nutrients.totalNutrients.NA.unit}}
                                     </th>				
-                                    <td class="text-right"><b>0%</b></td>			
+                                    <td class="text-right"><b>{{round(nutrients.totalDaily.NA.quantity)}}%</b></td>			
                                 </tr>			
                                 <tr class="border-t-[1px] border-stone-300 dark:border-stone-200">				
                                     <th colspan="2">
-                                        <b>Total Carbohydrate</b> 82.40g
+                                        <b>Total Carbohydrate</b> {{round(nutrients.totalNutrients.CHOCDF.quantity) + nutrients.totalNutrients.CHOCDF.unit}}
                                     </th>				
-                                    <td class="text-right"><b>27%</b>
+                                    <td class="text-right"><b>{{round(nutrients.totalDaily.CHOCDF.quantity)}}%</b>
                                     </td>			
                                 </tr>			
                                 <tr class="border-t-[1px] border-stone-300 dark:border-stone-200">				
                                     <td class="w-4 border-t-0"></td>				
-                                    <th>Dietary Fiber 0.20g</th>				
-                                    <td class="text-right"><b>1%</b></td>			
+                                    <th>Dietary Fiber {{round(nutrients.totalNutrients.FIBTG.quantity) + nutrients.totalNutrients.FIBTG.unit}}</th>				
+                                    <td class="text-right"><b>{{round(nutrients.totalDaily.FIBTG.quantity)}}%</b></td>			
                                 </tr>			
                                 <tr class="border-t-[1px] border-stone-300 dark:border-stone-200">				
                                     <td class="w-4 border-t-0"></td>				
-                                    <th>Total Sugars 82.10g</th>				
+                                    <th>Total Sugars {{round(nutrients.totalNutrients.SUGAR.quantity) + nutrients.totalNutrients.SUGAR.unit}}</th>				
                                     <td></td>			
-                                </tr>			
-                                <tr class="border-t-[1px] border-stone-300 dark:border-stone-200">				
-                                    <td class="w-4 border-t-0"></td>				
-                                    <th>Includes 82.10g Added Sugars</th>				
-                                    <td></td>			
-                                </tr>			
+                                </tr>
                                 <tr class="border-t-[1px] border-stone-300 dark:border-stone-200">				
                                     <th colspan="2">
-                                        <b>Protein</b> 0.30g
+                                        <b>Protein</b> {{round(nutrients.totalNutrients.PROCNT.quantity) + nutrients.totalNutrients.PROCNT.unit}}
                                     </th>				
-                                    <td class="text-right"><b>1%</b></td>			
+                                    <td class="text-right"><b>{{round(nutrients.totalDaily.PROCNT.quantity)}}%</b></td>			
                                 </tr>		
                             </tbody>	
                         </table>	
@@ -105,23 +100,23 @@
                             <tbody>			
                                 <tr class="border-t-[3px] border-stone-300 dark:border-stone-200">				
                                     <th>Vitamin D 0.00µg</th>				
-                                    <td class="text-right"><b>0%</b></td>			
+                                    <td class="text-right"><b>{{round(nutrients.totalDaily.VITD.quantity)}}%</b></td>			
                                 </tr>			
                                 <tr class="border-t-[1px] border-stone-300 dark:border-stone-200">				
                                     <th>Calcium 6.00mg</th>				
-                                    <td class="text-right"><b>1%</b></td>			
+                                    <td class="text-right"><b>{{round(nutrients.totalDaily.CA.quantity)}}%</b></td>			
                                 </tr>			
                                 <tr class="border-t-[1px] border-stone-300 dark:border-stone-200">				
                                     <th>Iron 0.42mg</th>				
-                                    <td class="text-right"><b>2%</b></td>			
+                                    <td class="text-right"><b>{{round(nutrients.totalDaily.FE.quantity)}}%</b></td>			
                                 </tr>			
                                 <tr class="border-t-[1px] border-stone-300 dark:border-stone-200">				
                                     <th>Potassium 52.00mg</th>				
-                                    <td class="text-right"><b>1%</b></td>			
+                                    <td class="text-right"><b>{{round(nutrients.totalDaily.K.quantity)}}%</b></td>			
                                 </tr>			
                                 <tr class="border-t-[1px] border-stone-300 dark:border-stone-200">				
                                     <th>Vitamin C 0.50mg</th>				
-                                    <td class="text-right"><b>1%</b></td>			
+                                    <td class="text-right"><b>{{round(nutrients.totalDaily.VITC.quantity)}}%</b></td>			
                                 </tr>		
                             </tbody>	
                         </table>
@@ -130,7 +125,7 @@
             </div>
             <!-- Modal footer -->
             <div class="flex justify-end p-4 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button attr.data-modal-hide="{{food._id}}" type="button" class="py-2.5 px-5 ms-3 mx-7 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Close</button>
+                <button data-modal-hide="modalId" type="button" class="py-2.5 px-5 ms-3 mx-7 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Close</button>
             </div>
         </div>
     </div>

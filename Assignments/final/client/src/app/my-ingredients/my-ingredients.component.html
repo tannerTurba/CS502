@@ -23,7 +23,10 @@
 </div>
 <div class="grid grid-cols-4 gap-4 justify-items-center mx-8">
     @for (food of foods; track food) {
-        <app-ingredient-card [food]="food" (delete)="deleteIngredient($event)" />
+        <app-ingredient-card [food]="food" (delete)="deleteIngredient($event)" (loadModal)="sendToModal($event)" />
     }
     <app-add-card />
 </div>
+
+<div data-modal-target="modalId" data-modal-toggle="modalId" class="hidden"></div>
+<app-info-modal [food]="foodInfo" [nutrients]="nutrients"/>

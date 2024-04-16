@@ -18,6 +18,7 @@ import { InfoModalComponent } from '../../info-modal/info-modal.component';
 export class IngredientCardComponent implements OnInit {
   @Input() food!: Food;
   @Output() delete: EventEmitter<Food> = new EventEmitter();
+  @Output() loadModal: EventEmitter<Food> = new EventEmitter();
 
   constructor(private data: DataService) { }
 

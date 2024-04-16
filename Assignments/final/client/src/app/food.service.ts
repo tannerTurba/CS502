@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { KeywordResult } from './keyword-result';
 import { Observable } from 'rxjs';
+import { MoreNutrients } from './more-nutrients';
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +26,8 @@ export class FoodService {
     });
   }
 
-  getNutrients(foodId: string): Observable<string> {
-    
-    return this.http.post<string>(`${this.baseUrl}/nutrients`, 
+  getNutrients(foodId: string): Observable<MoreNutrients> {
+    return this.http.post<MoreNutrients>(`${this.baseUrl}/nutrients`, 
     {
       "ingredients": [
         {

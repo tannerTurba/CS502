@@ -8,6 +8,9 @@ import { Food } from '../food';
 import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
 import { AddIngredientModalComponent } from '../add-ingredient-modal/add-ingredient-modal.component';
+import { FoodService } from '../food.service';
+import { InfoModalComponent } from '../info-modal/info-modal.component';
+import { MoreNutrients } from '../more-nutrients';
 
 @Component({
   selector: 'app-my-ingredients',
@@ -17,7 +20,8 @@ import { AddIngredientModalComponent } from '../add-ingredient-modal/add-ingredi
     IngredientCardComponent,
     AddCardComponent, 
     CommonModule,
-    AddIngredientModalComponent
+    AddIngredientModalComponent,
+    InfoModalComponent
   ],
   templateUrl: './my-ingredients.component.html',
   styleUrl: './my-ingredients.component.css'
@@ -25,10 +29,13 @@ import { AddIngredientModalComponent } from '../add-ingredient-modal/add-ingredi
 export class MyIngredientsComponent implements OnInit {
   uid: string = this.route.snapshot.paramMap.get('uid')!;
   foods!: [Food];
+  foodInfo!: Food;
+  nutrients!: MoreNutrients;
 
   constructor(
     private route: ActivatedRoute,
-    private data: DataService
+    private data: DataService, 
+    private foodService: FoodService
   ) {
     this.data.getIngredients(this.uid).subscribe((food) => {
       this.foods = food;
@@ -44,5 +51,12 @@ export class MyIngredientsComponent implements OnInit {
     this.data.getIngredients(this.uid).subscribe((food) => {
       this.foods = food;
     });
+  }
+
+  sendToModal(food: Food): void {
+    // this.foodService.getNutrients(food.foodId).subscribe((res) => {
+    //   this.foodInfo = food;
+    //   this.nutrients = res
+    // });
   }
 }
