@@ -47,7 +47,7 @@ export class MyIngredientsComponent implements OnInit {
   }
 
   deleteIngredient(food: Food): void {
-    this.data.setQuantity(food.userId, food._id, -1, 'false').subscribe();
+    this.data.setQuantity(food.userId, food._id, -1).subscribe();
     this.data.getIngredients(this.uid).subscribe((food) => {
       this.foods = food;
     });

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { initFlowbite } from 'flowbite';
-import { RequestBubbleComponent } from '../request-bubble/request-bubble.component';
+import { RequestBubbleComponent } from './request-bubble/request-bubble.component';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
 import { User } from '../user';
@@ -40,5 +40,4 @@ export class MessagePageComponent implements OnInit {
   ngOnInit(): void {
     initFlowbite();
   }
-
 }

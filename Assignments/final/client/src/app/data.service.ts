@@ -28,9 +28,13 @@ export class DataService {
     return this.http.get<[Food]>(`${this.apiVersion}/users/${uid}/ingredients`);
   }
 
-  setQuantity(uid: string, fid: string, quantity: number, increment: string): Observable<Food> {
+  getIngredient(uid: string, fid: string): Observable<Food> {
+    return this.http.get<Food>(`${this.apiVersion}/users/${uid}/ingredients/${fid}`);
+  }
+
+  setQuantity(uid: string, fid: string, quantity: number): Observable<Food> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post<Food>(`${this.apiVersion}/users/${uid}/ingredients/${fid}`, { quantity : quantity }, { headers: headers, params: {increment: increment} });
+    return this.http.put<Food>(`${this.apiVersion}/users/${uid}/ingredients/${fid}`, { quantity : quantity }, { headers: headers });
   }
 
   addIngredient(uid: string, food: Food): Observable<Food> {
@@ -46,7 +50,19 @@ export class DataService {
     return this.http.get<[Message]>(`${this.apiVersion}/users/${uid}/messages/${contactId}`);
   }
 
-  updateMessage(uid: string, mid: string, status: string): Observable<Message> {
-    return this.http.put<Message>(`${this.apiVersion}/users/${uid}/messages/${mid}`, { status: status });
+  updateMessage(uid: string, mid: string, status: string, quantity: number): Observable<Message> {
+    return this.http.put<Message>(`${this.apiVersion}/users/${uid}/messages/${mid}`, { status: status, quantity: quantity });
+  }
+
+  transferIngredient(foodId: string, uid: string, to: string, quantity: number): Observable<Food> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<Food>(`${this.apiVersion}/users/${uid}/ingredients/${foodId}`, 
+    {
+      transferTo: to,
+      quantity: quantity
+    },
+    {
+      headers: headers
+    });
   }
 }

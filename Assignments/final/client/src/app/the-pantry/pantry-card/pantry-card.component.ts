@@ -23,7 +23,7 @@ export class PantryCardComponent {
       this.removeAll();
     }
     else {
-      this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity, 'false').subscribe((x) => {
+      this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity).subscribe((x) => {
         this.food = x;
       });
     }
@@ -31,7 +31,7 @@ export class PantryCardComponent {
 
   increment(): void {
     this.food.quantity++;
-    this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity, 'false').subscribe((x) => {
+    this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity).subscribe((x) => {
       this.food = x;
     });
   }
@@ -41,6 +41,6 @@ export class PantryCardComponent {
   }
 
   updateQuantity(): void {
-    this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity, 'false').subscribe();
+    this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity).subscribe();
   }
 }

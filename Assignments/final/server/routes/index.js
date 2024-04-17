@@ -51,16 +51,23 @@ router.get('/users/:uid/ingredients', async ( req, res, next ) => {
   res.status(200).json(ingredients);
 });
 
-router.post('/users/:uid/ingredients/:fid', async ( req, res, next ) => {
+router.get('/users/:uid/ingredients/:fid', async ( req, res, next ) => {
   const uid = req.params.uid;
   const fid = req.params.fid;
-  const increment = req.query.increment;
+  let ingredient = await Food.findOne( { userId: uid, foodId: fid } );
+  res.status(200).json(ingredient);
+});
+
+router.put('/users/:uid/ingredients/:fid', async ( req, res, next ) => {
+  const uid = req.params.uid;
+  const fid = req.params.fid;
+  // const increment = req.query.increment;
   let quantity = req.body.quantity;
 
-  if (increment === 'true') {
-    let f = await Food.find( { _id: fid, userId: uid } );
-    quantity += f.quantity;
-  }
+  // if (increment === 'true') {
+  //   let f = await Food.find( { _id: fid, userId: uid } );
+  //   quantity += f.quantity;
+  // }
 
   let food = {};
   if (quantity > 0) {
@@ -112,8 +119,9 @@ router.get('/users/:uid/messages', async ( req, res, next ) => {
 router.put('/users/:uid/messages/:mid', async ( req, res, next ) => {
   const mid = req.params.mid;
   const status = req.body.status;
+  const quantity = req.body.quantity;
 
-  await Message.findOneAndUpdate( { _id: mid }, { status: status } );
+  await Message.updateOne( { _id: mid }, { status: status, quantity: quantity } );
   let message = await Message.findOne( { _id: mid } );
   res.status(200).json(message);
 });
@@ -130,6 +138,56 @@ router.get('/users/:uid/messages/:contactId', async ( req, res, next ) => {
   })
   .sort({ dateSent: 1 });
   res.status(200).json(messages);
+});
+
+router.post('/users/:uid/ingredients/:fid', async ( req, res, next ) => {
+  const uid = req.params.uid;
+  const fid = req.params.fid;
+  const recipient = req.body.transferTo;
+  const quantity = req.body.quantity;
+
+  let userFood = await Food.findOne( {foodId: fid, userId: uid} );
+  let userQuantity = userFood.quantity;
+  let recipientFood = await Food.findOne( {foodId: fid, userId: recipient} );
+  let recipientQuantity = 0;
+  if (recipientFood !== null) {
+    recipientQuantity = recipientFood.quantity;
+  }
+
+  userQuantity -= quantity;
+  recipientQuantity += quantity;
+
+  if (recipientQuantity === quantity) {
+    await Food.create( { 
+      userId: recipient,
+      foodId: fid,
+      label: userFood.label,
+      knownAs: userFood.knownAs,
+      nutrients: userFood.nutrients,
+      brand: userFood.brand,
+      category: userFood.category, 
+      categoryLabel: userFood.categoryLabel,
+      foodContentsLabel: userFood.foodContentsLabel,
+      image: userFood.image,
+      servingSizes: userFood.servingSizes,
+      servingsPerContainer: userFood.servingsPerContainer,
+      quantity: recipientQuantity
+     } );
+  }
+  else {
+    await Food.updateOne( { foodId: fid, userId: recipient }, { $set: { quantity: recipientQuantity } });
+    await Food.findOne({ foodId: fid, userId: recipient });
+  }
+
+  let food = {};
+  if (userQuantity > 0) {
+    await Food.updateOne( { foodId: fid, userId: uid }, { quantity : userQuantity } );
+    food = await Food.findOne( { foodId: fid } );
+  }
+  else {
+    await Food.deleteOne( { foodId: fid, userId: uid } );
+  }
+  res.status(200).json(food);
 });
 
 module.exports = router;
