@@ -1,0 +1,19 @@
+<div class="flex flow-row max-w-xs mx-auto">
+    @if (uid !== user._id) {
+        <label [for]="user._id + food._id" class="sr-only">Underline select</label>
+        <select [id]="user._id + food._id" (change)="recordVal($event)" class="block py-2.5 px-0 w-[75%] text-sm text-stone-950 bg-transparent border-0 border-b-2 border-stone-200 appearance-nonetext-stone-950 dark:text-stone-50 dark:border-stone-700 focus:outline-none focus:ring-0 focus:border-stone-200 peer">
+            <option selected>{{user.firstName + ' ' + user.lastName + ': ' + food.quantity + ' Units'}}</option>
+            @for (i of [].constructor(food.quantity); track $index) {
+                <option [value]="$index + 1">{{$index + 1}}</option>
+            }
+        </select>
+        <button (click)="makeRequest()" class="text-stone-300 hover:bg-stone-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+            Request
+        </button>
+    }
+    @else {
+        <h6 class="text-stone-950 dark:text-stone-50 text-sm">
+            {{user.firstName + ' ' + user.lastName + ': ' + food.quantity + ' Units'}}
+        </h6>
+    }
+</div>
