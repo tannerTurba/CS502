@@ -25,7 +25,7 @@ export class RequestBubbleComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.data.getIngredient(this.uid, this.message.food.foodId).subscribe((res) => {
+    this.data.getUserIngredient(this.uid, this.message.food.foodId).subscribe((res) => {
       this.ownedFood = res;
       if (res.quantity > this.message.quantity) {
         this.fulfillmentQuantity = this.message.quantity;

@@ -6,6 +6,7 @@ var Nutrients = require('./nutrientsModel');
 var ServingSize = require('./servingSizeModel');
 var Directory = require('./directoryModel');
 var Message = require('./messageModel');
+var Household = require('./householdModel');
 var bcrypt = require('bcrypt');
 
 // router.all('*', function(req, res, next) {
@@ -26,13 +27,13 @@ var bcrypt = require('bcrypt');
 //   }
 // });
 
-router.post('/logout', function( req, res, next ) {
+router.post('/logout', function(req, res, next) {
   req.session.destroy(() => {
     res.json( 'ok' )
   });
 });
 
-router.post('/login', ( req, res, next ) => {
+router.post('/login', (req, res, next) => {
  req.session.regenerate( async function( err ) { 
      let user = await User.findOne( { username: req.body.username } );
      if( user && await bcrypt.compare(req.body.password, user.password)) {
@@ -45,20 +46,26 @@ router.post('/login', ( req, res, next ) => {
     } );
 } );
 
-router.get('/users/:uid/ingredients', async ( req, res, next ) => {
+router.get('/users/:uid', async (req, res, next) => {
+  const uid = req.params.uid;
+  let user = await User.findById(uid);
+  res.status(200).json(user);
+})
+
+router.get('/users/:uid/ingredients', async (req, res, next) => {
   const uid = req.params.uid;
   let ingredients = await Food.find( { userId: uid } );
   res.status(200).json(ingredients);
 });
 
-router.get('/users/:uid/ingredients/:fid', async ( req, res, next ) => {
+router.get('/users/:uid/ingredients/:fid', async (req, res, next) => {
   const uid = req.params.uid;
   const fid = req.params.fid;
   let ingredient = await Food.findOne( { userId: uid, foodId: fid } );
   res.status(200).json(ingredient);
 });
 
-router.put('/users/:uid/ingredients/:fid', async ( req, res, next ) => {
+router.put('/users/:uid/ingredients/:fid', async (req, res, next) => {
   const uid = req.params.uid;
   const fid = req.params.fid;
   // const increment = req.query.increment;
@@ -80,7 +87,7 @@ router.put('/users/:uid/ingredients/:fid', async ( req, res, next ) => {
   res.status(200).json(food);
 });
 
-router.post('/users/:uid/ingredients', async ( req, res, next ) => {
+router.post('/users/:uid/ingredients', async (req, res, next) => {
   const uid = req.params.uid;
   const food = req.body;
   let nutrients = await Nutrients.create( food.nutrients );
@@ -110,13 +117,13 @@ router.post('/users/:uid/ingredients', async ( req, res, next ) => {
   res.status(200).json(f);
 });
 
-router.get('/users/:uid/messages', async ( req, res, next ) => {
+router.get('/users/:uid/messages', async (req, res, next) => {
   const uid = req.params.uid;
   let directory = await Directory.findOne({ ownerId: uid });
   res.status(200).json(directory.contacts);
 });
 
-router.put('/users/:uid/messages/:mid', async ( req, res, next ) => {
+router.put('/users/:uid/messages/:mid', async (req, res, next) => {
   const mid = req.params.mid;
   const status = req.body.status;
   const quantity = req.body.quantity;
@@ -126,7 +133,7 @@ router.put('/users/:uid/messages/:mid', async ( req, res, next ) => {
   res.status(200).json(message);
 });
 
-router.get('/users/:uid/messages/:contactId', async ( req, res, next ) => {
+router.get('/users/:uid/messages/:contactId', async (req, res, next) => {
   const uid = req.params.uid;
   const contactId = req.params.contactId;
 
@@ -140,7 +147,7 @@ router.get('/users/:uid/messages/:contactId', async ( req, res, next ) => {
   res.status(200).json(messages);
 });
 
-router.post('/users/:uid/ingredients/:fid', async ( req, res, next ) => {
+router.post('/users/:uid/ingredients/:fid', async (req, res, next) => {
   const uid = req.params.uid;
   const fid = req.params.fid;
   const recipient = req.body.transferTo;
@@ -188,6 +195,19 @@ router.post('/users/:uid/ingredients/:fid', async ( req, res, next ) => {
     await Food.deleteOne( { foodId: fid, userId: uid } );
   }
   res.status(200).json(food);
+});
+
+router.get('/users/:uid/households/:hid', async (req, res, next ) => {
+  const hid = req.params.hid;
+  let household = await Household.findById(hid);
+  res.status(200).json(household);
+});
+
+router.get('/users/:uid/households/:hid/ingredients/:fid', async (req, res, next) => {
+  const hid = req.params.hid;
+  const fid = req.params.fid;
+  let foods = await Food.find( { foodId: fid } );
+  res.status(200).json(foods);
 });
 
 module.exports = router;

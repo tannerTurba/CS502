@@ -4,12 +4,13 @@ var ServingSize = require('./servingSizeModel.js');
 var Nutrients = require('./nutrientsModel.js');
 var Directory = require('./directoryModel.js');
 var Message = require('./messageModel.js');
+var Household = require('./householdModel.js');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
 let USERS = [
-    { username: "jDoe", password: "1", firstName: "John", lastName: "Doe" },
-    { username: "jaDoe", password: "1", firstName: "Jane", lastName: "Doe" }
+    { username: "jDoe", password: "1", firstName: "John", lastName: "Doe", role: 'admin', householdId: '' },
+    { username: "jaDoe", password: "1", firstName: "Jane", lastName: "Doe", role: 'admin', householdId: '' }
 ];
 
 let FOOD = [
@@ -74,7 +75,8 @@ async function initUsers() {
             username: user.username,
             password: await bcrypt.hash(user.password, 10),
             firstName: user.firstName,
-            lastName: user.lastName
+            lastName: user.lastName,
+            role: user.role
         });
         await initFood(u._id);
         users.push(u);
@@ -140,9 +142,22 @@ async function initDirectory(owner, contacts) {
 
     await Directory.create({
         ownerId: owner._id,
-        contacts: contacts, 
-        // messages: messages
+        contacts: contacts
     });
+}
+
+async function initHousehold(members) {
+    let foodIds = [];
+    for (let i = 0; i < FOOD.length; i++) {
+        foodIds.push(FOOD[i].foodId);
+    }
+    
+    let household = await Household.create( { members: members, foodIds: foodIds } );
+    
+    for (let i = 0; i < members.length; i++) {
+        let user = members[i];
+        await User.updateOne( { _id: user._id }, { householdId: household._id } );
+    }
 }
 
 async function init() {
@@ -155,8 +170,9 @@ async function init() {
     }
     
     let users = await initUsers();
-    initDirectory(users[0], [users[1]]);
-    initDirectory(users[1], [users[0]]);
+    await initDirectory(users[0], [users[1]]);
+    await initDirectory(users[1], [users[0]]);
+    await initHousehold(users);
 }
 
 module.exports = { init };

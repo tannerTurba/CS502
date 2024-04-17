@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './user';
 import { Food } from './food';
 import { Message } from './message';
+import { Household } from './household';
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +25,20 @@ export class DataService {
     return this.http.post<string>(`${this.apiVersion}/logout`, {});
   }
 
+  getUserInfo(uid: String): Observable<User> {
+    return this.http.get<User>(`${this.apiVersion}/users/${uid}`);
+  }
+
   getIngredients(uid: string): Observable<[Food]> {
     return this.http.get<[Food]>(`${this.apiVersion}/users/${uid}/ingredients`);
   }
 
-  getIngredient(uid: string, fid: string): Observable<Food> {
+  getUserIngredient(uid: string, fid: string): Observable<Food> {
     return this.http.get<Food>(`${this.apiVersion}/users/${uid}/ingredients/${fid}`);
+  }
+
+  getIngredient(uid: string, hid: string, fid: string): Observable<[Food]> {
+    return this.http.get<[Food]>(`${this.apiVersion}/users/${uid}/households/${hid}/ingredients/${fid}`);
   }
 
   setQuantity(uid: string, fid: string, quantity: number): Observable<Food> {
@@ -64,5 +73,9 @@ export class DataService {
     {
       headers: headers
     });
+  }
+
+  getHousehold(uid: string, hid: string): Observable<Household> {
+    return this.http.get<Household>(`${this.apiVersion}/users/${uid}/households/${hid}`);
   }
 }

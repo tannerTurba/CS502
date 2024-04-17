@@ -29,7 +29,7 @@
 </div>
 <div class="grid grid-cols-4 gap-4 justify-items-center mx-8">
     @for (food of foods; track food) {
-        <app-pantry-card [food]="food" (delete)="deleteIngredient($event)" />
+        <app-pantry-card [foodId]="food" [householdId]="household._id" (delete)="deleteIngredient($event)" />
     }
     <app-add-card />
 </div>

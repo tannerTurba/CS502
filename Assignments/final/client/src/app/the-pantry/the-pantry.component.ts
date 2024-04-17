@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../data.service';
 import { Food } from '../food';
 import { AddIngredientModalComponent } from '../add-ingredient-modal/add-ingredient-modal.component';
+import { Household } from '../household';
 
 @Component({
   selector: 'app-the-pantry',
@@ -24,14 +25,19 @@ import { AddIngredientModalComponent } from '../add-ingredient-modal/add-ingredi
 })
 export class ThePantryComponent implements OnInit {
   uid: string = this.route.snapshot.paramMap.get('uid')!;
-  foods!: [Food];
+  household!: Household;
+  foods!: [string];
 
   constructor(
     private route: ActivatedRoute,
     private data: DataService
   ) {
-    this.data.getIngredients(this.uid).subscribe((food) => {
-      this.foods = food;
+    this.data.getUserInfo(this.uid).subscribe((userInfo) => {
+      this.data.getHousehold(this.uid, userInfo.householdId).subscribe((household) => {
+        this.household = household;
+        this.foods = household.foodIds;
+        console.log(household);
+      })
     });
   }
 
@@ -40,9 +46,9 @@ export class ThePantryComponent implements OnInit {
   }
 
   deleteIngredient(food: Food): void {
-    this.data.setQuantity(food.userId, food._id, -1).subscribe();
-    this.data.getIngredients(this.uid).subscribe((food) => {
-      this.foods = food;
-    });
+    // this.data.setQuantity(food.userId, food._id, -1).subscribe();
+    // this.data.getIngredients(this.uid).subscribe((food) => {
+    //   this.foods = food;
+    // });
   }
 }

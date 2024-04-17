@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Food } from '../../food';
 import { DataService } from '../../data.service';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pantry-card',
@@ -10,11 +11,29 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './pantry-card.component.html',
   styleUrl: './pantry-card.component.css'
 })
-export class PantryCardComponent {
-  @Input() food!: Food;
+export class PantryCardComponent implements OnInit {
+  food!: Food;
+  owners!: [Food];
+  uid: string = this.route.snapshot.paramMap.get('uid')!;
+  @Input() householdId!: string;
+  @Input() foodId!: string;
   @Output() delete: EventEmitter<Food> = new EventEmitter();
 
-  constructor(private data: DataService) { }
+  constructor(
+    private data: DataService,
+    private route: ActivatedRoute
+  ) {
+    
+  }
+  
+  ngOnInit(): void {
+    this.data.getIngredient(this.uid, this.householdId, this.foodId).subscribe((res) => {
+      console.log(res);
+      this.food = res[0];
+      this.owners = res;
+    });
+    
+  }
 
   decrement(): void {
     this.food.quantity--;
