@@ -1,31 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { PantryCardComponent } from './pantry-card/pantry-card.component';
-import { AddCardComponent } from '../add-card/add-card.component';
+import { ActivatedRoute } from '@angular/router';
 import { initFlowbite } from 'flowbite';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { DataService } from '../data.service';
-import { Food } from '../food';
-import { AddIngredientModalComponent } from '../add-ingredient-modal/add-ingredient-modal.component';
 import { Household } from '../household';
 import { User } from '../user';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-the-pantry',
+  selector: 'app-household',
   standalone: true,
   imports: [
     NavbarComponent,
-    PantryCardComponent,
-    AddCardComponent,
-    CommonModule,
-    AddIngredientModalComponent,
-    RouterModule
+    FormsModule
   ],
-  templateUrl: './the-pantry.component.html',
-  styleUrl: './the-pantry.component.css'
+  templateUrl: './household.component.html',
+  styleUrl: './household.component.css'
 })
-export class ThePantryComponent implements OnInit {
+export class HouseholdComponent implements OnInit {
   uid: string = this.route.snapshot.paramMap.get('uid')!;
   userInfo: User = {
     _id: 'string',
@@ -51,7 +43,8 @@ export class ThePantryComponent implements OnInit {
     }],
     foodIds: ['string'],
   };
-  foods!: [string];
+  inviteUser: string = '';
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -60,7 +53,6 @@ export class ThePantryComponent implements OnInit {
     this.data.getUserInfo(this.uid).subscribe((userInfo) => {
       this.data.getHousehold(this.uid, userInfo.householdId).subscribe((household) => {
         this.household = household;
-        this.foods = household.foodIds;
       });
       this.userInfo = userInfo;
     });
@@ -70,10 +62,7 @@ export class ThePantryComponent implements OnInit {
     initFlowbite();
   }
 
-  deleteIngredient(food: Food): void {
-    // this.data.setQuantity(food.userId, food._id, -1).subscribe();
-    // this.data.getIngredients(this.uid).subscribe((food) => {
-    //   this.foods = food;
-    // });
+  sendInvite(): void {
+    console.log(this.inviteUser);
   }
 }

@@ -9,8 +9,8 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
 let USERS = [
-    { username: "jDoe", password: "1", firstName: "John", lastName: "Doe", role: 'admin', householdId: '' },
-    { username: "jaDoe", password: "1", firstName: "Jane", lastName: "Doe", role: 'admin', householdId: '' }
+    { username: "jDoe", password: "1", firstName: "John", lastName: "Doe", role: 'admin', status: 'JOINED', householdId: '' },
+    { username: "jaDoe", password: "1", firstName: "Jane", lastName: "Doe", role: 'member', status: 'JOINED', householdId: '' }
 ];
 
 let FOOD = [
@@ -76,7 +76,8 @@ async function initUsers() {
             password: await bcrypt.hash(user.password, 10),
             firstName: user.firstName,
             lastName: user.lastName,
-            role: user.role
+            role: user.role,
+            status: user.status
         });
         await initFood(u._id);
         users.push(u);

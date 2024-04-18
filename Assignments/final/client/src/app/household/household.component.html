@@ -1,0 +1,58 @@
+<app-navbar />
+<div class="mx-10 my-5 text-4xl flex justify-between">
+    <h1 class="text-green-600 dark:text-green-500">Your Household</h1>
+    <div class="flex">
+        <div class="relative">
+            <input type="text" id="username" [(ngModel)]="inviteUser" [ngModelOptions]="{standalone: true}" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-stone-900 bg-transparent rounded-lg border-1 border-stone-300 appearance-none dark:text-white dark:border-stone-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" " />
+            <label for="username" class="absolute text-sm text-stone-500 dark:text-stone-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-stone-900 px-2 peer-focus:px-2 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Username</label>
+        </div>
+        <button type="button" (click)="sendInvite()" class="text-sm w-[95px] bg-stone-100 dark:text-stone-100 dark:bg-stone-700 dark:hover:bg-stone-600 dark:border-stone-600 hover:bg-stone-200 border border-stone-300 rounded-lg px-2 h-11 ml-3 focus:ring-stone-100 dark:focus:ring-stone-700 focus:ring-2 focus:outline-none">
+            Invite
+        </button>
+    </div>
+</div>
+<div class="flex justify-items-center mx-8 w-full">
+    <div class="absolute left-[10%] overflow-x-auto shadow-md sm:rounded-lg w-[80%]">
+        <table class="w-full text-sm text-left rtl:text-right text-stone-500 dark:text-stone-400">
+            <thead class="text-xs text-stone-700 uppercase bg-stone-50 dark:bg-stone-700 dark:text-stone-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Member
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Username
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Status
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (member of household.members; track member) {
+                    @if (member._id !== userInfo._id) {
+                        <tr class="bg-white border-b dark:bg-stone-800 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-600">
+                            <th scope="row" class="px-6 py-4 font-medium text-stone-900 whitespace-nowrap dark:text-white">
+                                {{member.firstName + ' ' + member.lastName}}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{member.username}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{member.status}}
+                            </td>
+                            <td class="px-6 py-4 text-left">
+                                @if (member.status === 'JOINED') {
+                                    <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-green-600 dark:text-green-500 hover:text-white hover:underline">Make Admin</a>
+                                }
+                                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-green-600 dark:text-green-500 hover:text-white hover:underline">Remove</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

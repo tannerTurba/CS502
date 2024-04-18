@@ -18,11 +18,12 @@ export class OwnerRowComponent {
   buttonText: string = 'Request';
   user: User = {
     _id: "",
-    email: "",
+    username: "",
     password: "",
     firstName: "",
     lastName: "",
     role: "",
+    status: "",
     householdId: "",
   };
 

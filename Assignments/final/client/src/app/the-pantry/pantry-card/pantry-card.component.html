@@ -23,7 +23,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
                     </svg>
                 </button>
-                <input type="text" [id]="food._id+2" [(ngModel)]="food.quantity" (change)="updateQuantity()" data-input-counter data-input-counter-min="0" aria-describedby="helper-text-explanation" class="bg-stone-50 border-x-0 border-stone-300 h-11 font-medium text-center text-stone-900 text-sm focus:ring-green-500 focus:border-green-500 block w-full pb-6 dark:bg-stone-700 dark:border-stone-600 dark:placeholder-stone-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="" required [ngModelOptions]="{standalone: true}"/>
+                <input type="text" [id]="food._id+2" [(ngModel)]="food.quantity" [ngModelOptions]="{standalone: true}" (change)="updateQuantity()" data-input-counter data-input-counter-min="0" aria-describedby="helper-text-explanation" class="bg-stone-50 border-x-0 border-stone-300 h-11 font-medium text-center text-stone-900 text-sm focus:ring-green-500 focus:border-green-500 block w-full pb-6 dark:bg-stone-700 dark:border-stone-600 dark:placeholder-stone-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="" required/>
                 <div class="absolute bottom-1 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 flex items-center text-xs text-stone-400 space-x-1 rtl:space-x-reverse">
                     Shared Units
                 </div>

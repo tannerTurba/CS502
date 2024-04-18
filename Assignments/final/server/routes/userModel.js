@@ -6,6 +6,7 @@ var userSchema = mongoose.Schema({
    firstName : String,
    lastName : String, 
    role: String,
+   status: String,
    householdId: String
 });
 
