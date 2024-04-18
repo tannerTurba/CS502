@@ -56,8 +56,8 @@ export class DataService {
     return this.http.post<Food>(`${this.apiVersion}/users/${uid}/ingredients`, food, { headers: headers });
   }
 
-  getMessageDirectory(uid: string): Observable<[User]> {
-    return this.http.get<[User]>(`${this.apiVersion}/users/${uid}/messages`);
+  getMessageDirectory(uid: string): Observable<[User] | string> {
+    return this.http.get<[User] | string>(`${this.apiVersion}/users/${uid}/messages`);
   }
 
   getUserMessages(uid: string, contactId: string): Observable<[Message]> {

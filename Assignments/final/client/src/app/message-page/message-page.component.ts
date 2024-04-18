@@ -33,11 +33,13 @@ export class MessagePageComponent implements OnInit {
 
   getMessages(): void {
     this.data.getMessageDirectory(this.uid).subscribe((res) => {
-      this.directory = res;
-      this.selectedContact = res[0]._id;
-      this.data.getUserMessages(this.uid, this.selectedContact).subscribe((res) => {
-        this.messages = res;
-      });
+      if (typeof(res) !== 'string') {
+        this.directory = res;
+        this.selectedContact = res[0]._id;
+        this.data.getUserMessages(this.uid, this.selectedContact).subscribe((res) => {
+          this.messages = res;
+        });
+      }
     });
   }
 

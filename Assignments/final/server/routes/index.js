@@ -125,7 +125,13 @@ router.post('/users/:uid/ingredients', async (req, res, next) => {
 router.get('/users/:uid/messages', async (req, res, next) => {
   const uid = req.params.uid;
   let directory = await Directory.findOne({ ownerId: uid });
-  res.status(200).json(directory.contacts);
+
+  if (directory == null) {
+    res.status(200).json('No messages available');
+  }
+  else {
+    res.status(200).json(directory.contacts);
+  }
 });
 
 // Change to users/uid/contacts/cid/messages/mid
@@ -159,6 +165,19 @@ router.post('/users/:uid/contacts/:cid/messages', async (req, res, next) => {
   const cid = req.params.cid;
   const foodId = req.body.foodId;
   const quantity = req.body.quantity;
+  const user = await User.findById(uid);
+  const contact = await User.findById(cid);
+
+  //{_id: hid, 'members._id': uid}, {'members.$.role': 'member'}
+  let dir = await Directory.find( {ownerId: uid, 'contacts._id': cid} );
+  if (dir.length === 0) {
+    await Directory.updateOne( {ownerId: uid}, {$push: {contacts: contact}} );
+  }
+
+  dir = await Directory.find( {ownerId: cid, 'contacts._id': uid} );
+  if (dir.length === 0) {
+    await Directory.updateOne( {ownerId: cid}, {$push: {contacts: user}} );
+  }
 
   let food = await Food.findOne( {foodId: foodId} );
   let message = await Message.create( {to: cid, from: uid, food: food, quantity: quantity, status: 'active', dateSent: Date.now()} );

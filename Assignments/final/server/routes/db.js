@@ -172,6 +172,7 @@ async function init() {
     }
     
     let users = await initUsers();
+    await Directory.create( {ownerId: users[2]._id, contacts: []} );
     await initDirectory(users[0], [users[1]]);
     await initDirectory(users[1], [users[0]]);
     await initHousehold(users);
