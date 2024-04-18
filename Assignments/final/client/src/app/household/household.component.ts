@@ -45,7 +45,6 @@ export class HouseholdComponent implements OnInit {
     foodIds: ['string'],
   };
   inviteUser: string = '';
-  isInitialiazed: boolean = true;
   
   constructor(
     private route: ActivatedRoute,
@@ -53,15 +52,10 @@ export class HouseholdComponent implements OnInit {
     private router: Router
   ) {
     this.data.getUserInfo(this.uid).subscribe((userInfo) => {
-      if (userInfo.householdId === '') {
-        this.isInitialiazed = false;
-      }
-      else {
-        this.data.getHousehold(this.uid, userInfo.householdId).subscribe((household) => {
-          this.household = household;
-        });
-        this.userInfo = userInfo;
-      }
+      this.data.getHousehold(this.uid, userInfo.householdId).subscribe((household) => {
+        this.household = household;
+      });
+      this.userInfo = userInfo;
     });
   }
   

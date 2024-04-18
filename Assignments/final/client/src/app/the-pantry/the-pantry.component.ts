@@ -57,21 +57,19 @@ export class ThePantryComponent implements OnInit {
     private route: ActivatedRoute,
     private data: DataService,
     private router: Router
-  ) {
-    this.data.getUserInfo(this.uid).subscribe((userInfo) => {
-      if (userInfo.householdId === '') {
-        this.router.navigateByUrl(`users/${this.uid}/household`);
-      }
-      this.data.getHousehold(this.uid, userInfo.householdId).subscribe((household) => {
-        this.household = household;
-        this.foods = household.foodIds;
-      });
-      this.userInfo = userInfo;
-    });
-  }
+  ) { }
   
   ngOnInit(): void {
     initFlowbite();
+    this.data.getUserInfo(this.uid).subscribe((userInfo) => {
+      if (userInfo.householdId !== undefined && userInfo.householdId !== '') {
+        this.data.getHousehold(this.uid, userInfo.householdId).subscribe((household) => {
+          this.household = household;
+          this.foods = household.foodIds;
+        });
+        this.userInfo = userInfo;
+      }
+    });
   }
 
   deleteIngredient(food: Food): void {
@@ -84,6 +82,13 @@ export class ThePantryComponent implements OnInit {
   leaveGroup(): void {
     this.data.removeMemberFromHousehold(this.uid, this.household._id, this.uid).subscribe((res) => {
       this.router.navigateByUrl(`users/${this.uid}/my-ingredients`);
+    });
+  }
+
+  startGroup(): void {
+    this.data.createHousehold(this.uid).subscribe((res) => {
+      this.household = res;
+      this.ngOnInit();
     });
   }
 }

@@ -7,9 +7,14 @@
                 Household
             </button>
         }
-        @else {
+        @else if (userInfo.role === 'member') {
             <button (click)="leaveGroup()" type="button" class="text-sm bg-stone-100 dark:text-stone-100 dark:bg-stone-700 dark:hover:bg-stone-600 dark:border-stone-600 hover:bg-stone-200 border border-stone-300 rounded-lg px-2 h-11 ml-3 focus:ring-stone-100 dark:focus:ring-stone-700 focus:ring-2 focus:outline-none">
                 Leave Household
+            </button>
+        }
+        @else {
+            <button type="button" (click)="startGroup()" class="text-sm bg-stone-100 dark:text-stone-100 dark:bg-stone-700 dark:hover:bg-stone-600 dark:border-stone-600 hover:bg-stone-200 border border-stone-300 rounded-lg px-2 h-11 ml-3 focus:ring-stone-100 dark:focus:ring-stone-700 focus:ring-2 focus:outline-none">
+                Start a Group
             </button>
         }
         <app-add-ingredient-modal [uid]="household._id" [hid]="household._id" />

@@ -335,8 +335,6 @@ router.put('/users/:uid/households/:hid/members/:mid', async (req, res, next) =>
 
   await User.updateOne( {_id: uid}, {role: 'member'} );
   await User.updateOne( {_id: mid}, {role: 'admin'} );
-
-  // will users update in household model??
   await Household.updateOne( {_id: hid, 'members._id': uid}, {'members.$.role': 'member'});
   await Household.updateOne( {_id: hid, 'members._id': mid}, {'members.$.role': 'admin'});
   let household = await Household.findById(hid);
@@ -351,15 +349,17 @@ router.post('/users/:uid/households', async (req, res, next) => {
   const foods = await Food.find( {userId: uid} );
 
   let foodIds = [];
-  for (let i = 0; i < FOOD.length; i++) {
+  for (let i = 0; i < foods.length; i++) {
     foodIds.push(foods[i].foodId);
   }
-
+  
+  user.role = 'admin';
+  user.status = 'JOINED';
   const household = await Household.create({
     members: [user],
     foodIds: foodIds
   });
-  await User.updateOne( {_id: uid}, {householdId: household._id} );
+  await User.updateOne( {_id: uid}, {householdId: household._id, role: 'admin', status: 'JOINED'} );
   res.status(200).json(household);
 });
 
