@@ -19,7 +19,7 @@ import { Message } from '../message';
 })
 export class MessagePageComponent implements OnInit {
   uid: string;
-  selectedContact!: string;
+  selectedContact: string = '';
   directory!: [User];
   messages!: [Message];
 
@@ -35,7 +35,10 @@ export class MessagePageComponent implements OnInit {
     this.data.getMessageDirectory(this.uid).subscribe((res) => {
       if (typeof(res) !== 'string') {
         this.directory = res;
-        this.selectedContact = res[0]._id;
+        if (this.selectedContact === '' && res.length > 0) {
+          this.selectedContact = res[0]._id;
+        }
+
         this.data.getUserMessages(this.uid, this.selectedContact).subscribe((res) => {
           this.messages = res;
         });
@@ -48,8 +51,13 @@ export class MessagePageComponent implements OnInit {
   }
 
   refresh(x: string): void {
-    if (x = 'refresh') {
+    if (x == 'refresh') {
       this.getMessages();
     }
+  }
+
+  selectContact(cid: string): void {
+    this.selectedContact = cid;
+    this.getMessages();
   }
 }

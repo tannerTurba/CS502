@@ -168,7 +168,6 @@ router.post('/users/:uid/contacts/:cid/messages', async (req, res, next) => {
   const user = await User.findById(uid);
   const contact = await User.findById(cid);
 
-  //{_id: hid, 'members._id': uid}, {'members.$.role': 'member'}
   let dir = await Directory.find( {ownerId: uid, 'contacts._id': cid} );
   if (dir.length === 0) {
     await Directory.updateOne( {ownerId: uid}, {$push: {contacts: contact}} );

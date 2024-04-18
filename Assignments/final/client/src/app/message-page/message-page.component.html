@@ -6,12 +6,12 @@
     <div class="flex flex-col border-r border-stone-900 dark:border-stone-500 h-[675px] w-[300px] p-0">
         @for (user of directory; track user) {
             @if (selectedContact === user._id) {
-                <div (click)="selectedContact = user._id" class="flex flex-row border-b border-r border-stone-900 dark:border-stone-500 bg-stone-300 dark:bg-stone-700 dark:text-stone-100 h-[80px] w-[300px] items-center justify-center text-center text-xl">
+                <div (click)="selectContact(user._id)" class="flex flex-row border-b border-r border-stone-900 dark:border-stone-500 bg-stone-300 dark:bg-stone-700 dark:text-stone-100 h-[80px] w-[300px] items-center justify-center text-center text-xl">
                     {{user.firstName + ' ' + user.lastName}}
                 </div>
             }
             @else {
-                <div (click)="selectedContact = user._id" class="flex flex-row border-b border-r border-stone-900 dark:border-stone-500 hover:bg-stone-300 dark:hover:bg-stone-700 dark:text-stone-100 h-[80px] w-[300px] items-center justify-center text-center text-xl">
+                <div (click)="selectContact(user._id)" class="flex flex-row border-b border-r border-stone-900 dark:border-stone-500 hover:bg-stone-300 dark:hover:bg-stone-700 dark:text-stone-100 h-[80px] w-[300px] items-center justify-center text-center text-xl">
                     {{user.firstName + ' ' + user.lastName}}
                 </div>
             }
