@@ -37,7 +37,7 @@ export class ThePantryComponent implements OnInit {
         this.household = household;
         this.foods = household.foodIds;
         console.log(household);
-      })
+      });
     });
   }
 

@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FoodService } from '../food.service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Food } from '../food';
 import { SearchCardComponent } from './search-card/search-card.component';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-ingredient-modal',
@@ -17,6 +18,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './add-ingredient-modal.component.css'
 })
 export class AddIngredientModalComponent {
+  // uid: string = this.route.snapshot.paramMap.get('uid')!;
+  @Input() uid!: string;
+  @Input() hid!: string;
   foods!: Food[];
   searchForm = this.formBuilder.group({
     keyword: ''
@@ -24,7 +28,8 @@ export class AddIngredientModalComponent {
 
   constructor(
     private foodSearch: FoodService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute
   ) {
 
   }

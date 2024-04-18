@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Message } from '../../message';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../data.service';
@@ -15,6 +15,7 @@ export class RequestBubbleComponent implements OnInit {
   uid: string;
   ownedFood!: Food;
   @Input() message!: Message;
+  @Output() refresh: EventEmitter<string> = new EventEmitter();
   fulfillmentQuantity: number = 0;
 
   constructor(
@@ -26,14 +27,20 @@ export class RequestBubbleComponent implements OnInit {
   
   ngOnInit(): void {
     this.data.getUserIngredient(this.uid, this.message.food.foodId).subscribe((res) => {
-      this.ownedFood = res;
-      if (res.quantity > this.message.quantity) {
-        this.fulfillmentQuantity = this.message.quantity;
+      if (res) {
+        this.ownedFood = res;
+        if (res.quantity > this.message.quantity) {
+          this.fulfillmentQuantity = this.message.quantity;
+        }
+        else {
+          this.fulfillmentQuantity = res.quantity;
+        }
       }
       else {
-        this.fulfillmentQuantity = res.quantity;
+        this.fulfillmentQuantity = 0;
       }
     });
+
   }
 
   approve(): void {
@@ -41,12 +48,15 @@ export class RequestBubbleComponent implements OnInit {
     let foodId = this.message.food.foodId;
     let quantity = this.fulfillmentQuantity;
     
-    this.data.transferIngredient(foodId, this.uid, contactId, quantity).subscribe((res) => {
-      console.log(res);
-    });
-    this.data.updateMessage(this.uid, this.message._id, 'approved', quantity).subscribe((res) => {
-      this.message = res;
-    });
+    if (quantity > 0) {
+      this.data.transferIngredient(foodId, this.uid, contactId, quantity).subscribe((res) => {
+        console.log(res);
+      });
+      this.data.updateMessage(this.uid, this.message._id, 'approved', quantity).subscribe((res) => {
+        this.message = res;
+        this.refresh.emit('refresh');
+      });
+    }
   }
 
   deny(): void {

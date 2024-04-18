@@ -41,6 +41,11 @@ export class DataService {
     return this.http.get<[Food]>(`${this.apiVersion}/users/${uid}/households/${hid}/ingredients/${fid}`);
   }
 
+  setSharedIngredient(uid: string, hid: string, food: Food): Observable<Food> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<Food>(`${this.apiVersion}/users/${uid}/households/${hid}/ingredients/${food.foodId}`, { food: food }, { headers: headers });
+  }
+
   setQuantity(uid: string, fid: string, quantity: number): Observable<Food> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.put<Food>(`${this.apiVersion}/users/${uid}/ingredients/${fid}`, { quantity : quantity }, { headers: headers });
@@ -77,5 +82,10 @@ export class DataService {
 
   getHousehold(uid: string, hid: string): Observable<Household> {
     return this.http.get<Household>(`${this.apiVersion}/users/${uid}/households/${hid}`);
+  }
+
+  createMessage(uid: string, contactId: string, foodId: string, quantity: number): Observable<Message> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<Message>(`${this.apiVersion}/users/${uid}/contacts/${contactId}/messages`, { foodId: foodId, quantity: quantity },  { headers: headers } );
   }
 }

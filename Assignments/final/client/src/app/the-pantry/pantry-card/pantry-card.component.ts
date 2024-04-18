@@ -54,38 +54,55 @@ export class PantryCardComponent implements OnInit {
   
   ngOnInit(): void {
     this.data.getIngredient(this.uid, this.householdId, this.foodId).subscribe((res) => {
-      console.log(res);
-      this.food = res[0];
       this.owners = res;
+
+      let sharedFood = undefined;
+      for (let i = 0; i < res.length; i++) {
+        let food = res[i];
+        if (food.userId === this.householdId) {
+          sharedFood = food;
+        }
+      }
+
+      if (sharedFood !== undefined) {
+        this.food = sharedFood;
+      }
+      else {
+        this.food = structuredClone(res[0]);
+        this.food.quantity = 0;
+      }
     });
     
   }
 
   decrement(): void {
-    this.food.quantity--;
-
-    if (this.food.quantity === 0) {
-      this.removeAll();
-    }
-    else {
-      this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity).subscribe((x) => {
-        this.food = x;
-      });
+    if (this.food.quantity > 0) {
+      this.food.quantity--;
+      this.data.setSharedIngredient(this.uid, this.householdId, this.food).subscribe();
+      // this.data.setQuantity(this.householdId, this.food._id, this.food.quantity).subscribe((x) => {
+      //   this.food = x;
+      // });
     }
   }
 
   increment(): void {
     this.food.quantity++;
-    this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity).subscribe((x) => {
-      this.food = x;
-    });
+    this.data.setSharedIngredient(this.uid, this.householdId, this.food).subscribe();
+    // this.data.setQuantity(this.householdId, this.food._id, this.food.quantity).subscribe((x) => {
+    //   this.food = x;
+    // });
   }
 
   removeAll(): void {
-    this.delete.emit(this.food);
+    this.food.quantity = 0;
+    this.data.setSharedIngredient(this.uid, this.householdId, this.food).subscribe();
+    // this.data.setQuantity(this.householdId, this.food._id, this.food.quantity).subscribe((x) => {
+    //   this.food = x;
+    // });
   }
 
   updateQuantity(): void {
-    this.data.setQuantity(this.food.userId, this.food._id, this.food.quantity).subscribe();
+    // this.data.setQuantity(this.householdId, this.food._id, this.food.quantity).subscribe();
+    this.data.setSharedIngredient(this.uid, this.householdId, this.food).subscribe();
   }
 }

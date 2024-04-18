@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { initFlowbite } from 'flowbite';
 import { RequestBubbleComponent } from './request-bubble/request-bubble.component';
@@ -28,6 +28,10 @@ export class MessagePageComponent implements OnInit {
     private data: DataService
   ) {
     this.uid = this.route.snapshot.paramMap.get('uid')!;
+    this.getMessages();
+  }
+
+  getMessages(): void {
     this.data.getMessageDirectory(this.uid).subscribe((res) => {
       this.directory = res;
       this.selectedContact = res[0]._id;
@@ -39,5 +43,11 @@ export class MessagePageComponent implements OnInit {
 
   ngOnInit(): void {
     initFlowbite();
+  }
+
+  refresh(x: string): void {
+    if (x = 'refresh') {
+      this.getMessages();
+    }
   }
 }

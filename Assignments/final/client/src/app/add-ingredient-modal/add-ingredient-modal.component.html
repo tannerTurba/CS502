@@ -28,7 +28,7 @@
             </form>
             <div class="grid grid-cols-3 gap-4 justify-items-center mx-8">
                 @for (food of foods; track food) {
-                    <app-search-card [food]="food" />
+                    <app-search-card [food]="food" [uid]="uid" [hid]="hid" />
                 }
             </div>
         </div>

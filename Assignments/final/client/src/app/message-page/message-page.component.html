@@ -21,12 +21,12 @@
         @for (message of messages; track message) {
             @if (message.from === uid) {
                 <span class="flex justify-end">
-                    <app-request-bubble [message]="message" />
+                    <app-request-bubble [message]="message" (refresh)="refresh($event)" />
                 </span>
             }
             @else {
                 <span class="flex">
-                    <app-request-bubble [message]="message" />
+                    <app-request-bubble [message]="message" (refresh)="refresh($event)" />
                 </span>
             }
         }

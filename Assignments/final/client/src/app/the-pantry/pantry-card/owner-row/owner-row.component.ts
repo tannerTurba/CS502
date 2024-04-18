@@ -15,6 +15,7 @@ export class OwnerRowComponent {
   @Input() food!: Food;
   uid: string = this.route.snapshot.paramMap.get('uid')!;
   requestQuantity: number = -1;
+  buttonText: string = 'Request';
   user: User = {
     _id: "",
     email: "",
@@ -41,7 +42,9 @@ export class OwnerRowComponent {
   makeRequest(): void {
     let contactId = this.user._id;
     let foodId = this.food.foodId;
-    // RECORD REQUEST
+    this.data.createMessage(this.uid, contactId, foodId, this.requestQuantity).subscribe((x) => {
+      this.buttonText = 'Sent!';
+    });
   }
 
   recordVal(event: Event): void {

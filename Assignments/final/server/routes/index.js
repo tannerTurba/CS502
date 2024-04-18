@@ -114,6 +114,11 @@ router.post('/users/:uid/ingredients', async (req, res, next) => {
     servingsPerContainer: food.servingsPerContainer,
     quantity: food.quantity
   });
+
+  let user = await User.findById(uid);
+  let household = await Household.findById(user.householdId);
+  household.foodIds.push(food.foodId);
+  await Household.updateOne( {foodIds: household.foodIds} );
   res.status(200).json(f);
 });
 
@@ -123,6 +128,7 @@ router.get('/users/:uid/messages', async (req, res, next) => {
   res.status(200).json(directory.contacts);
 });
 
+// Change to users/uid/contacts/cid/messages/mid
 router.put('/users/:uid/messages/:mid', async (req, res, next) => {
   const mid = req.params.mid;
   const status = req.body.status;
@@ -133,6 +139,7 @@ router.put('/users/:uid/messages/:mid', async (req, res, next) => {
   res.status(200).json(message);
 });
 
+// Change to users/uid/contacts/cid/messages
 router.get('/users/:uid/messages/:contactId', async (req, res, next) => {
   const uid = req.params.uid;
   const contactId = req.params.contactId;
@@ -145,6 +152,17 @@ router.get('/users/:uid/messages/:contactId', async (req, res, next) => {
   })
   .sort({ dateSent: 1 });
   res.status(200).json(messages);
+});
+
+router.post('/users/:uid/contacts/:cid/messages', async (req, res, next) => {
+  const uid = req.params.uid;
+  const cid = req.params.cid;
+  const foodId = req.body.foodId;
+  const quantity = req.body.quantity;
+
+  let food = await Food.findOne( {foodId: foodId} );
+  let message = await Message.create( {to: cid, from: uid, food: food, quantity: quantity, status: 'active', dateSent: Date.now()} );
+  res.status(200).json(message);
 });
 
 router.post('/users/:uid/ingredients/:fid', async (req, res, next) => {
@@ -208,6 +226,42 @@ router.get('/users/:uid/households/:hid/ingredients/:fid', async (req, res, next
   const fid = req.params.fid;
   let foods = await Food.find( { foodId: fid } );
   res.status(200).json(foods);
+});
+
+router.post('/users/:uid/households/:hid/ingredients/:fid', async (req, res, next) => {
+  const hid = req.params.hid;
+  const fid = req.params.fid;
+  const food = req.body.food;
+  let storedFood = await Food.findOne( {foodId: fid, userId: hid} );
+
+  let ret;
+  if (storedFood !== null) {
+    ret = await Food.updateOne( {foodId: fid, userId: hid}, {quantity: food.quantity} );
+  }
+  else {
+    ret = await Food.create( { 
+      userId: hid,
+      foodId: fid,
+      label: food.label,
+      knownAs: food.knownAs,
+      nutrients: food.nutrients,
+      brand: food.brand,
+      category: food.category, 
+      categoryLabel: food.categoryLabel,
+      foodContentsLabel: food.foodContentsLabel,
+      image: food.image,
+      servingSizes: food.servingSizes,
+      servingsPerContainer: food.servingsPerContainer,
+      quantity: food.quantity
+     } );
+  }
+
+  let household = await Household.findById(hid);
+  if (!household.foodIds.includes(fid)) {
+    household.foodIds.push(fid);
+    await Household.updateOne( {foodIds: household.foodIds} );
+  }
+  res.status(200).json(ret);
 });
 
 module.exports = router;
