@@ -88,4 +88,24 @@ export class DataService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<Message>(`${this.apiVersion}/users/${uid}/contacts/${contactId}/messages`, { foodId: foodId, quantity: quantity },  { headers: headers } );
   }
+
+  addMemberToHousehold(uid: string, hid: string, memberUsername: string): Observable<Household | string> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<Household | string>(`${this.apiVersion}/users/${uid}/households/${hid}/members`, {memberUsername: memberUsername}, {headers: headers});
+  }
+
+  removeMemberFromHousehold(uid: string, hid: string, mid: string): Observable<Household> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<Household>(`${this.apiVersion}/users/${uid}/households/${hid}/members/${mid}`, {}, {headers: headers});
+  }
+
+  reassignAdmin(uid: string, hid: string, mid: string): Observable<Household> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put<Household>(`${this.apiVersion}/users/${uid}/households/${hid}/members/${mid}`, {}, {headers: headers});
+  }
+
+  createHousehold(uid: string): Observable<Household> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<Household>(`${this.apiVersion}/users/${uid}/households`, {}, {headers: headers});
+  }
 }

@@ -3,7 +3,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { PantryCardComponent } from './pantry-card/pantry-card.component';
 import { AddCardComponent } from '../add-card/add-card.component';
 import { initFlowbite } from 'flowbite';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../data.service';
 import { Food } from '../food';
@@ -55,9 +55,13 @@ export class ThePantryComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private data: DataService
+    private data: DataService,
+    private router: Router
   ) {
     this.data.getUserInfo(this.uid).subscribe((userInfo) => {
+      if (userInfo.householdId === '') {
+        this.router.navigateByUrl(`users/${this.uid}/household`);
+      }
       this.data.getHousehold(this.uid, userInfo.householdId).subscribe((household) => {
         this.household = household;
         this.foods = household.foodIds;
@@ -75,5 +79,11 @@ export class ThePantryComponent implements OnInit {
     // this.data.getIngredients(this.uid).subscribe((food) => {
     //   this.foods = food;
     // });
+  }
+
+  leaveGroup(): void {
+    this.data.removeMemberFromHousehold(this.uid, this.household._id, this.uid).subscribe((res) => {
+      this.router.navigateByUrl(`users/${this.uid}/my-ingredients`);
+    });
   }
 }

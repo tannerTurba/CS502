@@ -10,7 +10,8 @@ var bcrypt = require('bcrypt');
 
 let USERS = [
     { username: "jDoe", password: "1", firstName: "John", lastName: "Doe", role: 'admin', status: 'JOINED', householdId: '' },
-    { username: "jaDoe", password: "1", firstName: "Jane", lastName: "Doe", role: 'member', status: 'JOINED', householdId: '' }
+    { username: "jaDoe", password: "1", firstName: "Jane", lastName: "Doe", role: 'member', status: 'JOINED', householdId: '' },
+    { username: "test", password: "1", firstName: "test", lastName: "test", role: '', status: '', householdId: '' }
 ];
 
 let FOOD = [
@@ -153,9 +154,9 @@ async function initHousehold(members) {
         foodIds.push(FOOD[i].foodId);
     }
     
-    let household = await Household.create( { members: members, foodIds: foodIds } );
+    let household = await Household.create( { members: [members[0], members[1]], foodIds: foodIds } );
     
-    for (let i = 0; i < members.length; i++) {
+    for (let i = 0; i < 2; i++) {
         let user = members[i];
         await User.updateOne( { _id: user._id }, { householdId: household._id } );
     }

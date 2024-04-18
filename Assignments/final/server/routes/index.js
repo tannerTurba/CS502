@@ -224,7 +224,14 @@ router.get('/users/:uid/households/:hid', async (req, res, next ) => {
 router.get('/users/:uid/households/:hid/ingredients/:fid', async (req, res, next) => {
   const hid = req.params.hid;
   const fid = req.params.fid;
-  let foods = await Food.find( { foodId: fid } );
+
+  const members = (await Household.findById(hid)).members;
+  let mids = [];
+  for (let i = 0; i < members.length; i++) {
+    mids.push(members[i]._id);
+  }
+
+  let foods = await Food.find( { foodId: fid, userId: {$in: mids} } );
   res.status(200).json(foods);
 });
 
@@ -262,6 +269,98 @@ router.post('/users/:uid/households/:hid/ingredients/:fid', async (req, res, nex
     await Household.updateOne( {foodIds: household.foodIds} );
   }
   res.status(200).json(ret);
+});
+
+/* Add a user to the group */
+router.post('/users/:uid/households/:hid/members', async (req, res, next) => {
+  const uid = req.params.uid;
+  const hid = req.params.hid;
+  const username = req.body.memberUsername;
+  let member = await User.findOne( {username: username} );
+
+  // add the user to the contact's directory
+  // let sender = await User.findById(uid);
+  // let directory = await Directory.findOne( {ownerId: contact._id} );
+  // directory.contacts.push(sender);
+  // await Directory.updateOne( {ownerId: contact._id}, {contacts: directory.contacts} );
+
+  if (member === null) {
+    res.status(200).json(`'${username}' is not a valid username`);
+    return;
+  }
+
+  if (member.householdId === '' || member.householdId === undefined) {
+    await User.updateOne( {_id: member._id}, {householdId: hid, role: "member", status: 'JOINED'} );
+    member = await User.findOne( {username: username} );
+
+    let household = await Household.findById(hid);
+    household.members.push(member);
+    await Household.updateOne( {_id: hid}, {members: household.members} );
+    res.status(200).json(household);
+  }
+  else {
+    res.status(200).json(`'${username}' is already a member of a household`);
+  }
+});
+
+/* Remove a member from the group: Remove a member(UserModel) from a household group */
+router.post('/users/:uid/households/:hid/members/:mid', async (req, res, next) => {
+  const uid = req.params.uid;
+  const hid = req.params.hid;
+  const mid = req.params.mid;
+  const member = await User.findById(mid);
+
+  let household = {};
+  if (member.householdId !== '' && member.householdId !== undefined) {
+    household = await Household.findById(hid);
+
+    for (let i = 0; i < household.members.length; i++) {
+      let m = household.members[i];
+      if (m.username === member.username) {
+        household.members.splice(i, 1);
+        await Household.updateOne( {_id: hid}, {members: household.members} );
+        await User.updateOne( {_id: member._id}, {householdId: "", role: "", status: ""} );
+        break;
+      }
+    }
+  }
+  res.status(200).json(household);
+});
+
+/* Make another user and admin: Change admin(uid) to "member" role and change member(mid) to "admin" role */
+router.put('/users/:uid/households/:hid/members/:mid', async (req, res, next) => {
+  const uid = req.params.uid;
+  const hid = req.params.hid;
+  const mid = req.params.mid;
+
+  await User.updateOne( {_id: uid}, {role: 'member'} );
+  await User.updateOne( {_id: mid}, {role: 'admin'} );
+
+  // will users update in household model??
+  await Household.updateOne( {_id: hid, 'members._id': uid}, {'members.$.role': 'member'});
+  await Household.updateOne( {_id: hid, 'members._id': mid}, {'members.$.role': 'admin'});
+  let household = await Household.findById(hid);
+
+  res.status(200).json(household);
+});
+
+/* Create a group: Create a household object containing the owner's account in the members field. Set User.role to admin and User.status to JOINED */
+router.post('/users/:uid/households', async (req, res, next) => {
+  const uid = req.params.uid;
+  const user = await User.findById(uid);
+  const foods = await Food.find( {userId: uid} );
+
+  let foodIds = [];
+  for (let i = 0; i < FOOD.length; i++) {
+    foodIds.push(foods[i].foodId);
+  }
+
+  const household = await Household.create({
+    members: [user],
+    foodIds: foodIds
+  });
+  await User.updateOne( {_id: uid}, {householdId: household._id} );
+  res.status(200).json(household);
 });
 
 module.exports = router;
