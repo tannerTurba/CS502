@@ -35,16 +35,46 @@ router.post('/logout', function(req, res, next) {
 
 router.post('/login', (req, res, next) => {
  req.session.regenerate( async function( err ) { 
-     let user = await User.findOne( { username: req.body.username } );
-     if( user && await bcrypt.compare(req.body.password, user.password)) {
-          req.session.user = user;
-          user.password = "[REDACTED]";
-          res.json( user );
-       } else {
-          res.status( 200 ).json( 'Error with username/password' );
-       }
-    } );
-} );
+    let user = await User.findOne( { username: req.body.username } );
+    if( user && await bcrypt.compare(req.body.password, user.password)) {
+      req.session.user = user;
+      user.password = "[REDACTED]";
+      res.json( user );
+    } 
+    else {
+      res.status( 200 ).json( 'Error with username/password' );
+    }
+  });
+});
+
+router.post('/signup', (req, res, next) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+
+  req.session.regenerate( async function( err ) { 
+    let user = await User.findOne( { username: username } );
+    if (user !== null) {
+      res.status(200).json( 'This username is already taken' );
+    }
+    else {
+      let u = await User.create({
+        username: username,
+        password: await bcrypt.hash(password, 10),
+        firstName: firstName,
+        lastName: lastName,
+        role: '',
+        status: ''
+      });
+      await Directory.create({
+        ownerId: u._id,
+        contacts: []
+      });
+      res.status(200).json(u);
+    }
+  });
+});
 
 router.get('/users/:uid', async (req, res, next) => {
   const uid = req.params.uid;

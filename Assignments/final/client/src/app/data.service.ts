@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './user';
 import { Food } from './food';
 import { Message } from './message';
 import { Household } from './household';
+import { headers } from 'next/headers';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,16 @@ export class DataService {
 
   logout(): Observable<string> {
     return this.http.post<string>(`${this.apiVersion}/logout`, {});
+  }
+
+  signup(username: string, password: string, firstName: string, lastName: string): Observable<User | string> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<User | string>(`${this.apiVersion}/signup`, {
+      username: username,
+      password: password, 
+      firstName: firstName,
+      lastName: lastName
+    }, {headers: headers});
   }
 
   getUserInfo(uid: String): Observable<User> {
