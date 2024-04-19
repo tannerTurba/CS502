@@ -36,6 +36,16 @@ export class DataService {
     }, {headers: headers});
   }
 
+  modifyAccount(uid: string, firstName: string, lastName: string, password: string): Observable<User> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<User>(`${this.apiVersion}/users/${uid}`, {
+      firstName: firstName,
+      lastName: lastName,
+      password: password
+    }, 
+    {headers: headers});
+  }
+
   getUserInfo(uid: String): Observable<User> {
     return this.http.get<User>(`${this.apiVersion}/users/${uid}`);
   }

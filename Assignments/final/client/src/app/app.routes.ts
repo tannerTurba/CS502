@@ -6,6 +6,7 @@ import { ThePantryComponent } from './the-pantry/the-pantry.component';
 import { MessagePageComponent } from './message-page/message-page.component';
 import { profileGuard } from './auth.guard';
 import { HouseholdComponent } from './household/household.component';
+import { AccountDetailsComponent } from './account-details/account-details.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -15,4 +16,5 @@ export const routes: Routes = [
     { path: 'users/:uid/the-pantry', title: 'Cellarium | The Pantry', component: ThePantryComponent },
     { path: 'users/:uid/messages', title: 'Cellarium | Messages', component: MessagePageComponent },
     { path: 'users/:uid/household', title: 'Cellarium | Household', component: HouseholdComponent },
+    { path: 'users/:uid/my-account', title: 'Cellarium | My Account', component: AccountDetailsComponent }
 ];

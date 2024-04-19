@@ -37,7 +37,7 @@
             <div id="dropdown" class="z-10 hidden bg-white divide-y divide-stone-100 rounded-lg shadow w-44 dark:bg-stone-700">
               <ul class="py-2 text-sm text-stone-700 dark:text-stone-200" aria-labelledby="dropdownDefaultButton">
                 <li>
-                  <a routerLink="" class="block px-4 py-2 hover:bg-stone-100 dark:hover:bg-stone-600 dark:hover:text-white">Your profile</a>
+                  <a [routerLink]="'/users/' + uid + '/my-account'" class="block px-4 py-2 hover:bg-stone-100 dark:hover:bg-stone-600 dark:hover:text-white">Your profile</a>
                 </li>
                 <li>
                   <a routerLink="/login" class="block px-4 py-2 hover:bg-stone-100 dark:hover:bg-stone-600 dark:hover:text-white">Sign out</a>

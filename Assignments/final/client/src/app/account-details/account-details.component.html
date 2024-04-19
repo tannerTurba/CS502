@@ -1,0 +1,54 @@
+<app-navbar />
+<div class="mx-10 my-5 text-4xl flex justify-between">
+    <h1 class="text-green-600 dark:text-green-500">My Account</h1>
+</div>
+<div class="grid grid-cols-2 gap-4 justify-items-center">
+    <div class="w-3/4 bg-white border border-stone-200 rounded-lg dark:bg-stone-800 dark:border-stone-700 shadow-md">
+        <h4 class="text-xl ml-4 pl-4 mt-4  text-green-600 dark:text-green-500">Account Details</h4>
+        <div class="p-4 mx-4 space-y-4 md:space-y-6">
+            <div>
+                <label for="firstName" class="block mb-2 text-sm font-medium text-stone-900 dark:text-white">First name</label>
+                <p name="firstName" id="firstName" class="form-control bg-stone-50 border border-stone-300 text-stone-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-stone-700 dark:border-stone-600 dark:placeholder-stone-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                    {{userInfo.firstName}}
+                </p>
+            </div>
+            <div>
+                <label for="lastName" class="block mb-2 text-sm font-medium text-stone-900 dark:text-white">Last name</label>
+                <p name="lastName" id="lastName" class="form-control bg-stone-50 border border-stone-300 text-stone-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-stone-700 dark:border-stone-600 dark:placeholder-stone-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                    {{userInfo.lastName}}
+                </p>
+            </div>
+            <div>
+                <label for="username" class="block mb-2 text-sm font-medium text-stone-900 dark:text-white">Username</label>
+                <p name="username" id="username" class="form-control bg-stone-50 border border-stone-300 text-stone-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-stone-700 dark:border-stone-600 dark:placeholder-stone-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                    {{userInfo.username}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="w-3/4 bg-white border border-stone-200 rounded-lg dark:bg-stone-800 dark:border-stone-700 shadow-md">
+        <h4 class="text-xl ml-4 pl-4 mt-4  text-green-600 dark:text-green-500">Modify Details</h4>
+        <form class="p-4 mx-4 space-y-4 md:space-y-6" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <div>
+                <label for="firstName" class="block mb-2 text-sm font-medium text-stone-900 dark:text-white">Your first name</label>
+                <input formControlName="firstName" type="firstName" name="firstName" id="firstName" class="form-control bg-stone-50 border border-stone-300 text-stone-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-stone-700 dark:border-stone-600 dark:placeholder-stone-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="John" required="">
+            </div>
+            <div>
+                <label for="lastName" class="block mb-2 text-sm font-medium text-stone-900 dark:text-white">Your last name</label>
+                <input formControlName="lastName" type="lastName" name="lastName" id="lastName" placeholder="Doe" class="form-control bg-stone-50 border border-stone-300 text-stone-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-stone-700 dark:border-stone-600 dark:placeholder-stone-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" required="">
+            </div>
+            <div>
+                <label for="password" class="block mb-2 text-sm font-medium text-stone-900 dark:text-white">Password</label>
+                <input formControlName="password" type="password" name="password" id="password" placeholder="••••••" class="form-control bg-stone-50 border border-stone-300 text-stone-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-stone-700 dark:border-stone-600 dark:placeholder-stone-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" required="">
+                <div id="pwdFeedback" style="color: red;">{{pwdFeedback}}</div>
+            </div>
+            <div>
+                <label for="confirmPassword" class="block mb-2 text-sm font-medium text-stone-900 dark:text-white">Confirm password</label>
+                <input formControlName="confirmPassword" type="password" name="confirmPassword" id="confirmPassword" placeholder="••••••" class="form-control bg-stone-50 border border-stone-300 text-stone-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-stone-700 dark:border-stone-600 dark:placeholder-stone-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" required="">
+                <div id="confirmPasswordFeedback" style="color: red;">{{confirmPasswordFeedback}}</div>
+            </div>
+            <div id="generalFeedback" style="color: red;">{{generalFeedback}}</div>
+            <button type="submit" class="w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Submit</button>
+        </form>
+    </div>
+</div>

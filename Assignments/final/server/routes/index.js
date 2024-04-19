@@ -76,6 +76,27 @@ router.post('/signup', (req, res, next) => {
   });
 });
 
+/* Modify account */
+router.post('/users/:uid', async (req, res, next) => {
+  const uid = req.params.uid;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const password = req.body.password;
+
+  if (firstName !== '') {
+    await User.updateOne( {_id: uid}, {firstName: firstName} );
+  }
+  if (lastName !== '') {
+    await User.updateOne( {_id: uid}, {lastName: lastName} );
+  }
+  if (password !== '') {
+    await User.updateOne( {_id: uid}, {password: await bcrypt.hash(password, 10)} );
+  }
+
+  let user = await User.findById(uid);
+  res.status(200).json(user);
+})
+
 router.get('/users/:uid', async (req, res, next) => {
   const uid = req.params.uid;
   let user = await User.findById(uid);
