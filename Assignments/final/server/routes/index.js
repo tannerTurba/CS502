@@ -299,6 +299,7 @@ router.get('/users/:uid/households/:hid', async (req, res, next ) => {
   res.status(200).json(household);
 });
 
+/* Get shared food */
 router.get('/users/:uid/households/:hid/ingredients', async (req, res, next ) => {
   const hid = req.params.hid;
   const search = req.query.search;
@@ -358,12 +359,13 @@ router.get('/users/:uid/households/:hid/ingredients', async (req, res, next ) =>
   });
 });
 
+/* Get Ingredient */
 router.get('/users/:uid/households/:hid/ingredients/:fid', async (req, res, next) => {
   const hid = req.params.hid;
   const fid = req.params.fid;
 
   const members = (await Household.findById(hid)).members;
-  let mids = [];
+  let mids = [hid];
   for (let i = 0; i < members.length; i++) {
     mids.push(members[i]._id);
   }

@@ -88,14 +88,13 @@ export class ThePantryComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.search);
     this.data.getUserInfo(this.uid).subscribe((userInfo) => {
       if (userInfo.householdId !== undefined && userInfo.householdId !== '') {
         this.userInfo = userInfo;
         this.data.getHousehold(this.uid, userInfo.householdId).subscribe((household) => {
           this.household = household;
           this.data.getSharedFood(this.uid, userInfo.householdId, this.search).subscribe((foodIds) => {
-              this.foods = foodIds;
+            this.foods = foodIds;
           });
         });
       }

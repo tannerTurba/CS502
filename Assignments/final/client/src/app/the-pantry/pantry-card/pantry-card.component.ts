@@ -17,7 +17,6 @@ export class PantryCardComponent implements OnInit {
   uid: string = this.route.snapshot.paramMap.get('uid')!;
   @Input() householdId!: string;
   @Input() foodId!: string;
-  @Input() search!: string;
   @Output() delete: EventEmitter<Food> = new EventEmitter();
   food: Food = {
     _id : "",
@@ -50,7 +49,7 @@ export class PantryCardComponent implements OnInit {
     private data: DataService,
     private route: ActivatedRoute
   ) {
-    console.log(this.search);
+    
   }
   
   ngOnInit(): void {
@@ -68,7 +67,7 @@ export class PantryCardComponent implements OnInit {
       if (sharedFood !== undefined) {
         this.food = sharedFood;
       }
-      else {
+      else if (res.length > 0) {
         this.food = structuredClone(res[0]);
         this.food.quantity = 0;
       }
