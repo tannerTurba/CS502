@@ -30,7 +30,7 @@ export class AccountDetailsComponent {
     status: 'string',
     householdId: 'string'
   };
-  signupForm = this.formBuilder.group({
+  detailsForm = this.formBuilder.group({
     firstName: '',
     lastName: '',
     password: '',
@@ -52,10 +52,10 @@ export class AccountDetailsComponent {
   }
 
   onSubmit(): void {
-    let firstName = this.signupForm.value.firstName;
-    let lastName = this.signupForm.value.lastName;
-    let password = this.signupForm.value.password;
-    let confirmPassword = this.signupForm.value.confirmPassword;
+    let firstName = this.detailsForm.value.firstName;
+    let lastName = this.detailsForm.value.lastName;
+    let password = this.detailsForm.value.password;
+    let confirmPassword = this.detailsForm.value.confirmPassword;
     let checksPassed: boolean = true
 
     if (firstName === null) {
@@ -99,7 +99,7 @@ export class AccountDetailsComponent {
       this.data.modifyAccount(this.uid, firstName!, lastName!, password!).subscribe((res) => {
         this.userInfo = res;
       });
-      this.signupForm.reset();
+      this.detailsForm.reset();
     }
   }
 }

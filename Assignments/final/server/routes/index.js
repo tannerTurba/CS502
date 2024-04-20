@@ -105,8 +105,16 @@ router.get('/users/:uid', async (req, res, next) => {
 
 router.get('/users/:uid/ingredients', async (req, res, next) => {
   const uid = req.params.uid;
-  let ingredients = await Food.find( { userId: uid } );
-  res.status(200).json(ingredients);
+  const search = req.query.search;
+
+  if (search === "") {
+    let ingredients = await Food.find( { userId: uid } );
+    res.status(200).json(ingredients);
+  }
+  else {
+    let ingredients = await Food.find( { userId: uid, label:{ $regex: search, $options: "i" }} );
+    res.status(200).json(ingredients);
+  }
 });
 
 router.get('/users/:uid/ingredients/:fid', async (req, res, next) => {

@@ -11,6 +11,7 @@ import { AddIngredientModalComponent } from '../add-ingredient-modal/add-ingredi
 import { FoodService } from '../food.service';
 import { InfoModalComponent } from '../info-modal/info-modal.component';
 import { MoreNutrients } from '../more-nutrients';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-my-ingredients',
@@ -21,7 +22,8 @@ import { MoreNutrients } from '../more-nutrients';
     AddCardComponent, 
     CommonModule,
     AddIngredientModalComponent,
-    InfoModalComponent
+    InfoModalComponent, 
+    FormsModule
   ],
   templateUrl: './my-ingredients.component.html',
   styleUrl: './my-ingredients.component.css'
@@ -31,13 +33,14 @@ export class MyIngredientsComponent implements OnInit {
   foods!: [Food];
   foodInfo!: Food;
   nutrients!: MoreNutrients;
+  search: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private data: DataService, 
     private foodService: FoodService
   ) {
-    this.data.getIngredients(this.uid).subscribe((food) => {
+    this.data.getIngredients(this.uid, '').subscribe((food) => {
       this.foods = food;
     });
   }
@@ -48,7 +51,7 @@ export class MyIngredientsComponent implements OnInit {
 
   deleteIngredient(food: Food): void {
     this.data.setQuantity(food.userId, food._id, -1).subscribe();
-    this.data.getIngredients(this.uid).subscribe((food) => {
+    this.data.getIngredients(this.uid, '').subscribe((food) => {
       this.foods = food;
     });
   }
@@ -58,5 +61,16 @@ export class MyIngredientsComponent implements OnInit {
     //   this.foodInfo = food;
     //   this.nutrients = res
     // });
+  }
+
+  onSubmit(): void {
+    this.data.getIngredients(this.uid, this.search).subscribe((food) => {
+      this.foods = food;
+    });
+  }
+
+  clearFilter(): void {
+    this.search = '';
+    this.onSubmit();
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { first, Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from './user';
 import { Food } from './food';
 import { Message } from './message';
@@ -50,8 +50,10 @@ export class DataService {
     return this.http.get<User>(`${this.apiVersion}/users/${uid}`);
   }
 
-  getIngredients(uid: string): Observable<[Food]> {
-    return this.http.get<[Food]>(`${this.apiVersion}/users/${uid}/ingredients`);
+  getIngredients(uid: string, search: string): Observable<[Food]> {
+    return this.http.get<[Food]>(`${this.apiVersion}/users/${uid}/ingredients`, {
+      params: new HttpParams().set('search', search)
+    });
   }
 
   getUserIngredient(uid: string, fid: string): Observable<Food> {
