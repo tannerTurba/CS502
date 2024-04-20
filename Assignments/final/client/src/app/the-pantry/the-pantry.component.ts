@@ -10,6 +10,7 @@ import { Food } from '../food';
 import { AddIngredientModalComponent } from '../add-ingredient-modal/add-ingredient-modal.component';
 import { Household } from '../household';
 import { User } from '../user';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-the-pantry',
@@ -20,7 +21,8 @@ import { User } from '../user';
     AddCardComponent,
     CommonModule,
     AddIngredientModalComponent,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   templateUrl: './the-pantry.component.html',
   styleUrl: './the-pantry.component.css'
@@ -52,6 +54,7 @@ export class ThePantryComponent implements OnInit {
     foodIds: ['string'],
   };
   foods!: [string];
+  search: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -61,15 +64,7 @@ export class ThePantryComponent implements OnInit {
   
   ngOnInit(): void {
     initFlowbite();
-    this.data.getUserInfo(this.uid).subscribe((userInfo) => {
-      if (userInfo.householdId !== undefined && userInfo.householdId !== '') {
-        this.data.getHousehold(this.uid, userInfo.householdId).subscribe((household) => {
-          this.household = household;
-          this.foods = household.foodIds;
-        });
-        this.userInfo = userInfo;
-      }
-    });
+    this.onSubmit();
   }
 
   deleteIngredient(food: Food): void {
@@ -90,5 +85,25 @@ export class ThePantryComponent implements OnInit {
       this.household = res;
       this.ngOnInit();
     });
+  }
+
+  onSubmit(): void {
+    console.log(this.search);
+    this.data.getUserInfo(this.uid).subscribe((userInfo) => {
+      if (userInfo.householdId !== undefined && userInfo.householdId !== '') {
+        this.userInfo = userInfo;
+        this.data.getHousehold(this.uid, userInfo.householdId).subscribe((household) => {
+          this.household = household;
+          this.data.getSharedFood(this.uid, userInfo.householdId, this.search).subscribe((foodIds) => {
+              this.foods = foodIds;
+          });
+        });
+      }
+    });
+  }
+
+  clearFilter(): void {
+    this.search = '';
+    this.onSubmit();
   }
 }

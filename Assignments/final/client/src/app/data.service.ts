@@ -107,6 +107,12 @@ export class DataService {
     return this.http.get<Household>(`${this.apiVersion}/users/${uid}/households/${hid}`);
   }
 
+  getSharedFood(uid: string, hid: string, search: string): Observable<[string]> {
+    return this.http.get<[string]>(`${this.apiVersion}/users/${uid}/households/${hid}/ingredients`, {
+      params: new HttpParams().set('search', search)
+    });
+  }
+
   createMessage(uid: string, contactId: string, foodId: string, quantity: number): Observable<Message> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<Message>(`${this.apiVersion}/users/${uid}/contacts/${contactId}/messages`, { foodId: foodId, quantity: quantity },  { headers: headers } );

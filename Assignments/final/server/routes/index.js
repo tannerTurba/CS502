@@ -7,6 +7,7 @@ var ServingSize = require('./servingSizeModel');
 var Directory = require('./directoryModel');
 var Message = require('./messageModel');
 var Household = require('./householdModel');
+var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
 // router.all('*', function(req, res, next) {
@@ -296,6 +297,65 @@ router.get('/users/:uid/households/:hid', async (req, res, next ) => {
   const hid = req.params.hid;
   let household = await Household.findById(hid);
   res.status(200).json(household);
+});
+
+router.get('/users/:uid/households/:hid/ingredients', async (req, res, next ) => {
+  const hid = req.params.hid;
+  const search = req.query.search;
+
+  Household.aggregate([
+    // Match stage to filter household by its _id
+    { $match: { _id: mongoose.Types.ObjectId(hid) } },
+    
+    {
+      $lookup: {
+        from: 'foods',
+        let: { foodIds: '$foodIds' },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $and: [
+                  { $in: ['$foodId', '$$foodIds'] },
+                  { $regexMatch: { input: "$label", regex: new RegExp(search, "i") } }
+                ]
+              }
+            }
+          },
+          { $project: { _id: 0, foodId: 1 } }
+        ],
+        as: 'foods'
+      }
+    },
+    {
+      $unwind: '$foods' // Unwind the array of foods
+    },
+    {
+      $group: {
+        _id: null,
+        foodIds: { $addToSet: '$foods.foodId' } // Accumulate distinct foodIds into an array
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        foodIds: 1 // Project the foodIds array
+      }
+    }
+  ])
+  .exec((err, result) => {
+    if (err) {
+      console.error('Error:', err);
+      // Handle error
+    } else {
+      if (result.length > 0) {
+        res.status(200).json(result[0].foodIds);
+      }
+      else {
+        res.status(200).json([]);
+      }
+    }
+  });
 });
 
 router.get('/users/:uid/households/:hid/ingredients/:fid', async (req, res, next) => {

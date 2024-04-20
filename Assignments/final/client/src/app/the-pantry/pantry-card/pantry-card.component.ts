@@ -17,6 +17,7 @@ export class PantryCardComponent implements OnInit {
   uid: string = this.route.snapshot.paramMap.get('uid')!;
   @Input() householdId!: string;
   @Input() foodId!: string;
+  @Input() search!: string;
   @Output() delete: EventEmitter<Food> = new EventEmitter();
   food: Food = {
     _id : "",
@@ -49,7 +50,7 @@ export class PantryCardComponent implements OnInit {
     private data: DataService,
     private route: ActivatedRoute
   ) {
-
+    console.log(this.search);
   }
   
   ngOnInit(): void {
