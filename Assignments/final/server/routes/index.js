@@ -28,6 +28,67 @@ var bcrypt = require('bcrypt');
 //   }
 // });
 
+/* Make call to Edamam food API and return results */
+router.get('/foods', function(req, res, next) {
+  const baseUrl = 'https://api.edamam.com/api/food-database/v2';
+  const appId = '35b313ca';
+  const appKey = '5fe592b84538ad54e7a6d8f45f321e34';
+  const nutritionType = 'cooking';
+  const keyword = req.query.keyword;
+
+  fetch(`${baseUrl}/parser?app_id=${appId}&app_key=${appKey}&ingr=${keyword}&nutrition-type=${nutritionType}`)
+    .then((resp) => {
+      if (!resp.ok) {
+        throw new Error('Failed to fetch food');
+      }
+      return resp.json();
+    })
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((error) => {
+      res.status(404).json({ error: error.message });
+    });
+});
+
+/* Make call to Edamam food API and return results */
+router.get('/foods/:fid', function(req, res, next) {
+  const baseUrl = 'https://api.edamam.com/api/food-database/v2';
+  const appId = '35b313ca';
+  const appKey = '5fe592b84538ad54e7a6d8f45f321e34';
+  const nutritionType = 'cooking';
+  const fid = req.params.fid;
+
+  fetch(`${baseUrl}/nutrients?app_id=${appId}&app_key=${appKey}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: {
+      "ingredients": [
+        {
+          "quantity": 1,
+          "measureURI": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+          "qualifiers": [],
+          "foodId": fid
+        }
+      ]
+    }
+  })
+    .then((resp) => {
+      if (!resp.ok) {
+        throw new Error('Failed to fetch food details');
+      }
+      return resp.json();
+    })
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((error) => {
+      res.status(404).json({ error: error.message });
+    });
+});
+
 router.post('/logout', function(req, res, next) {
   req.session.destroy(() => {
     res.json( 'ok' )
