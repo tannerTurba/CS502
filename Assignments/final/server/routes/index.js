@@ -52,7 +52,7 @@ router.get('/foods', function(req, res, next) {
 });
 
 /* Make call to Edamam food API and return results */
-router.get('/foods/:fid', function(req, res, next) {
+router.post('/foods/:fid', function(req, res, next) {
   const baseUrl = 'https://api.edamam.com/api/food-database/v2';
   const appId = '35b313ca';
   const appKey = '5fe592b84538ad54e7a6d8f45f321e34';
@@ -65,7 +65,7 @@ router.get('/foods/:fid', function(req, res, next) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: {
+    body: JSON.stringify({
       "ingredients": [
         {
           "quantity": 1,
@@ -74,10 +74,11 @@ router.get('/foods/:fid', function(req, res, next) {
           "foodId": fid
         }
       ]
-    }
+    })
   })
     .then((resp) => {
       if (!resp.ok) {
+        console.log(resp);
         throw new Error('Failed to fetch food details');
       }
       return resp.json();
@@ -86,7 +87,7 @@ router.get('/foods/:fid', function(req, res, next) {
       res.status(200).json(data);
     })
     .catch((error) => {
-      res.status(404).json({ error: error.message });
+      res.status(500).json({ error: error.message });
     });
 });
 

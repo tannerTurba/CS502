@@ -56,6 +56,6 @@ export class FoodService {
   }
 
   getNutrients(foodId: string): Observable<MoreNutrients> {
-    return this.http.get<MoreNutrients>(`${this.apiVersion}/foods/${foodId}`);
+    return this.http.post<MoreNutrients>(`${this.apiVersion}/foods/${foodId}`, {});
   }
 }

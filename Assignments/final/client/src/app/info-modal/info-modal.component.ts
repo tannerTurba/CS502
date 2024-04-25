@@ -11,32 +11,7 @@ import { MoreNutrients } from '../more-nutrients';
   styleUrl: './info-modal.component.css'
 })
 export class InfoModalComponent implements OnInit {
-  @Input() food: Food = {
-    _id : "",
-    foodId : "",
-    label : "",
-    knownAs : "",
-    nutrients : {
-      ENERC_KCAL : 0, 
-      PROCNT : 0,
-      FAT : 0,
-      CHOCDF : 0, 
-      FIBTG : 0
-    },
-    brand : "", 
-    category : "", 
-    categoryLabel : "", 
-    foodContentsLabel : "",
-    image : "", 
-    servingSizes : [{
-      uri : "",
-      label : "",
-      quantity : 0
-    }],
-    servingsPerContainer : 0,
-    quantity: 0,
-    userId: ""
-  };
+  @Input() food!: Food;
   @Input() nutrients!: MoreNutrients;
 
   constructor(
@@ -134,22 +109,22 @@ export class InfoModalComponent implements OnInit {
   }
 
   get vitD() {
-    return (this.nutrients && this.nutrients.totalDaily) ? this.round(this.nutrients.totalDaily.VITD.quantity) : "0";
+    return (this.nutrients && this.nutrients.totalDaily && this.nutrients.totalDaily.VITD) ? this.round(this.nutrients.totalDaily.VITD.quantity) : "0";
   }
 
   get vitC() {
-    return (this.nutrients && this.nutrients.totalDaily) ? this.round(this.nutrients.totalDaily.VITC.quantity) : "0";
+    return (this.nutrients && this.nutrients.totalDaily && this.nutrients.totalDaily.VITC) ? this.round(this.nutrients.totalDaily.VITC.quantity) : "0";
   }
 
   get calcium() {
-    return (this.nutrients && this.nutrients.totalDaily) ? this.round(this.nutrients.totalDaily.CA.quantity) : "0";
+    return (this.nutrients && this.nutrients.totalDaily && this.nutrients.totalDaily.CA) ? this.round(this.nutrients.totalDaily.CA.quantity) : "0";
   }
 
   get iron() {
-    return (this.nutrients && this.nutrients.totalDaily) ? this.round(this.nutrients.totalDaily.FE.quantity) : "0";
+    return (this.nutrients && this.nutrients.totalDaily && this.nutrients.totalDaily.FE) ? this.round(this.nutrients.totalDaily.FE.quantity) : "0";
   }
 
   get potassium() {
-    return (this.nutrients && this.nutrients.totalDaily) ? this.round(this.nutrients.totalDaily.K.quantity) : "0";
+    return (this.nutrients && this.nutrients.totalDaily && this.nutrients.totalDaily.K) ? this.round(this.nutrients.totalDaily.K.quantity) : "0";
   }
 }
