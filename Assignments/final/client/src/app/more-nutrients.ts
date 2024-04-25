@@ -1,5 +1,6 @@
 export interface MoreNutrients {
     calories: number,
+    healthLabels: [string],
     totalNutrients: {
         ENERC_KCAL: {
             label: string,

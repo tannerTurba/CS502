@@ -57,7 +57,6 @@ export class MyIngredientsComponent implements OnInit {
   }
 
   sendToModal(food: Food): void {
-    console.log(food);
     this.foodService.getNutrients(food.foodId).subscribe((res) => {
       this.foodInfo = food;
       this.nutrients = res

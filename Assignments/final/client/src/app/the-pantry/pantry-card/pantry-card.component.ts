@@ -4,6 +4,7 @@ import { DataService } from '../../data.service';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { OwnerRowComponent } from './owner-row/owner-row.component';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-pantry-card',
@@ -18,6 +19,7 @@ export class PantryCardComponent implements OnInit {
   @Input() householdId!: string;
   @Input() foodId!: string;
   @Output() delete: EventEmitter<Food> = new EventEmitter();
+  @Output() loadModal: EventEmitter<Food> = new EventEmitter();
   food: Food = {
     _id : "",
     foodId : "",
@@ -53,6 +55,7 @@ export class PantryCardComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    initFlowbite();
     this.data.getIngredient(this.uid, this.householdId, this.foodId).subscribe((res) => {
       this.owners = res;
 

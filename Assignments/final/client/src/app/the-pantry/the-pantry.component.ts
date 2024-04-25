@@ -11,6 +11,9 @@ import { AddIngredientModalComponent } from '../add-ingredient-modal/add-ingredi
 import { Household } from '../household';
 import { User } from '../user';
 import { FormsModule } from '@angular/forms';
+import { FoodService } from '../food.service';
+import { MoreNutrients } from '../more-nutrients';
+import { InfoModalComponent } from '../info-modal/info-modal.component';
 
 @Component({
   selector: 'app-the-pantry',
@@ -22,13 +25,16 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     AddIngredientModalComponent,
     RouterModule,
-    FormsModule
+    FormsModule,
+    InfoModalComponent
   ],
   templateUrl: './the-pantry.component.html',
   styleUrl: './the-pantry.component.css'
 })
 export class ThePantryComponent implements OnInit {
   uid: string = this.route.snapshot.paramMap.get('uid')!;
+  foodInfo!: Food;
+  nutrients!: MoreNutrients;
   userInfo: User = {
     _id: 'string',
     username: 'string',
@@ -59,7 +65,8 @@ export class ThePantryComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private data: DataService,
-    private router: Router
+    private router: Router, 
+    private foodService: FoodService
   ) { }
   
   ngOnInit(): void {
@@ -67,11 +74,11 @@ export class ThePantryComponent implements OnInit {
     this.onSubmit();
   }
 
-  deleteIngredient(food: Food): void {
-    // this.data.setQuantity(food.userId, food._id, -1).subscribe();
-    // this.data.getIngredients(this.uid).subscribe((food) => {
-    //   this.foods = food;
-    // });
+  sendToModal(food: Food): void {
+    this.foodService.getNutrients(food.foodId).subscribe((res) => {
+      this.foodInfo = food;
+      this.nutrients = res
+    });
   }
 
   leaveGroup(): void {

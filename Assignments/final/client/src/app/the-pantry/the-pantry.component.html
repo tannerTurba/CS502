@@ -38,8 +38,11 @@
 <div class="overflow-y-auto">
     <div class="grid grid-cols-4 gap-4 justify-items-center mx-8">
         @for (food of foods; track food) {
-            <app-pantry-card [foodId]="food" [householdId]="household._id" (delete)="deleteIngredient($event)" />
+            <app-pantry-card [foodId]="food" [householdId]="household._id"  (loadModal)="sendToModal($event)" />
         }
         <app-add-card />
     </div>
 </div>
+
+<div data-modal-target="modalId" data-modal-toggle="modalId" class="hidden"></div>
+<app-info-modal [food]="foodInfo" [nutrients]="nutrients"/>
