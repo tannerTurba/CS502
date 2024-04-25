@@ -57,10 +57,11 @@ export class MyIngredientsComponent implements OnInit {
   }
 
   sendToModal(food: Food): void {
-    // this.foodService.getNutrients(food.foodId).subscribe((res) => {
-    //   this.foodInfo = food;
-    //   this.nutrients = res
-    // });
+    console.log(food);
+    this.foodService.getNutrients(food.foodId).subscribe((res) => {
+      this.foodInfo = food;
+      this.nutrients = res
+    });
   }
 
   onSubmit(): void {

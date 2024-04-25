@@ -56,8 +56,9 @@ router.get('/foods/:fid', function(req, res, next) {
   const baseUrl = 'https://api.edamam.com/api/food-database/v2';
   const appId = '35b313ca';
   const appKey = '5fe592b84538ad54e7a6d8f45f321e34';
-  const nutritionType = 'cooking';
   const fid = req.params.fid;
+
+  // https://api.edamam.com/api/food-database/v2/nutrients?app_id=35b313ca&app_key=5fe592b84538ad54e7a6d8f45f321e34
 
   fetch(`${baseUrl}/nutrients?app_id=${appId}&app_key=${appKey}`, {
     method: 'POST',

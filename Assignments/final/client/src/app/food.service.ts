@@ -9,10 +9,10 @@ import { MoreNutrients } from './more-nutrients';
 })
 export class FoodService {
   apiVersion: string = 'api/v1';
-  // baseUrl: string = 'https://api.edamam.com/api/food-database/v2';
-  // appId: string = '35b313ca';
-  // appKey: string = '5fe592b84538ad54e7a6d8f45f321e34';
-  // nutritionType: string = 'cooking';
+  baseUrl: string = 'https://api.edamam.com/api/food-database/v2';
+  appId: string = '35b313ca';
+  appKey: string = '5fe592b84538ad54e7a6d8f45f321e34';
+  nutritionType: string = 'cooking';
 
   constructor(private http: HttpClient) { }
 
