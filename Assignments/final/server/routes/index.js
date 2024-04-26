@@ -170,14 +170,37 @@ router.get('/users/:uid', async (req, res, next) => {
 router.get('/users/:uid/ingredients', async (req, res, next) => {
   const uid = req.params.uid;
   const search = req.query.search;
+  const page = Number.parseInt(req.query.page) || 1;
+
+  let totalFoods = (await Food.find( { userId: uid } )).length;
+  const pageLimit = 11;
+  const offset = (page - 1) * pageLimit;
+  let prevPage = (page - 1) > 0 ? page - 1 : -1;
+  let nextPage = (offset + pageLimit) < totalFoods ? page + 1 : -1;
 
   if (search === "") {
-    let ingredients = await Food.find( { userId: uid } );
-    res.status(200).json(ingredients);
+    let ingredients = await Food.find( { userId: uid } )
+      .sort( { label: 1 } )
+      .skip( offset )
+      .limit( pageLimit );
+
+    res.status(200).json({
+      food: ingredients,
+      prev: prevPage,
+      next: nextPage
+    });
   }
   else {
-    let ingredients = await Food.find( { userId: uid, label:{ $regex: search, $options: "i" }} );
-    res.status(200).json(ingredients);
+    let ingredients = await Food.find( { userId: uid, label:{ $regex: search, $options: "i" }} )
+    .sort( { label: 1 } )
+    .skip( offset )
+    .limit( pageLimit );
+    
+    res.status(200).json({
+      food: ingredients,
+      prev: prevPage,
+      next: nextPage
+    });
   }
 });
 
@@ -191,13 +214,7 @@ router.get('/users/:uid/ingredients/:fid', async (req, res, next) => {
 router.put('/users/:uid/ingredients/:fid', async (req, res, next) => {
   const uid = req.params.uid;
   const fid = req.params.fid;
-  // const increment = req.query.increment;
   let quantity = req.body.quantity;
-
-  // if (increment === 'true') {
-  //   let f = await Food.find( { _id: fid, userId: uid } );
-  //   quantity += f.quantity;
-  // }
 
   let food = {};
   if (quantity > 0) {

@@ -34,14 +34,17 @@ export class MyIngredientsComponent implements OnInit {
   foodInfo!: Food;
   nutrients!: MoreNutrients;
   search: string = '';
+  prev: string = '';
+  next: string = '';
+  page: string = '1';
 
   constructor(
     private route: ActivatedRoute,
     private data: DataService, 
     private foodService: FoodService
   ) {
-    this.data.getIngredients(this.uid, '').subscribe((food) => {
-      this.foods = food;
+    this.data.getIngredients(this.uid, this.search, this.page).subscribe((res) => {
+      this.foods = res.food;
     });
   }
 
@@ -51,8 +54,8 @@ export class MyIngredientsComponent implements OnInit {
 
   deleteIngredient(food: Food): void {
     this.data.setQuantity(food.userId, food._id, -1).subscribe();
-    this.data.getIngredients(this.uid, '').subscribe((food) => {
-      this.foods = food;
+    this.data.getIngredients(this.uid, this.search, this.page).subscribe((res) => {
+      this.foods = res.food;
     });
   }
 
@@ -64,13 +67,36 @@ export class MyIngredientsComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.data.getIngredients(this.uid, this.search).subscribe((food) => {
-      this.foods = food;
+    this.data.getIngredients(this.uid, this.search, this.page).subscribe((res) => {
+      this.foods = res.food;
     });
   }
 
   clearFilter(): void {
     this.search = '';
     this.onSubmit();
+  }
+
+  prevPage(): void {
+    console.log(this.prev);
+    if (this.prev != '-1') {
+      this.page = this.prev;
+      this.data.getIngredients(this.uid, this.search, this.page).subscribe((res) => {
+        this.foods = res.food;
+        this.prev = res.prev;
+        this.next = res.next;
+      });
+    }
+  }
+
+  nextPage(): void {
+    if (this.next != '-1') {
+      this.page = this.next;
+      this.data.getIngredients(this.uid, this.search, this.page).subscribe((res) => {
+        this.foods = res.food;
+        this.prev = res.prev;
+        this.next = res.next;
+      });
+    }
   }
 }

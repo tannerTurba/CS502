@@ -119,27 +119,24 @@ export class ThePantryComponent implements OnInit {
   }
 
   prevPage(): void {
-    // let page = 'page=';
-    // let index = this.prev.indexOf(page) + page.length;
-    // let pageNum = this.prev.slice(index, this.prev.length);
-    if (this.prev !== '-1') {
+    if (this.prev != '-1') {
       this.page = this.prev;
       this.data.getSharedFood(this.uid, this.userInfo.householdId, this.search, this.page).subscribe((res) => {
         this.foods = res.foodIds;
         this.prev = res.prev;
         this.next = res.next;
-      })
+      });
     }
   }
 
   nextPage(): void {
-    if (this.next !== '-1') {
+    if (this.next != '-1') {
       this.page = this.next;
       this.data.getSharedFood(this.uid, this.userInfo.householdId, this.search, this.page).subscribe((res) => {
         this.foods = res.foodIds;
         this.prev = res.prev;
         this.next = res.next;
-      })
+      });
     }
   }
 }

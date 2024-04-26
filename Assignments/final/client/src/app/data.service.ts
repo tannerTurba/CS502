@@ -7,6 +7,7 @@ import { Message } from './message';
 import { Household } from './household';
 import { headers } from 'next/headers';
 import { PantrySearchResult } from './pantry-search-result';
+import { IngredientSearchResult } from './ingredient-search-result';
 
 @Injectable({
   providedIn: 'root'
@@ -51,9 +52,9 @@ export class DataService {
     return this.http.get<User>(`${this.apiVersion}/users/${uid}`);
   }
 
-  getIngredients(uid: string, search: string): Observable<[Food]> {
-    return this.http.get<[Food]>(`${this.apiVersion}/users/${uid}/ingredients`, {
-      params: new HttpParams().set('search', search)
+  getIngredients(uid: string, search: string, page: string): Observable<IngredientSearchResult> {
+    return this.http.get<IngredientSearchResult>(`${this.apiVersion}/users/${uid}/ingredients`, {
+      params: new HttpParams().set('search', search).set('page', page)
     });
   }
 
