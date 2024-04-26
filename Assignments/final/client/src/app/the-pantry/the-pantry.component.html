@@ -43,6 +43,17 @@
         <app-add-card />
     </div>
 </div>
+<div class="grid justify-items-center m-4">
+    <div class="flex">
+        <button (click)="prevPage()" class="flex items-center justify-center px-4 h-10 text-base font-medium text-stone-500 bg-white border border-stone-300 rounded-lg hover:bg-stone-100 hover:text-stone-700 dark:bg-stone-800 dark:border-stone-700 dark:text-stone-400 dark:hover:bg-stone-700 dark:hover:text-white">
+          Previous
+        </button>
+      
+        <button (click)="nextPage()" class="flex items-center justify-center px-4 h-10 ms-3 text-base font-medium text-stone-500 bg-white border border-stone-300 rounded-lg hover:bg-stone-100 hover:text-stone-700 dark:bg-stone-800 dark:border-stone-700 dark:text-stone-400 dark:hover:bg-stone-700 dark:hover:text-white">
+          Next
+        </button>
+    </div>
+</div>
 
 <div data-modal-target="modalId" data-modal-toggle="modalId" class="hidden"></div>
 <app-info-modal [food]="foodInfo" [nutrients]="nutrients"/>

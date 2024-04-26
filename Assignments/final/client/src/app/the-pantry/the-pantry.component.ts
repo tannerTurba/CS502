@@ -59,8 +59,11 @@ export class ThePantryComponent implements OnInit {
     }],
     foodIds: ['string'],
   };
-  foods!: [string];
+  foods!: string[];
   search: string = '';
+  prev: string = '';
+  next: string = '';
+  page: string = '1';
 
   constructor(
     private route: ActivatedRoute,
@@ -100,8 +103,10 @@ export class ThePantryComponent implements OnInit {
         this.userInfo = userInfo;
         this.data.getHousehold(this.uid, userInfo.householdId).subscribe((household) => {
           this.household = household;
-          this.data.getSharedFood(this.uid, userInfo.householdId, this.search).subscribe((foodIds) => {
-            this.foods = foodIds;
+          this.data.getSharedFood(this.uid, userInfo.householdId, this.search, this.page).subscribe((res) => {
+            this.foods = res.foodIds;
+            this.prev = res.prev;
+            this.next = res.next;
           });
         });
       }
@@ -111,5 +116,30 @@ export class ThePantryComponent implements OnInit {
   clearFilter(): void {
     this.search = '';
     this.onSubmit();
+  }
+
+  prevPage(): void {
+    // let page = 'page=';
+    // let index = this.prev.indexOf(page) + page.length;
+    // let pageNum = this.prev.slice(index, this.prev.length);
+    if (this.prev !== '-1') {
+      this.page = this.prev;
+      this.data.getSharedFood(this.uid, this.userInfo.householdId, this.search, this.page).subscribe((res) => {
+        this.foods = res.foodIds;
+        this.prev = res.prev;
+        this.next = res.next;
+      })
+    }
+  }
+
+  nextPage(): void {
+    if (this.next !== '-1') {
+      this.page = this.next;
+      this.data.getSharedFood(this.uid, this.userInfo.householdId, this.search, this.page).subscribe((res) => {
+        this.foods = res.foodIds;
+        this.prev = res.prev;
+        this.next = res.next;
+      })
+    }
   }
 }

@@ -6,6 +6,7 @@ import { Food } from './food';
 import { Message } from './message';
 import { Household } from './household';
 import { headers } from 'next/headers';
+import { PantrySearchResult } from './pantry-search-result';
 
 @Injectable({
   providedIn: 'root'
@@ -107,10 +108,14 @@ export class DataService {
     return this.http.get<Household>(`${this.apiVersion}/users/${uid}/households/${hid}`);
   }
 
-  getSharedFood(uid: string, hid: string, search: string): Observable<[string]> {
-    return this.http.get<[string]>(`${this.apiVersion}/users/${uid}/households/${hid}/ingredients`, {
-      params: new HttpParams().set('search', search)
+  getSharedFood(uid: string, hid: string, search: string, page: string): Observable<PantrySearchResult> {
+    return this.http.get<PantrySearchResult>(`${this.apiVersion}/users/${uid}/households/${hid}/ingredients`, {
+      params: new HttpParams().set('search', search).set('page', page)
     });
+  }
+
+  getPantryPage(url: string): Observable<PantrySearchResult> {
+    return this.http.get<PantrySearchResult>(`${this.apiVersion}${url}`);
   }
 
   createMessage(uid: string, contactId: string, foodId: string, quantity: number): Observable<Message> {
