@@ -23,7 +23,7 @@ router.all('*/users/:uid*', function(req, res, next) {
   }
 });
 
-/* Make call to Edamam food API and return results */
+/* Make call to Edamam food search API and return results */
 router.get('/foods', function(req, res, next) {
   const baseUrl = 'https://api.edamam.com/api/food-database/v2';
   const appId = '35b313ca';
@@ -46,14 +46,12 @@ router.get('/foods', function(req, res, next) {
     });
 });
 
-/* Make call to Edamam food API and return results */
+/* Make call to Edamam food stats API and return results */
 router.post('/foods/:fid', function(req, res, next) {
   const baseUrl = 'https://api.edamam.com/api/food-database/v2';
   const appId = '35b313ca';
   const appKey = '5fe592b84538ad54e7a6d8f45f321e34';
   const fid = req.params.fid;
-
-  // https://api.edamam.com/api/food-database/v2/nutrients?app_id=35b313ca&app_key=5fe592b84538ad54e7a6d8f45f321e34
 
   fetch(`${baseUrl}/nutrients?app_id=${appId}&app_key=${appKey}`, {
     method: 'POST',
@@ -86,12 +84,14 @@ router.post('/foods/:fid', function(req, res, next) {
     });
 });
 
+/* logout: Logout user */
 router.post('/logout', function(req, res, next) {
   req.session.destroy(() => {
     res.json( 'ok' )
   });
 });
 
+/* login: Login user */
 router.post('/login', (req, res, next) => {
  req.session.regenerate( async function( err ) { 
     let user = await User.findOne( { username: req.body.username } );
@@ -106,6 +106,7 @@ router.post('/login', (req, res, next) => {
   });
 });
 
+/* signup: Create user */
 router.post('/signup', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -130,12 +131,13 @@ router.post('/signup', (req, res, next) => {
         ownerId: u._id,
         contacts: []
       });
+      u.password = '[REDACTED]';
       res.status(200).json(u);
     }
   });
 });
 
-/* Modify account */
+/* modifyAccount: Modify account */
 router.post('/users/:uid', async (req, res, next) => {
   const uid = req.params.uid;
   const firstName = req.body.firstName;
@@ -153,20 +155,25 @@ router.post('/users/:uid', async (req, res, next) => {
   }
 
   let user = await User.findById(uid);
+  user.password = "[REDACTED]";
   res.status(200).json(user);
 })
 
+/* getUserInfo: Get user details */
 router.get('/users/:uid', async (req, res, next) => {
   const uid = req.params.uid;
   let user = await User.findById(uid);
+  user.password = "[REDACTED]";
   res.status(200).json(user);
 })
 
+/* getUserIngredients: Get user's set of ingredients */
 router.get('/users/:uid/ingredients', async (req, res, next) => {
   const uid = req.params.uid;
   const search = req.query.search;
   const page = Number.parseInt(req.query.page) || 1;
 
+  // Calculate pagination details
   let totalFoods = (await Food.find( { userId: uid } )).length;
   const pageLimit = 11;
   const offset = (page - 1) * pageLimit;
@@ -199,6 +206,7 @@ router.get('/users/:uid/ingredients', async (req, res, next) => {
   }
 });
 
+/* getUserIngredient: get the details for a single ingredient */
 router.get('/users/:uid/ingredients/:fid', async (req, res, next) => {
   const uid = req.params.uid;
   const fid = req.params.fid;
@@ -206,6 +214,7 @@ router.get('/users/:uid/ingredients/:fid', async (req, res, next) => {
   res.status(200).json(ingredient);
 });
 
+/* setQuantity: set the quantity of a user's ingredient */
 router.put('/users/:uid/ingredients/:fid', async (req, res, next) => {
   const uid = req.params.uid;
   const fid = req.params.fid;
@@ -222,11 +231,14 @@ router.put('/users/:uid/ingredients/:fid', async (req, res, next) => {
   res.status(200).json(food);
 });
 
+/* addUserIngredient: add an ingredient to the user's set of ingredients */
 router.post('/users/:uid/ingredients', async (req, res, next) => {
   const uid = req.params.uid;
   const food = req.body;
   let nutrients = await Nutrients.create( food.nutrients );
   let servingSizes = [];
+
+  // if available, create serving size documents to attact to the new ingredient
   if (food.servingSizes !== undefined) {
     for (let k = 0; k < food.servingSizes.length; k++) {
       let servingSize = food.servingSizes[k];
@@ -234,6 +246,7 @@ router.post('/users/:uid/ingredients', async (req, res, next) => {
     }
   }
 
+  // Create the ingredient document
   let f = await Food.create({
     userId: uid,
     foodId: food.foodId,
@@ -250,13 +263,17 @@ router.post('/users/:uid/ingredients', async (req, res, next) => {
     quantity: food.quantity
   });
 
+  // Add the ingredient's foodId to the household set
   let user = await User.findById(uid);
   let household = await Household.findById(user.householdId);
   household.foodIds.push(food.foodId);
   await Household.updateOne( {foodIds: household.foodIds} );
+
+  // Return the ingredient in the response
   res.status(200).json(f);
 });
 
+/* getMessageDirectory: get all the users that the user has contacted before */
 router.get('/users/:uid/messages', async (req, res, next) => {
   const uid = req.params.uid;
   let directory = await Directory.findOne({ ownerId: uid });
@@ -269,8 +286,8 @@ router.get('/users/:uid/messages', async (req, res, next) => {
   }
 });
 
-// Change to users/uid/contacts/cid/messages/mid
-router.put('/users/:uid/messages/:mid', async (req, res, next) => {
+// updateMessage: update a message between and user and a contact
+router.put('/users/:uid/contacts/:cid/messages/:mid', async (req, res, next) => {
   const mid = req.params.mid;
   const status = req.body.status;
   const quantity = req.body.quantity;
@@ -280,10 +297,10 @@ router.put('/users/:uid/messages/:mid', async (req, res, next) => {
   res.status(200).json(message);
 });
 
-// Change to users/uid/contacts/cid/messages
-router.get('/users/:uid/messages/:contactId', async (req, res, next) => {
+// getUserMessages: get all messages between a user and a contact
+router.get('/users/:uid/contacts/:cid/messages', async (req, res, next) => {
   const uid = req.params.uid;
-  const contactId = req.params.contactId;
+  const contactId = req.params.cid;
 
   let messages = await Message.find({
     $or: [
@@ -295,6 +312,7 @@ router.get('/users/:uid/messages/:contactId', async (req, res, next) => {
   res.status(200).json(messages);
 });
 
+/* createMessage: add a message to the user's set of messages with a contact */
 router.post('/users/:uid/contacts/:cid/messages', async (req, res, next) => {
   const uid = req.params.uid;
   const cid = req.params.cid;
@@ -303,27 +321,30 @@ router.post('/users/:uid/contacts/:cid/messages', async (req, res, next) => {
   const user = await User.findById(uid);
   const contact = await User.findById(cid);
 
+  // if needed, update the directory for user and contact
   let dir = await Directory.find( {ownerId: uid, 'contacts._id': cid} );
   if (dir.length === 0) {
     await Directory.updateOne( {ownerId: uid}, {$push: {contacts: contact}} );
   }
-
   dir = await Directory.find( {ownerId: cid, 'contacts._id': uid} );
   if (dir.length === 0) {
     await Directory.updateOne( {ownerId: cid}, {$push: {contacts: user}} );
   }
 
+  // create the message
   let food = await Food.findOne( {foodId: foodId} );
   let message = await Message.create( {to: cid, from: uid, food: food, quantity: quantity, status: 'active', dateSent: Date.now()} );
   res.status(200).json(message);
 });
 
+/* transferIngredient: Transfer the quantity of an ingredient from one user to another */
 router.post('/users/:uid/ingredients/:fid', async (req, res, next) => {
   const uid = req.params.uid;
   const fid = req.params.fid;
   const recipient = req.body.transferTo;
   const quantity = req.body.quantity;
 
+  // get the current quantity of the ingredients for both users
   let userFood = await Food.findOne( {foodId: fid, userId: uid} );
   let userQuantity = userFood.quantity;
   let recipientFood = await Food.findOne( {foodId: fid, userId: recipient} );
@@ -332,9 +353,11 @@ router.post('/users/:uid/ingredients/:fid', async (req, res, next) => {
     recipientQuantity = recipientFood.quantity;
   }
 
+  // tranfer quantity via basic math
   userQuantity -= quantity;
   recipientQuantity += quantity;
 
+  // update recipient's ingredient
   if (recipientQuantity === quantity) {
     await Food.create( { 
       userId: recipient,
@@ -357,6 +380,7 @@ router.post('/users/:uid/ingredients/:fid', async (req, res, next) => {
     await Food.findOne({ foodId: fid, userId: recipient });
   }
 
+  // update user's ingredient
   let food = {};
   if (userQuantity > 0) {
     await Food.updateOne( { foodId: fid, userId: uid }, { quantity : userQuantity } );
@@ -368,22 +392,24 @@ router.post('/users/:uid/ingredients/:fid', async (req, res, next) => {
   res.status(200).json(food);
 });
 
+/* getHousehold: get household information */
 router.get('/users/:uid/households/:hid', async (req, res, next ) => {
   const hid = req.params.hid;
   let household = await Household.findById(hid);
   res.status(200).json(household);
 });
 
-/* Get shared food */
+/* getSharedFood: get all ingredients in the household */
 router.get('/users/:uid/households/:hid/ingredients', async (req, res, next ) => {
   const uid = req.params.uid;
   const hid = req.params.hid;
   const search = req.query.search;
 
+  // aggregate to get all ingredient information for a household
   const result = await Household.aggregate([
     // Match stage to filter household by its _id
     { $match: { _id: mongoose.Types.ObjectId(hid) } },
-    
+    // Make cross references
     {
       $lookup: {
         from: 'foods',
@@ -416,11 +442,12 @@ router.get('/users/:uid/households/:hid/ingredients', async (req, res, next ) =>
     {
       $project: {
         _id: 0,
-        foodIds: 1 // Project the foodIds array
+        foodIds: 1 // Project the foodIds array to return
       }
     }
   ]);
 
+  // Get number of ingredients, otherwise return 
   let totalFoods = 0;
   if (result.length > 0) {
     totalFoods = result[0].foodIds.length;
@@ -430,100 +457,58 @@ router.get('/users/:uid/households/:hid/ingredients', async (req, res, next ) =>
     return;
   }
 
+  // Pagination calculations
   const page = Number.parseInt(req.query.page) || 1;
-  const pageLimit = 11;
+  const pageLimit = 2;
   const offset = (page - 1) * pageLimit;
   let prevPage = (page - 1) > 0 ? page - 1 : -1;
   let nextPage = (offset + pageLimit) < totalFoods ? page + 1 : -1;
 
-  Household.aggregate([
-    // Match stage to filter household by its _id
-    { $match: { _id: mongoose.Types.ObjectId(hid) } },
-    {
-      $lookup: {
-        from: 'foods',
-        let: { foodIds: '$foodIds' },
-        pipeline: [
-          {
-            $match: {
-              $expr: {
-                $and: [
-                  { $in: ['$foodId', '$$foodIds'] },
-                  { $regexMatch: { input: "$label", regex: new RegExp(search, "i") } }
-                ]
-              }
-            }
-          },
-          { $project: { _id: 0, foodId: 1 } }
-        ],
-        as: 'foods'
-      }
-    },
-    {
-      $unwind: '$foods' // Unwind the array of foods
-    },
-    {
-      $group: {
-        _id: null,
-        foodIds: { $addToSet: '$foods.foodId' } // Accumulate distinct foodIds into an array
-      }
-    },
-    {
-      $project: {
-        _id: 0,
-        foodIds: 1 // Project the foodIds array
-      }
-    }
-  ])
-  .exec((err, result) => {
-    if (err) {
-      console.error('Error:', err);
-      // Handle error
-    } else {
-      if (result.length > 0) {
-        const sortAlphaNum = (a, b) => a.localeCompare(b, 'en', { numeric: true });
-        let foods = result[0].foodIds;
-        foods.sort(sortAlphaNum);
-        if (foods.length >= offset) {
-          foods = foods.slice(offset, offset + pageLimit);
-        }
-        else {
-          foods = foods.slice(0, pageLimit);
-        }
+  // Alphanumerically sort ingredients and perform pagination to get single page of ingredients
+  const sortAlphaNum = (a, b) => a.localeCompare(b, 'en', { numeric: true });
+  let foods = result[0].foodIds;
+  foods.sort(sortAlphaNum);
+  if (foods.length >= offset) {
+    foods = foods.slice(offset, offset + pageLimit);
+  }
+  else {
+    foods = foods.slice(0, pageLimit);
+  }
 
-        res.status(200).json({
-          foodIds: foods,
-          prev: `${prevPage}`,
-          next: `${nextPage}`
-        });
-      }
-      else {
-        res.status(200).json([]);
-      }
-    }
+  // Respond with ingredients and pagination links
+  res.status(200).json({
+    foodIds: foods,
+    prev: `${prevPage}`,
+    next: `${nextPage}`
   });
 });
 
-/* Get Ingredient */
+/* getSharedIngredient: get the user information for all instances of a single ingredient in a household */
 router.get('/users/:uid/households/:hid/ingredients/:fid', async (req, res, next) => {
   const hid = req.params.hid;
   const fid = req.params.fid;
 
+  // get all member Ids
   const members = (await Household.findById(hid)).members;
   let mids = [hid];
   for (let i = 0; i < members.length; i++) {
     mids.push(members[i]._id);
   }
 
-  //food with name attatched to each
+  // get ingredients that are by someone in the household
   let foods = await Food.find( { foodId: fid, userId: {$in: mids} } );
 
+  // attach owner's name to ingredient
   let results = [];
   for (let i = 0; i < foods.length; i++) {
     let user = await User.findById(foods[i].userId);
+    let owner = '';
+    if (owner) {
+      owner = `${user.firstName} ${user.lastName}`;
+    }
     let f = {
       food: foods[i],
-      owner: `${user.firstName} ${user.lastName}`
+      owner: owner
     }
     results.push(f);
   }
@@ -531,12 +516,14 @@ router.get('/users/:uid/households/:hid/ingredients/:fid', async (req, res, next
   res.status(200).json(results);
 });
 
+/* setSharedIngredient: adds an ingredient to the household group */
 router.post('/users/:uid/households/:hid/ingredients/:fid', async (req, res, next) => {
   const hid = req.params.hid;
   const fid = req.params.fid;
   const food = req.body.food;
   let storedFood = await Food.findOne( {foodId: fid, userId: hid} );
 
+  // update or set food in household account
   let ret;
   if (storedFood !== null) {
     ret = await Food.updateOne( {foodId: fid, userId: hid}, {quantity: food.quantity} );
@@ -567,18 +554,12 @@ router.post('/users/:uid/households/:hid/ingredients/:fid', async (req, res, nex
   res.status(200).json(ret);
 });
 
-/* Add a user to the group */
+/* addMemberToHousehold: Add a user to the group */
 router.post('/users/:uid/households/:hid/members', async (req, res, next) => {
   const uid = req.params.uid;
   const hid = req.params.hid;
   const username = req.body.memberUsername;
   let member = await User.findOne( {username: username} );
-
-  // add the user to the contact's directory
-  // let sender = await User.findById(uid);
-  // let directory = await Directory.findOne( {ownerId: contact._id} );
-  // directory.contacts.push(sender);
-  // await Directory.updateOne( {ownerId: contact._id}, {contacts: directory.contacts} );
 
   if (member === null) {
     res.status(200).json(`'${username}' is not a valid username`);
@@ -599,7 +580,7 @@ router.post('/users/:uid/households/:hid/members', async (req, res, next) => {
   }
 });
 
-/* Remove a member from the group: Remove a member(UserModel) from a household group */
+/* removeMemberFromHousehold: Remove a member from the group: Remove a member(UserModel) from a household group */
 router.post('/users/:uid/households/:hid/members/:mid', async (req, res, next) => {
   const uid = req.params.uid;
   const hid = req.params.hid;
@@ -623,7 +604,7 @@ router.post('/users/:uid/households/:hid/members/:mid', async (req, res, next) =
   res.status(200).json(household);
 });
 
-/* Make another user and admin: Change admin(uid) to "member" role and change member(mid) to "admin" role */
+/* reassignAdmin: Make another user and admin: Change admin(uid) to "member" role and change member(mid) to "admin" role */
 router.put('/users/:uid/households/:hid/members/:mid', async (req, res, next) => {
   const uid = req.params.uid;
   const hid = req.params.hid;
@@ -638,7 +619,7 @@ router.put('/users/:uid/households/:hid/members/:mid', async (req, res, next) =>
   res.status(200).json(household);
 });
 
-/* Create a group: Create a household object containing the owner's account in the members field. Set User.role to admin and User.status to JOINED */
+/* createHousehold: Create a household object containing the owner's account in the members field. Set User.role to admin and User.status to JOINED */
 router.post('/users/:uid/households', async (req, res, next) => {
   const uid = req.params.uid;
   const user = await User.findById(uid);

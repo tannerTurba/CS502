@@ -43,7 +43,7 @@ export class MyIngredientsComponent implements OnInit {
     private data: DataService, 
     private foodService: FoodService
   ) {
-    this.data.getIngredients(this.uid, this.search, this.page).subscribe((res) => {
+    this.data.getUserIngredients(this.uid, this.search, this.page).subscribe((res) => {
       this.foods = res.food;
     });
   }
@@ -54,7 +54,7 @@ export class MyIngredientsComponent implements OnInit {
 
   deleteIngredient(food: Food): void {
     this.data.setQuantity(food.userId, food._id, -1).subscribe();
-    this.data.getIngredients(this.uid, this.search, this.page).subscribe((res) => {
+    this.data.getUserIngredients(this.uid, this.search, this.page).subscribe((res) => {
       this.foods = res.food;
     });
   }
@@ -67,7 +67,7 @@ export class MyIngredientsComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.data.getIngredients(this.uid, this.search, this.page).subscribe((res) => {
+    this.data.getUserIngredients(this.uid, this.search, this.page).subscribe((res) => {
       this.foods = res.food;
     });
   }
@@ -81,7 +81,7 @@ export class MyIngredientsComponent implements OnInit {
     console.log(this.prev);
     if (this.prev != '-1') {
       this.page = this.prev;
-      this.data.getIngredients(this.uid, this.search, this.page).subscribe((res) => {
+      this.data.getUserIngredients(this.uid, this.search, this.page).subscribe((res) => {
         this.foods = res.food;
         this.prev = res.prev;
         this.next = res.next;
@@ -92,7 +92,7 @@ export class MyIngredientsComponent implements OnInit {
   nextPage(): void {
     if (this.next != '-1') {
       this.page = this.next;
-      this.data.getIngredients(this.uid, this.search, this.page).subscribe((res) => {
+      this.data.getUserIngredients(this.uid, this.search, this.page).subscribe((res) => {
         this.foods = res.food;
         this.prev = res.prev;
         this.next = res.next;

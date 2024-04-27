@@ -57,7 +57,7 @@ export class PantryCardComponent implements OnInit {
   
   ngOnInit(): void {
     initFlowbite();
-    this.data.getIngredient(this.uid, this.householdId, this.foodId).subscribe((res) => {
+    this.data.getSharedIngredient(this.uid, this.householdId, this.foodId).subscribe((res) => {
       this.owners = res;
 
       let sharedFood = undefined;

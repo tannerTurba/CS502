@@ -52,7 +52,7 @@ export class RequestBubbleComponent implements OnInit {
       this.data.transferIngredient(foodId, this.uid, contactId, quantity).subscribe((res) => {
         console.log(res);
       });
-      this.data.updateMessage(this.uid, this.message._id, 'approved', quantity).subscribe((res) => {
+      this.data.updateMessage(this.uid, contactId, this.message._id, 'approved', quantity).subscribe((res) => {
         this.message = res;
         this.refresh.emit('refresh');
       });
@@ -60,7 +60,7 @@ export class RequestBubbleComponent implements OnInit {
   }
 
   deny(): void {
-    this.data.updateMessage(this.uid, this.message._id, 'denied', this.message.quantity).subscribe((res) => {
+    this.data.updateMessage(this.uid, this.message.from, this.message._id, 'denied', this.message.quantity).subscribe((res) => {
       this.message = res;
     });
   }
