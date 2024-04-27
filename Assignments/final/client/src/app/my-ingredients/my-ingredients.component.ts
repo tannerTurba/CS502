@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { IngredientCardComponent } from './ingredient-card/ingredient-card.component';
-import { AddCardComponent } from '../add-card/add-card.component';
 import { initFlowbite } from 'flowbite';
 import { ActivatedRoute } from '@angular/router';
 import { Food } from '../food';
@@ -19,7 +18,6 @@ import { FormsModule } from '@angular/forms';
   imports: [
     NavbarComponent,
     IngredientCardComponent,
-    AddCardComponent, 
     CommonModule,
     AddIngredientModalComponent,
     InfoModalComponent, 

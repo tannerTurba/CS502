@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { PantryCardComponent } from './pantry-card/pantry-card.component';
-import { AddCardComponent } from '../add-card/add-card.component';
 import { initFlowbite } from 'flowbite';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -21,7 +20,6 @@ import { InfoModalComponent } from '../info-modal/info-modal.component';
   imports: [
     NavbarComponent,
     PantryCardComponent,
-    AddCardComponent,
     CommonModule,
     AddIngredientModalComponent,
     RouterModule,

@@ -23,7 +23,6 @@
     @for (food of foods; track food) {
         <app-ingredient-card [food]="food" (delete)="deleteIngredient($event)" (loadModal)="sendToModal($event)" />
     }
-    <app-add-card />
 </div>
 <div class="grid justify-items-center m-4">
     <div class="flex">

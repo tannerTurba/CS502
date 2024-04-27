@@ -10,6 +10,11 @@ var Household = require('./householdModel');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
+// router.all('*', function(req, res, next) {
+//    console.log(req.url);
+//    next();
+//  });
+
 /* Verifies a session user matches their request data */
 router.all('*/users/:uid*', function(req, res, next) {
   var user = req.session.user;
@@ -132,6 +137,7 @@ router.post('/signup', (req, res, next) => {
         contacts: []
       });
       u.password = '[REDACTED]';
+      req.session.user = u;
       res.status(200).json(u);
     }
   });
@@ -174,11 +180,21 @@ router.get('/users/:uid/ingredients', async (req, res, next) => {
   const page = Number.parseInt(req.query.page) || 1;
 
   // Calculate pagination details
-  let totalFoods = (await Food.find( { userId: uid } )).length;
+  let foods = await Food.find( { userId: uid } );
+  let totalFoods = foods.length;
   const pageLimit = 11;
   const offset = (page - 1) * pageLimit;
   let prevPage = (page - 1) > 0 ? page - 1 : -1;
   let nextPage = (offset + pageLimit) < totalFoods ? page + 1 : -1;
+
+  if (totalFoods === 0) {
+    res.status(200).json({
+      food: [],
+      prev: prevPage,
+      next: nextPage
+    })
+    return;
+  }
 
   if (search === "") {
     let ingredients = await Food.find( { userId: uid } )
@@ -266,8 +282,10 @@ router.post('/users/:uid/ingredients', async (req, res, next) => {
   // Add the ingredient's foodId to the household set
   let user = await User.findById(uid);
   let household = await Household.findById(user.householdId);
-  household.foodIds.push(food.foodId);
-  await Household.updateOne( {foodIds: household.foodIds} );
+  if (household) {
+    household.foodIds.push(food.foodId);
+    await Household.updateOne( {_id: household._id}, {foodIds: household.foodIds} );
+  }
 
   // Return the ingredient in the response
   res.status(200).json(f);
@@ -459,7 +477,7 @@ router.get('/users/:uid/households/:hid/ingredients', async (req, res, next ) =>
 
   // Pagination calculations
   const page = Number.parseInt(req.query.page) || 1;
-  const pageLimit = 2;
+  const pageLimit = 11;
   const offset = (page - 1) * pageLimit;
   let prevPage = (page - 1) > 0 ? page - 1 : -1;
   let nextPage = (offset + pageLimit) < totalFoods ? page + 1 : -1;
@@ -503,7 +521,7 @@ router.get('/users/:uid/households/:hid/ingredients/:fid', async (req, res, next
   for (let i = 0; i < foods.length; i++) {
     let user = await User.findById(foods[i].userId);
     let owner = '';
-    if (owner) {
+    if (user) {
       owner = `${user.firstName} ${user.lastName}`;
     }
     let f = {
@@ -570,9 +588,18 @@ router.post('/users/:uid/households/:hid/members', async (req, res, next) => {
     await User.updateOne( {_id: member._id}, {householdId: hid, role: "member", status: 'JOINED'} );
     member = await User.findOne( {username: username} );
 
+    let foods = await Food.find( { userId: member._id } );
     let household = await Household.findById(hid);
+
+    // add new foodIds to the household collection
+    for (let i = 0; i < foods.length; i++) {
+      let fid = foods[i].foodId;
+      if (!household.foodIds.includes(fid)) {
+        household.foodIds.push(fid);
+      }
+    }
     household.members.push(member);
-    await Household.updateOne( {_id: hid}, {members: household.members} );
+    await Household.updateOne( {_id: hid}, {members: household.members, foodIds: household.foodIds } );
     res.status(200).json(household);
   }
   else {

@@ -39,9 +39,11 @@ export class MessagePageComponent implements OnInit {
           this.selectedContact = res[0]._id;
         }
 
-        this.data.getUserMessages(this.uid, this.selectedContact).subscribe((res) => {
-          this.messages = res;
-        });
+        if (this.selectedContact !== '') {
+          this.data.getUserMessages(this.uid, this.selectedContact).subscribe((res) => {
+            this.messages = res;
+          });
+        }
       }
     });
   }
