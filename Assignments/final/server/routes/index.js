@@ -10,23 +10,18 @@ var Household = require('./householdModel');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
-// router.all('*', function(req, res, next) {
-//   console.log(req.url);
-//   next();
-// });
-
 /* Verifies a session user matches their request data */
-// router.all('*/users/:uid*', function(req, res, next) {
-//   var user = req.session.user;
-//   if (user._id == req.params.uid) {
-//     next();
-//   }
-//   else {
-//     req.session.regenerate( function(err) { // create a new session id
-//       req.session.user = null;
-//     });
-//   }
-// });
+router.all('*/users/:uid*', function(req, res, next) {
+  var user = req.session.user;
+  if (user._id == req.params.uid) {
+    next();
+  }
+  else {
+    req.session.regenerate( function(err) { // create a new session id
+      req.session.user = null;
+    });
+  }
+});
 
 /* Make call to Edamam food API and return results */
 router.get('/foods', function(req, res, next) {
@@ -520,8 +515,20 @@ router.get('/users/:uid/households/:hid/ingredients/:fid', async (req, res, next
     mids.push(members[i]._id);
   }
 
+  //food with name attatched to each
   let foods = await Food.find( { foodId: fid, userId: {$in: mids} } );
-  res.status(200).json(foods);
+
+  let results = [];
+  for (let i = 0; i < foods.length; i++) {
+    let user = await User.findById(foods[i].userId);
+    let f = {
+      food: foods[i],
+      owner: `${user.firstName} ${user.lastName}`
+    }
+    results.push(f);
+  }
+
+  res.status(200).json(results);
 });
 
 router.post('/users/:uid/households/:hid/ingredients/:fid', async (req, res, next) => {

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { OwnerRowComponent } from './owner-row/owner-row.component';
 import { initFlowbite } from 'flowbite';
+import { PantryCardOwner } from '../../pantry-card-owner';
 
 @Component({
   selector: 'app-pantry-card',
@@ -14,7 +15,7 @@ import { initFlowbite } from 'flowbite';
   styleUrl: './pantry-card.component.css'
 })
 export class PantryCardComponent implements OnInit {
-  owners!: [Food];
+  owners!: [PantryCardOwner];
   uid: string = this.route.snapshot.paramMap.get('uid')!;
   @Input() householdId!: string;
   @Input() foodId!: string;
@@ -61,7 +62,7 @@ export class PantryCardComponent implements OnInit {
 
       let sharedFood = undefined;
       for (let i = 0; i < res.length; i++) {
-        let food = res[i];
+        let food = res[i].food;
         if (food.userId === this.householdId) {
           sharedFood = food;
         }
@@ -71,7 +72,7 @@ export class PantryCardComponent implements OnInit {
         this.food = sharedFood;
       }
       else if (res.length > 0) {
-        this.food = structuredClone(res[0]);
+        this.food = structuredClone(res[0].food);
         this.food.quantity = 0;
       }
     });

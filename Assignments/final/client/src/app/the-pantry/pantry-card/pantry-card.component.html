@@ -14,8 +14,8 @@
     </div>
     <div class="h-[100px] overflow-y-auto">
         @for (owner of owners; track owner) {
-            @if (owner.userId !== householdId) {
-                <app-owner-row [food]="owner" />
+            @if (owner.food.userId !== householdId) {
+                <app-owner-row [food]="owner.food" [owner]="owner.owner" />
             }
         }
     </div>

@@ -13,19 +13,20 @@ import { User } from '../../../user';
 })
 export class OwnerRowComponent {
   @Input() food!: Food;
+  @Input() owner!: String;
   uid: string = this.route.snapshot.paramMap.get('uid')!;
   requestQuantity: number = -1;
   buttonText: string = 'Request';
-  user: User = {
-    _id: "",
-    username: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    role: "",
-    status: "",
-    householdId: "",
-  };
+  // user: User = {
+  //   _id: "",
+  //   username: "",
+  //   password: "",
+  //   firstName: "",
+  //   lastName: "",
+  //   role: "",
+  //   status: "",
+  //   householdId: "",
+  // };
 
   constructor(
     private data: DataService,
@@ -35,13 +36,13 @@ export class OwnerRowComponent {
   }
   
   ngOnInit(): void {
-    this.data.getUserInfo(this.food.userId).subscribe((userInfo) => {
-      this.user = userInfo;
-    });
+    // this.data.getUserInfo(this.food.userId).subscribe((userInfo) => {
+    //   this.user = userInfo;
+    // });
   }
 
   makeRequest(): void {
-    let contactId = this.user._id;
+    let contactId = this.food.userId;
     let foodId = this.food.foodId;
     this.data.createMessage(this.uid, contactId, foodId, this.requestQuantity).subscribe((x) => {
       this.buttonText = 'Sent!';
