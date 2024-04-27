@@ -10,23 +10,18 @@ var Household = require('./householdModel');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
-// router.all('*', function(req, res, next) {
-//   console.log(req.url);
-//   next();
-// });
-
 /* Verifies a session user matches their request data */
-// router.all('*/users/:uid*', function(req, res, next) {
-//   var user = req.session.user;
-//   if (user._id == req.params.uid) {
-//     next();
-//   }
-//   else {
-//     req.session.regenerate( function(err) { // create a new session id
-//       req.session.user = null;
-//     });
-//   }
-// });
+router.all('*/users/:uid*', function(req, res, next) {
+  var user = req.session.user;
+  if (user._id == req.params.uid) {
+    next();
+  }
+  else {
+    req.session.regenerate( function(err) { // create a new session id
+      req.session.user = null;
+    });
+  }
+});
 
 /* Make call to Edamam food API and return results */
 router.get('/foods', function(req, res, next) {
@@ -170,14 +165,37 @@ router.get('/users/:uid', async (req, res, next) => {
 router.get('/users/:uid/ingredients', async (req, res, next) => {
   const uid = req.params.uid;
   const search = req.query.search;
+  const page = Number.parseInt(req.query.page) || 1;
+
+  let totalFoods = (await Food.find( { userId: uid } )).length;
+  const pageLimit = 11;
+  const offset = (page - 1) * pageLimit;
+  let prevPage = (page - 1) > 0 ? page - 1 : -1;
+  let nextPage = (offset + pageLimit) < totalFoods ? page + 1 : -1;
 
   if (search === "") {
-    let ingredients = await Food.find( { userId: uid } );
-    res.status(200).json(ingredients);
+    let ingredients = await Food.find( { userId: uid } )
+      .sort( { label: 1 } )
+      .skip( offset )
+      .limit( pageLimit );
+
+    res.status(200).json({
+      food: ingredients,
+      prev: prevPage,
+      next: nextPage
+    });
   }
   else {
-    let ingredients = await Food.find( { userId: uid, label:{ $regex: search, $options: "i" }} );
-    res.status(200).json(ingredients);
+    let ingredients = await Food.find( { userId: uid, label:{ $regex: search, $options: "i" }} )
+    .sort( { label: 1 } )
+    .skip( offset )
+    .limit( pageLimit );
+    
+    res.status(200).json({
+      food: ingredients,
+      prev: prevPage,
+      next: nextPage
+    });
   }
 });
 
@@ -191,13 +209,7 @@ router.get('/users/:uid/ingredients/:fid', async (req, res, next) => {
 router.put('/users/:uid/ingredients/:fid', async (req, res, next) => {
   const uid = req.params.uid;
   const fid = req.params.fid;
-  // const increment = req.query.increment;
   let quantity = req.body.quantity;
-
-  // if (increment === 'true') {
-  //   let f = await Food.find( { _id: fid, userId: uid } );
-  //   quantity += f.quantity;
-  // }
 
   let food = {};
   if (quantity > 0) {
@@ -364,13 +376,69 @@ router.get('/users/:uid/households/:hid', async (req, res, next ) => {
 
 /* Get shared food */
 router.get('/users/:uid/households/:hid/ingredients', async (req, res, next ) => {
+  const uid = req.params.uid;
   const hid = req.params.hid;
   const search = req.query.search;
+
+  const result = await Household.aggregate([
+    // Match stage to filter household by its _id
+    { $match: { _id: mongoose.Types.ObjectId(hid) } },
+    
+    {
+      $lookup: {
+        from: 'foods',
+        let: { foodIds: '$foodIds' },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $and: [
+                  { $in: ['$foodId', '$$foodIds'] },
+                  { $regexMatch: { input: "$label", regex: new RegExp(search, "i") } }
+                ]
+              }
+            }
+          },
+          { $project: { _id: 0, foodId: 1 } }
+        ],
+        as: 'foods'
+      }
+    },
+    {
+      $unwind: '$foods' // Unwind the array of foods
+    },
+    {
+      $group: {
+        _id: null,
+        foodIds: { $addToSet: '$foods.foodId' } // Accumulate distinct foodIds into an array
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        foodIds: 1 // Project the foodIds array
+      }
+    }
+  ]);
+
+  let totalFoods = 0;
+  if (result.length > 0) {
+    totalFoods = result[0].foodIds.length;
+  } 
+  else {
+    res.status(200).json([]);
+    return;
+  }
+
+  const page = Number.parseInt(req.query.page) || 1;
+  const pageLimit = 11;
+  const offset = (page - 1) * pageLimit;
+  let prevPage = (page - 1) > 0 ? page - 1 : -1;
+  let nextPage = (offset + pageLimit) < totalFoods ? page + 1 : -1;
 
   Household.aggregate([
     // Match stage to filter household by its _id
     { $match: { _id: mongoose.Types.ObjectId(hid) } },
-    
     {
       $lookup: {
         from: 'foods',
@@ -413,7 +481,21 @@ router.get('/users/:uid/households/:hid/ingredients', async (req, res, next ) =>
       // Handle error
     } else {
       if (result.length > 0) {
-        res.status(200).json(result[0].foodIds);
+        const sortAlphaNum = (a, b) => a.localeCompare(b, 'en', { numeric: true });
+        let foods = result[0].foodIds;
+        foods.sort(sortAlphaNum);
+        if (foods.length >= offset) {
+          foods = foods.slice(offset, offset + pageLimit);
+        }
+        else {
+          foods = foods.slice(0, pageLimit);
+        }
+
+        res.status(200).json({
+          foodIds: foods,
+          prev: `${prevPage}`,
+          next: `${nextPage}`
+        });
       }
       else {
         res.status(200).json([]);
@@ -433,8 +515,20 @@ router.get('/users/:uid/households/:hid/ingredients/:fid', async (req, res, next
     mids.push(members[i]._id);
   }
 
+  //food with name attatched to each
   let foods = await Food.find( { foodId: fid, userId: {$in: mids} } );
-  res.status(200).json(foods);
+
+  let results = [];
+  for (let i = 0; i < foods.length; i++) {
+    let user = await User.findById(foods[i].userId);
+    let f = {
+      food: foods[i],
+      owner: `${user.firstName} ${user.lastName}`
+    }
+    results.push(f);
+  }
+
+  res.status(200).json(results);
 });
 
 router.post('/users/:uid/households/:hid/ingredients/:fid', async (req, res, next) => {

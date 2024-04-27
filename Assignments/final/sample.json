@@ -1,1313 +1,456 @@
-{
-  "text": "Honey",
-  "parsed": [
-      {
-          "food": {
-              "foodId": "food_b1cj2pmac27zngan87974b0a40hk",
-              "label": "Orange Blossom Honey",
-              "knownAs": "honey",
-              "nutrients": {
-                  "ENERC_KCAL": 304.0,
-                  "PROCNT": 0.3,
-                  "FAT": 0.0,
-                  "CHOCDF": 82.4,
-                  "FIBTG": 0.2
-              },
-              "category": "Generic foods",
-              "categoryLabel": "food",
-              "image": "https://www.edamam.com/food-img/198/198c7b25c23b4235b4cc33818c7b335f.jpg"
-          }
-      }
-  ],
-  "hints": [
-      {
-          "food": {
-              "foodId": "food_b1cj2pmac27zngan87974b0a40hk",
-              "label": "Orange Blossom Honey",
-              "knownAs": "honey",
-              "nutrients": {
-                  "ENERC_KCAL": 304.0,
-                  "PROCNT": 0.3,
-                  "FAT": 0.0,
-                  "CHOCDF": 82.4,
-                  "FIBTG": 0.2
-              },
-              "category": "Generic foods",
-              "categoryLabel": "food",
-              "image": "https://www.edamam.com/food-img/198/198c7b25c23b4235b4cc33818c7b335f.jpg"
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_unit",
-                  "label": "Whole",
-                  "weight": 14.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 14.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_packet",
-                  "label": "Packet",
-                  "weight": 14.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
-                  "label": "Tablespoon",
-                  "weight": 21.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_cup",
-                  "label": "Cup",
-                  "weight": 339.0
-              }
-          ]
+{[
+    {
+      _id: ObjectId('662b039ea3f8291388d2e0db'),
+      userId: '662b039ea3f8291388d2e0d3',
+      foodId: 'food_a60ilboavp161pbygvy9ebn1snp8',
+      label: 'Skippy Peanut Butter Creamy, 18.0 Oz',
+      knownAs: 'Skippy Peanut Butter Creamy, 18.0 oz',
+      nutrients: {
+        _id: ObjectId('662b039ea3f8291388d2e0d5'),
+        ENERC_KCAL: 558.5043975350233,
+        PROCNT: 20.576477803921907,
+        FAT: 47.03194926610722,
+        CHOCDF: 20.576477803921907,
+        FIBTG: 5.878993658263402,
+        __v: 0
       },
-      {
-          "food": {
-              "foodId": "food_bn6aoj9atkqx8fbkli859bbbxx62",
-              "label": "Honey",
-              "knownAs": "Honey",
-              "nutrients": {
-                  "ENERC_KCAL": 304.0,
-                  "PROCNT": 0.3,
-                  "FAT": 0.0,
-                  "CHOCDF": 82.4,
-                  "FIBTG": 0.2
-              },
-              "category": "Generic foods",
-              "categoryLabel": "food",
-              "image": "https://www.edamam.com/food-img/198/198c7b25c23b4235b4cc33818c7b335f.jpg"
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_unit",
-                  "label": "Whole",
-                  "weight": 14.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_packet",
-                  "label": "Packet",
-                  "weight": 14.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 14.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
-                  "label": "Tablespoon",
-                  "weight": 21.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_cup",
-                  "label": "Cup",
-                  "weight": 339.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
+      brand: 'Skippy',
+      category: 'Packaged foods',
+      categoryLabel: 'food',
+      foodContentsLabel: 'Roasted Peanuts; Sugar; Partially Hydrogenated Vegetable Oils; Cottonseed; Soybean And Rapeseed; To Prevent Separation; Salt',
+      image: 'https://www.edamam.com/food-img/f3d/f3d9d7ed1c98c955e019ecaab47f1e60.jpg',
+      servingSizes: [
+        {
+          _id: ObjectId('662b039ea3f8291388d2e0d7'),
+          uri: 'http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon',
+          label: 'Tablespoon',
+          quantity: 2,
+          __v: 0
+        },
+        {
+          _id: ObjectId('662b039ea3f8291388d2e0d9'),
+          uri: 'http://www.edamam.com/ontologies/edamam.owl#Measure_ounce',
+          label: 'Ounce',
+          quantity: 1.2,
+          __v: 0
+        }
+      ],
+      servingsPerContainer: 15,
+      quantity: 2,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b039ea3f8291388d2e0e2'),
+      userId: '662b039ea3f8291388d2e0d3',
+      foodId: 'food_b1z309nagt045vai2cy6jbx0zu11',
+      label: 'Cheez-It',
+      knownAs: 'cheez-it',
+      nutrients: {
+        _id: ObjectId('662b039ea3f8291388d2e0e0'),
+        ENERC_KCAL: 507,
+        PROCNT: 11.4,
+        FAT: 26.3,
+        CHOCDF: 57.4,
+        FIBTG: 2.4,
+        __v: 0
       },
-      {
-          "food": {
-              "foodId": "food_beyldn4ad3dcwwbyonl3sbt0yngz",
-              "label": "Honey Mustard With Real Honey, Honey",
-              "knownAs": "HONEY MUSTARD WITH REAL HONEY, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 200.0,
-                  "PROCNT": 0.0,
-                  "FAT": 0.0,
-                  "CHOCDF": 40.0
-              },
-              "brand": "Hy-Vee, Inc.",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "WATER; VINEGAR; MUSTARD SEED; SUGAR; CIDER VINEGAR; HONEY; BROWN SUGAR; SALT; SPICES; TURMERIC; CITRIC ACID; PAPRIKA.",
-              "image": "https://www.edamam.com/food-img/96c/96c4b5f0803e6a20fa88d229f1c0f950.jpg",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 5.0
-                  },
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_teaspoon",
-                      "label": "Teaspoon",
-                      "quantity": 1.0
-                  }
-              ],
-              "servingsPerContainer": 68.0
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 5.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_teaspoon",
-                  "label": "Teaspoon",
-                  "weight": 5.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
-                  "label": "Package",
-                  "weight": 340.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
+      brand: '',
+      category: 'Generic foods',
+      categoryLabel: 'food',
+      foodContentsLabel: '',
+      image: '',
+      servingSizes: [],
+      servingsPerContainer: -1,
+      quantity: 3,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b039ea3f8291388d2e0ed'),
+      userId: '662b039ea3f8291388d2e0e5',
+      foodId: 'food_a60ilboavp161pbygvy9ebn1snp8',
+      label: 'Skippy Peanut Butter Creamy, 18.0 Oz',
+      knownAs: 'Skippy Peanut Butter Creamy, 18.0 oz',
+      nutrients: {
+        _id: ObjectId('662b039ea3f8291388d2e0e7'),
+        ENERC_KCAL: 558.5043975350233,
+        PROCNT: 20.576477803921907,
+        FAT: 47.03194926610722,
+        CHOCDF: 20.576477803921907,
+        FIBTG: 5.878993658263402,
+        __v: 0
       },
-      {
-          "food": {
-              "foodId": "food_bpsuu27a726fnbafbb43gaammdqu",
-              "label": "Honey Stinger, Honey Waffle, Honey",
-              "knownAs": "HONEY STINGER, HONEY WAFFLE, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 533.0,
-                  "PROCNT": 0.0,
-                  "FAT": 23.329999923706055,
-                  "CHOCDF": 70.0,
-                  "FIBTG": 3.299999952316284
-              },
-              "brand": "Honey Stinger",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "ORGANIC WHEAT FLOUR; ORGANIC PALM FRUIT OIL; ORGANIC RICE SYRUP; ORGANIC CANE SUGAR; ORGANIC HONEY; ORGANIC WHOLE WHEAT FLOUR; ORGANIC SOY FLOUR; SEA SALT; ORGANIC SOY LECITHIN; ORGANIC SPICES; BAKING SODA.",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 30.0
-                  }
-              ]
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 30.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
+      brand: 'Skippy',
+      category: 'Packaged foods',
+      categoryLabel: 'food',
+      foodContentsLabel: 'Roasted Peanuts; Sugar; Partially Hydrogenated Vegetable Oils; Cottonseed; Soybean And Rapeseed; To Prevent Separation; Salt',
+      image: 'https://www.edamam.com/food-img/f3d/f3d9d7ed1c98c955e019ecaab47f1e60.jpg',
+      servingSizes: [
+        {
+          _id: ObjectId('662b039ea3f8291388d2e0e9'),
+          uri: 'http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon',
+          label: 'Tablespoon',
+          quantity: 2,
+          __v: 0
+        },
+        {
+          _id: ObjectId('662b039ea3f8291388d2e0eb'),
+          uri: 'http://www.edamam.com/ontologies/edamam.owl#Measure_ounce',
+          label: 'Ounce',
+          quantity: 1.2,
+          __v: 0
+        }
+      ],
+      servingsPerContainer: 15,
+      quantity: 2,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b039ea3f8291388d2e0f4'),
+      userId: '662b039ea3f8291388d2e0e5',
+      foodId: 'food_b1z309nagt045vai2cy6jbx0zu11',
+      label: 'Cheez-It',
+      knownAs: 'cheez-it',
+      nutrients: {
+        _id: ObjectId('662b039ea3f8291388d2e0f2'),
+        ENERC_KCAL: 507,
+        PROCNT: 11.4,
+        FAT: 26.3,
+        CHOCDF: 57.4,
+        FIBTG: 2.4,
+        __v: 0
       },
-      {
-          "food": {
-              "foodId": "food_ajd5qdlai9un7hbg7aln6ak03ci6",
-              "label": "Pure Honey, Honey",
-              "knownAs": "PURE HONEY, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 286.0,
-                  "PROCNT": 0.0,
-                  "FAT": 0.0,
-                  "CHOCDF": 80.94999694824219
-              },
-              "brand": "PURE",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "HONEY",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
-                      "label": "Tablespoon",
-                      "quantity": 1.0
-                  },
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 21.0
-                  }
-              ]
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 21.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
-                  "label": "Tablespoon",
-                  "weight": 21.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
+      brand: '',
+      category: 'Generic foods',
+      categoryLabel: 'food',
+      foodContentsLabel: '',
+      image: '',
+      servingSizes: [],
+      servingsPerContainer: -1,
+      quantity: 3,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b039ea3f8291388d2e0ff'),
+      userId: '662b039ea3f8291388d2e0f7',
+      foodId: 'food_a60ilboavp161pbygvy9ebn1snp8',
+      label: 'Skippy Peanut Butter Creamy, 18.0 Oz',
+      knownAs: 'Skippy Peanut Butter Creamy, 18.0 oz',
+      nutrients: {
+        _id: ObjectId('662b039ea3f8291388d2e0f9'),
+        ENERC_KCAL: 558.5043975350233,
+        PROCNT: 20.576477803921907,
+        FAT: 47.03194926610722,
+        CHOCDF: 20.576477803921907,
+        FIBTG: 5.878993658263402,
+        __v: 0
       },
-      {
-          "food": {
-              "foodId": "food_b8024nvbt9k83naqn79cqa4n1ao2",
-              "label": "Honey Walnuts, Honey",
-              "knownAs": "HONEY WALNUTS, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 632.0,
-                  "PROCNT": 12.279999732971191,
-                  "FAT": 57.88999938964844,
-                  "CHOCDF": 22.809999465942383,
-                  "FIBTG": 5.300000190734863
-              },
-              "brand": "THE NUTTY GOURMET",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "WALNUTS; DEXTROSE; SAFFLOWER OIL; ORGANIC CANE SUGAR; HONEY POWDER (CANE SUGAR; HONEY); HONEY; SALT; XANTHAN GUM.",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 57.0
-                  },
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                      "label": "Ounce",
-                      "quantity": 2.0
-                  }
-              ]
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 56.69904625
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
+      brand: 'Skippy',
+      category: 'Packaged foods',
+      categoryLabel: 'food',
+      foodContentsLabel: 'Roasted Peanuts; Sugar; Partially Hydrogenated Vegetable Oils; Cottonseed; Soybean And Rapeseed; To Prevent Separation; Salt',
+      image: 'https://www.edamam.com/food-img/f3d/f3d9d7ed1c98c955e019ecaab47f1e60.jpg',
+      servingSizes: [
+        {
+          _id: ObjectId('662b039ea3f8291388d2e0fb'),
+          uri: 'http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon',
+          label: 'Tablespoon',
+          quantity: 2,
+          __v: 0
+        },
+        {
+          _id: ObjectId('662b039ea3f8291388d2e0fd'),
+          uri: 'http://www.edamam.com/ontologies/edamam.owl#Measure_ounce',
+          label: 'Ounce',
+          quantity: 1.2,
+          __v: 0
+        }
+      ],
+      servingsPerContainer: 15,
+      quantity: 2,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b039ea3f8291388d2e106'),
+      userId: '662b039ea3f8291388d2e0f7',
+      foodId: 'food_b1z309nagt045vai2cy6jbx0zu11',
+      label: 'Cheez-It',
+      knownAs: 'cheez-it',
+      nutrients: {
+        _id: ObjectId('662b039ea3f8291388d2e104'),
+        ENERC_KCAL: 507,
+        PROCNT: 11.4,
+        FAT: 26.3,
+        CHOCDF: 57.4,
+        FIBTG: 2.4,
+        __v: 0
       },
-      {
-          "food": {
-              "foodId": "food_b1z09k7ak2gf42a75w566bawxisw",
-              "label": "Honey Granules, Honey",
-              "knownAs": "HONEY GRANULES, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 333.0,
-                  "PROCNT": 0.0,
-                  "FAT": 0.0,
-                  "CHOCDF": 100.0
-              },
-              "brand": "Domino Foods, Inc.",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "CANE SUGAR; HONEY",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 3.0
-                  },
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_teaspoon",
-                      "label": "Teaspoon",
-                      "quantity": 1.0
-                  }
-              ]
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 3.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_teaspoon",
-                  "label": "Teaspoon",
-                  "weight": 3.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
+      brand: '',
+      category: 'Generic foods',
+      categoryLabel: 'food',
+      foodContentsLabel: '',
+      image: '',
+      servingSizes: [],
+      servingsPerContainer: -1,
+      quantity: 3,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b03e6a3f8291388d2e146'),
+      userId: '662b039ea3f8291388d2e12b',
+      foodId: 'food_awe80f5alx59k4an6ebyeb9a8m2h',
+      label: 'Cookies',
+      knownAs: 'cookies',
+      nutrients: {
+        _id: ObjectId('662b03e6a3f8291388d2e147'),
+        ENERC_KCAL: 423,
+        PROCNT: 5.25,
+        FAT: 22.08,
+        CHOCDF: 65.86
       },
-      {
-          "food": {
-              "foodId": "food_bq0r99xa8fasehbgp7amaa9ob3xj",
-              "label": "Peanuts, Honey, Honey",
-              "knownAs": "PEANUTS, HONEY, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 533.0,
-                  "PROCNT": 16.670000076293945,
-                  "FAT": 40.0,
-                  "CHOCDF": 36.66999816894531,
-                  "FIBTG": 6.699999809265137
-              },
-              "brand": "Krause Gentle Corporation",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "PEANUTS; HONEY ROASTED SESAME STICKS [UNBLEACHED WHEAT FLOUR (MALTED BARLEY FLOUR ADDED AS ENZYME ADDITIVE); SOYBEAN OIL; SESAME SEEDS; HONEY COATING (SUCROSE; WHEAT STARCH HONEY); BULGAR WHEAT; TACK BLEND (MALTODEXTRIN; XANTHAN GUM); SALT; BEET POWDER (COLOR); TURMERIC (COLOR)]; ALMONDS; CASHEWS; SUGAR; VEGETABLE OIL (CANOLA; SUNFLOWER; AND/OR SOYBEAN); WHEAT STARCH; MALTODEXTRIN; HONEY; SLAT; BUTTER (PASTEURIZED CREAM; SLAT); XANTHAN GUM; SOY LECITHIN.",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 30.0
-                  },
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_cup",
-                      "label": "Cup",
-                      "quantity": 0.25
-                  }
-              ]
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 30.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_cup",
-                  "label": "Cup",
-                  "weight": 120.0
-              }
-          ]
+      category: 'Generic foods',
+      categoryLabel: 'food',
+      image: 'https://www.edamam.com/food-img/c49/c49cbd80f3156ae1b2a7d0a5f23a4a00.jpg',
+      servingSizes: [],
+      quantity: 2,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b03eaa3f8291388d2e14c'),
+      userId: '662b039ea3f8291388d2e12b',
+      foodId: 'food_bn6aoj9atkqx8fbkli859bbbxx62',
+      label: 'Honey',
+      knownAs: 'Honey',
+      nutrients: {
+        _id: ObjectId('662b03eaa3f8291388d2e14d'),
+        ENERC_KCAL: 304,
+        PROCNT: 0.3,
+        FAT: 0,
+        CHOCDF: 82.4,
+        FIBTG: 0.2
       },
-      {
-          "food": {
-              "foodId": "food_aqr7ls3bigfm7yaetshtwbmzucgp",
-              "label": "Honey Gallberry, Honey",
-              "knownAs": "HONEY GALLBERRY, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 333.0,
-                  "PROCNT": 0.0,
-                  "FAT": 0.0,
-                  "CHOCDF": 80.94999694824219
-              },
-              "brand": "Orchard Pond Organics, LLC",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "RAW & UNFILTERED HONEY",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 21.0
-                  },
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
-                      "label": "Tablespoon",
-                      "quantity": 1.0
-                  }
-              ]
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 21.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_tablespoon",
-                  "label": "Tablespoon",
-                  "weight": 21.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
+      category: 'Generic foods',
+      categoryLabel: 'food',
+      image: 'https://www.edamam.com/food-img/198/198c7b25c23b4235b4cc33818c7b335f.jpg',
+      servingSizes: [],
+      quantity: 2,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b03f2a3f8291388d2e152'),
+      userId: '662b039ea3f8291388d2e12b',
+      foodId: 'food_by8rc5abgwzxf2apg0hewbkfhyjw',
+      label: 'Cheetos',
+      knownAs: 'cheese puff',
+      nutrients: {
+        _id: ObjectId('662b03f2a3f8291388d2e153'),
+        ENERC_KCAL: 432,
+        PROCNT: 8.5,
+        FAT: 12.1,
+        CHOCDF: 72.4,
+        FIBTG: 3.6
       },
-      {
-          "food": {
-              "foodId": "food_bptoyzfbfbboxwaowhlobbt05ioh",
-              "label": "Honey",
-              "knownAs": "Honey",
-              "nutrients": {
-                  "ENERC_KCAL": 197.04568421176828,
-                  "PROCNT": 9.55688117987475,
-                  "FAT": 10.012381474838765,
-                  "CHOCDF": 17.98285183268885,
-                  "FIBTG": 1.2175488047835714
-              },
-              "category": "Generic meals",
-              "categoryLabel": "meal",
-              "foodContentsLabel": "balsamic vinegar; olive oil; honey; dried thyme; dried rosemary; chicken thighs; salt; pepper"
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_unit",
-                  "label": "Whole",
-                  "weight": 166.7721154048103
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 166.7721154048103
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_milliliter",
-                  "label": "Milliliter",
-                  "weight": 1.0
-              }
-          ]
+      category: 'Generic foods',
+      categoryLabel: 'food',
+      image: 'https://www.edamam.com/food-img/464/464351a6d2739cef8e568381a499a2aa.jpg',
+      servingSizes: [],
+      quantity: 3,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b03f8a3f8291388d2e158'),
+      userId: '662b039ea3f8291388d2e12b',
+      foodId: 'food_amhlqj0by3ozesbg96kkhar1atxt',
+      label: 'Fuji Apple',
+      knownAs: 'fuji apple',
+      nutrients: {
+        _id: ObjectId('662b03f8a3f8291388d2e159'),
+        ENERC_KCAL: 63,
+        PROCNT: 0.2,
+        FAT: 0.18,
+        CHOCDF: 15.2,
+        FIBTG: 2.1
       },
-      {
-          "food": {
-              "foodId": "food_bbykczaaa6n6elb78s69nbmdu3ec",
-              "label": "Honey Mustard, Honey",
-              "knownAs": "HONEY MUSTARD, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 200.0,
-                  "PROCNT": 0.0,
-                  "FAT": 0.0,
-                  "CHOCDF": 40.0,
-                  "FIBTG": 0.0
-              },
-              "brand": "Conagra Brands, Inc.",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "WATER; CANE SUGAR; ORGANIC VINEGAR; MUSTARD SEED; ORGANIC HONEY; SALT; TURMERIC; GARLIC POWDER.",
-              "image": "https://www.edamam.com/food-img/423/423ff426f8e6c525fcdb9d7537cc0d70.jpg",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 5.0
-                  },
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_teaspoon",
-                      "label": "Teaspoon",
-                      "quantity": 1.0
-                  }
-              ],
-              "servingsPerContainer": 68.0
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 5.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_teaspoon",
-                  "label": "Teaspoon",
-                  "weight": 5.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
-                  "label": "Package",
-                  "weight": 340.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
+      category: 'Generic foods',
+      categoryLabel: 'food',
+      image: 'https://www.edamam.com/food-img/327/327e8b398000b83e4764ca0bab240f14.jpg',
+      servingSizes: [],
+      quantity: 2,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b03ffa3f8291388d2e15e'),
+      userId: '662b039ea3f8291388d2e12b',
+      foodId: 'food_b20nj78ajzve2qbjgnu8qbsazgdb',
+      label: 'Sausage Pizza',
+      knownAs: 'sausage pizza',
+      nutrients: {
+        _id: ObjectId('662b03ffa3f8291388d2e15f'),
+        ENERC_KCAL: 280,
+        PROCNT: 11.5,
+        FAT: 12.4,
+        CHOCDF: 30.6,
+        FIBTG: 2.3
       },
-      {
-          "food": {
-              "foodId": "food_am3ly4fb6mg7y7bq6qmrib17rsvz",
-              "label": "Honey Ham, Honey",
-              "knownAs": "HONEY HAM, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 140.0,
-                  "PROCNT": 17.540000915527344,
-                  "FAT": 3.509999990463257,
-                  "CHOCDF": 8.770000457763672,
-                  "FIBTG": 0.0
-              },
-              "brand": "The Hillshire Brands Company",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "HAM; WATER; HONEY; SUGAR; CONTAINS 2% OR LESS: SALT; DRIED VINEGAR; CARRAGEENAN; CULTURED CELERY JUICE POWDER.",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_slice",
-                      "label": "Slice",
-                      "quantity": 2.0
-                  },
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 57.0
-                  }
-              ]
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 57.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_slice",
-                  "label": "Slice",
-                  "weight": 28.5
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
+      category: 'Generic foods',
+      categoryLabel: 'food',
+      image: 'https://www.edamam.com/food-img/7e4/7e4559e8b0dea671e0d0e7cd2fecbef5.jpg',
+      servingSizes: [],
+      quantity: 2,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b0404a3f8291388d2e164'),
+      userId: '662b039ea3f8291388d2e12b',
+      foodId: 'food_abp2hivbz4bvnxbu8himgb0rgmvo',
+      label: 'Fresh Pasta',
+      knownAs: 'fresh pasta',
+      nutrients: {
+        _id: ObjectId('662b0404a3f8291388d2e165'),
+        ENERC_KCAL: 288,
+        PROCNT: 11.3,
+        FAT: 2.3,
+        CHOCDF: 54.7
       },
-      {
-          "food": {
-              "foodId": "food_a4uorlibq8zd3jaxjz8lhb1ow96v",
-              "label": "Honey Cookies, Honey",
-              "knownAs": "HONEY COOKIES, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 429.0,
-                  "PROCNT": 3.569999933242798,
-                  "FAT": 21.43000030517578,
-                  "CHOCDF": 57.13999938964844,
-                  "FIBTG": 0.0
-              },
-              "brand": "Lieber Chocolate & Food Products Co.",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "POTATO STARCH; PALM SHORTENING; WHOLE EGGS; SUGAR BROWN SUGAR; HONEY; TAPIOCA STARCH; SODIUM BICARBONATE; MONOCALCIUM PHOSPHATE; NUTMEG; CINNAMON.",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 28.0
-                  }
-              ]
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 28.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
+      category: 'Generic foods',
+      categoryLabel: 'food',
+      image: 'https://www.edamam.com/food-img/882/8825533f89f0fde6397f43b22ef20cfe.jpg',
+      servingSizes: [],
+      quantity: 1,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b040ba3f8291388d2e16a'),
+      userId: '662b039ea3f8291388d2e12b',
+      foodId: 'food_bbhw5lya0kgo8nact7pisb7koimn',
+      label: 'Pecan Ice Cream',
+      knownAs: 'butter pecan ice cream',
+      nutrients: {
+        _id: ObjectId('662b040ba3f8291388d2e16b'),
+        ENERC_KCAL: 180,
+        PROCNT: 3.99,
+        FAT: 10.3,
+        CHOCDF: 21.3,
+        FIBTG: 0.9
       },
-      {
-          "food": {
-              "foodId": "food_abvqu8ma88sis8agipluaa8svu3u",
-              "label": "Honey Yogurt, Honey",
-              "knownAs": "HONEY YOGURT, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 106.0,
-                  "PROCNT": 3.5299999713897705,
-                  "FAT": 3.5299999713897705,
-                  "CHOCDF": 14.119999885559082
-              },
-              "brand": "Laura Chenel's Chevre, Inc.",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "ORGANIC JERSEY COW WHOLE MILK; ORGANIC HONEY; LIVE ACTIVE CULTURES (L. ACIDOPHILUS; L. BULGARICUS; S. THERMOPHILUS; AND BIFIDOBACTERIUM)",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                      "label": "Ounce",
-                      "quantity": 6.0
-                  },
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 170.0
-                  }
-              ]
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 170.09713875
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
+      category: 'Generic foods',
+      categoryLabel: 'food',
+      image: 'https://www.edamam.com/food-img/948/94852938b2630bce1f28b01d05f929a0.jpg',
+      servingSizes: [],
+      quantity: 1,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b0412a3f8291388d2e170'),
+      userId: '662b039ea3f8291388d2e12b',
+      foodId: 'food_a4l1k0aa2jlekoajhigocbkixuyz',
+      label: 'Cinnamon Chex Cereal Rice Sweetened With Real Cinnamon Gluten Free - 12 Oz',
+      knownAs: 'Cinnamon Chex Cereal Rice Sweetened With Real Cinnamon Gluten Free - 12 Oz',
+      nutrients: {
+        _id: ObjectId('662b0412a3f8291388d2e171'),
+        ENERC_KCAL: 71.85479824141638,
+        PROCNT: 0.845350567546075,
+        FAT: 1.69070113509215,
+        CHOCDF: 13.948284364510236,
+        FIBTG: 0.845350567546075
       },
-      {
-          "food": {
-              "foodId": "food_b48ee8zb1h5oa0b2q7yanasd2txh",
-              "label": "Honey Ham, Honey",
-              "knownAs": "HONEY HAM, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 107.0,
-                  "PROCNT": 17.860000610351562,
-                  "FAT": 2.680000066757202,
-                  "CHOCDF": 3.569999933242798
-              },
-              "brand": "Smithfield",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "HAM; WATER; HONEY; CONTAINS 2% OR LESS OF SALT; SUGAR; SODIUM PHOSPHATE; SODIUM ERYTHORBATE; SODIUM NITRITE; POTASSIUM CHLORIDE.",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 56.0
-                  },
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                      "label": "Ounce",
-                      "quantity": 2.0
-                  }
-              ],
-              "servingsPerContainer": 8.0
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 56.69904625
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
-                  "label": "Package",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
+      brand: 'Chex',
+      category: 'Packaged foods',
+      categoryLabel: 'food',
+      foodContentsLabel: 'Whole Grain Rice;  Rice;  Sugar;  Canola and/or Sunflower Oil;  Salt;  Rice Fiber;  Cinnamon;  Molasses;  Natural Flavor;  Vitamin E (Mixed Tocopherols) Added to Preserve Freshness;  Vitamins and Minerals: Calcium Carbonate;  Iron and Zinc (Mineral Nutrients);  Vitamin C (Sodium Ascorbate);  A B Vitamin (Niacinamide);  Vitamin B2;  (Riboflavin);  Vitamin B6 (Pyridoxine Hydrochloride);  Vitamin B1 (Thiamin Mononitrate);  Vitamin A (Palmitate);  A B Vitamin (Folic Acid);  Vitamin B12;  Vitamin D3.',
+      image: 'https://www.edamam.com/food-img/564/56498f0d91130a34ff79725dc5bbcf84',
+      servingSizes: [
+        {
+          _id: ObjectId('662b0412a3f8291388d2e172'),
+          uri: 'http://www.edamam.com/ontologies/edamam.owl#Measure_cup',
+          label: 'Cup',
+          quantity: 1
+        }
+      ],
+      quantity: 2,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b041ba3f8291388d2e177'),
+      userId: '662b039ea3f8291388d2e12b',
+      foodId: 'food_a7vu13pbog16eoblu230lb6nm3wu',
+      label: 'Beef Hot Dog',
+      knownAs: 'beef frankfurter',
+      nutrients: {
+        _id: ObjectId('662b041ba3f8291388d2e178'),
+        ENERC_KCAL: 290,
+        PROCNT: 10.3,
+        FAT: 25.8,
+        CHOCDF: 4.17,
+        FIBTG: 0
       },
-      {
-          "food": {
-              "foodId": "food_aipm8mobslonobbbkxmhbb8a4iox",
-              "label": "Honey Grahams",
-              "knownAs": "cinnamon honey graham cracker",
-              "nutrients": {
-                  "ENERC_KCAL": 430.0,
-                  "PROCNT": 6.69,
-                  "FAT": 10.6,
-                  "CHOCDF": 77.7,
-                  "FIBTG": 3.4
-              },
-              "category": "Generic foods",
-              "categoryLabel": "food",
-              "image": "https://www.edamam.com/food-img/448/448b5544a8ac969e88525f6bc44f5c12.jpg"
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 30.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_unit",
-                  "label": "Whole",
-                  "weight": 14.0,
-                  "qualified": [
-                      {
-                          "qualifiers": [
-                              {
-                                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Qualifier_large",
-                                  "label": "large"
-                              }
-                          ],
-                          "weight": 14.0
-                      }
-                  ]
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pouch",
-                  "label": "Pouch",
-                  "weight": 204.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_cracker",
-                  "label": "Cracker",
-                  "weight": 15.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_biscuit",
-                  "label": "Biscuit",
-                  "weight": 14.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_cookie",
-                  "label": "Cookie",
-                  "weight": 14.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_sheet",
-                  "label": "Sheet",
-                  "weight": 14.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_box",
-                  "label": "Box",
-                  "weight": 408.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_container",
-                  "label": "Container",
-                  "weight": 408.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
-                  "label": "Package",
-                  "weight": 408.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_packet",
-                  "label": "Packet",
-                  "weight": 408.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_bag",
-                  "label": "Bag",
-                  "weight": 204.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_cup",
-                  "label": "Cup",
-                  "weight": 84.0,
-                  "qualified": [
-                      {
-                          "qualifiers": [
-                              {
-                                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Qualifier_crushed",
-                                  "label": "crushed"
-                              }
-                          ],
-                          "weight": 84.0
-                      }
-                  ]
-              }
-          ]
+      category: 'Generic foods',
+      categoryLabel: 'food',
+      image: 'https://www.edamam.com/food-img/533/533c1ce3b907a8a70abd8be2a5339734.jpg',
+      servingSizes: [],
+      quantity: 2,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b0422a3f8291388d2e17d'),
+      userId: '662b039ea3f8291388d2e12b',
+      foodId: 'food_aregbrwb5q7z2db1h14uxaizfd9f',
+      label: 'Beef Steak',
+      knownAs: 'steak',
+      nutrients: {
+        _id: ObjectId('662b0422a3f8291388d2e17e'),
+        ENERC_KCAL: 228,
+        PROCNT: 20,
+        FAT: 15.8,
+        CHOCDF: 0,
+        FIBTG: 0
       },
-      {
-          "food": {
-              "foodId": "food_a11nao3anlc0gtbgsco30b7vxn6q",
-              "label": "Honey Ham, Honey",
-              "knownAs": "HONEY HAM, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 125.0,
-                  "PROCNT": 19.639999389648438,
-                  "FAT": 2.680000066757202,
-                  "CHOCDF": 5.360000133514404
-              },
-              "brand": "Smithfield",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "INGREDIENTS: HAM; WATER; HONEY; CONTAINS 2% OR LESS OF SUGAR; SALT; POTASSIUM LACTATE; SODIUM DIACETATE; SODIUM ERYTHORBATE; SODIUM NITRITE; SODIUM PHOSPHATES.",
-              "image": "https://www.edamam.com/food-img/2a6/2a69565742bd3a8cc3862fc77590945e.jpg",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_slice",
-                      "label": "Slice",
-                      "quantity": 3.0
-                  },
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 56.0
-                  }
-              ],
-              "servingsPerContainer": 4.0
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 56.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_slice",
-                  "label": "Slice",
-                  "weight": 18.666666666666668
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
-                  "label": "Package",
-                  "weight": 224.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
+      category: 'Generic foods',
+      categoryLabel: 'food',
+      image: 'https://www.edamam.com/food-img/4d2/4d2ae7e6fd2145d4c89a8ffae7d4f2b7.jpg',
+      servingSizes: [],
+      quantity: 2,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b042aa3f8291388d2e183'),
+      userId: '662b039ea3f8291388d2e12b',
+      foodId: 'food_bg0rlw7bt25ojiavi5k7dbv51765',
+      label: 'Baby Carrot',
+      knownAs: 'baby carrot',
+      nutrients: {
+        _id: ObjectId('662b042aa3f8291388d2e184'),
+        ENERC_KCAL: 35,
+        PROCNT: 0.64,
+        FAT: 0.13,
+        CHOCDF: 8.24,
+        FIBTG: 2.9
       },
-      {
-          "food": {
-              "foodId": "food_bloou3ab3c3z20bqg9rgfbiv2td9",
-              "label": "Honey Ham, Honey",
-              "knownAs": "HONEY HAM, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 100.0,
-                  "PROCNT": 16.0,
-                  "FAT": 4.0,
-                  "CHOCDF": 6.0
-              },
-              "brand": "Land O'Frost, Inc.",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "INGREDIENTS: HAM CURED WITH WATER; HONEY; SALT. LESS THAN 2% OF VINEGAR. DEXTROSE; BROWN SUGAR; SODIUM ERYTHORBATE; SODIUM PHOSPHATES; SODIUM NITRITE.",
-              "image": "https://www.edamam.com/food-img/2e5/2e523c630d47bed7066a7ddf7260b031.jpg",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 50.0
-                  }
-              ],
-              "servingsPerContainer": 8.0
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 50.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_slice",
-                  "label": "Slice",
-                  "weight": 12.5
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
-                  "label": "Package",
-                  "weight": 400.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
+      category: 'Generic foods',
+      categoryLabel: 'food',
+      image: 'https://www.edamam.com/food-img/954/9546f1fd29336cab2ecf552935d03206.jpg',
+      servingSizes: [],
+      quantity: 2,
+      __v: 0
+    },
+    {
+      _id: ObjectId('662b0432a3f8291388d2e189'),
+      userId: '662b039ea3f8291388d2e12b',
+      foodId: 'food_a6k79rrahp8fe2b26zussa3wtkqh',
+      label: 'Tomato',
+      knownAs: 'tomato',
+      nutrients: {
+        _id: ObjectId('662b0432a3f8291388d2e18a'),
+        ENERC_KCAL: 18,
+        PROCNT: 0.88,
+        FAT: 0.2,
+        CHOCDF: 3.89,
+        FIBTG: 1.2
       },
-      {
-          "food": {
-              "foodId": "food_a5z78qlbt6k5rsalft96caydcvcv",
-              "label": "Honey Ham, Honey",
-              "knownAs": "HONEY HAM, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 161.0,
-                  "PROCNT": 16.06999969482422,
-                  "FAT": 8.930000305175781,
-                  "CHOCDF": 3.569999933242798
-              },
-              "brand": "Carl Buddig & Company",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "HAM; WATER; HONEY; SALT. LESS THAN 2% OF: POTASSIUM LACTATE; DEXTROSE; SODIUM PHOSPHATE; SODIUM DIACETATE; SODIUM ERYTHORBATE; CARRAGEENAN; SODIUM NITRITE; NATURAL FLAVORING; CULTURED CELERY POWDER; VINEGAR.",
-              "image": "https://www.edamam.com/food-img/e7a/e7a03611de2cf1e8820b9846beece549.png",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 56.0
-                  }
-              ],
-              "servingsPerContainer": 1.0
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 56.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
-                  "label": "Package",
-                  "weight": 56.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
-      },
-      {
-          "food": {
-              "foodId": "food_bbsxjmsb6975xna17dyv8b6me91a",
-              "label": "Honey Ham, Honey",
-              "knownAs": "HONEY HAM, HONEY",
-              "nutrients": {
-                  "ENERC_KCAL": 161.0,
-                  "PROCNT": 16.06999969482422,
-                  "FAT": 8.930000305175781,
-                  "CHOCDF": 3.569999933242798
-              },
-              "brand": "Carl Buddig & Company",
-              "category": "Packaged foods",
-              "categoryLabel": "food",
-              "foodContentsLabel": "HAM; WATER; HONEY; SALT. LESS THAN 2% OF: POTASSIUM LACTATE; DEXTROSE; SODIUM PHOSPHATE; SODIUM DIACETATE; SODIUM ERYTHORBATE; CARRAGEENAN; SODIUM NITRITE; NATURAL FLAVORING; CULTURED CELERY POWDER; VINEGAR.",
-              "image": "https://www.edamam.com/food-img/a51/a518fca9e83d5b62cb716439975f2a39.jpg",
-              "servingSizes": [
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                      "label": "Gram",
-                      "quantity": 56.0
-                  },
-                  {
-                      "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                      "label": "Ounce",
-                      "quantity": 2.0
-                  }
-              ],
-              "servingsPerContainer": 8.0
-          },
-          "measures": [
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
-                  "label": "Serving",
-                  "weight": 56.69904625
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_package",
-                  "label": "Package",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-                  "label": "Gram",
-                  "weight": 1.0
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_ounce",
-                  "label": "Ounce",
-                  "weight": 28.349523125
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                  "label": "Pound",
-                  "weight": 453.59237
-              },
-              {
-                  "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_kilogram",
-                  "label": "Kilogram",
-                  "weight": 1000.0
-              }
-          ]
-      }
-  ],
-  "_links": {
-      "next": {
-          "title": "Next page",
-          "href": "https://api.edamam.com/api/food-database/v2/parser?session=40&app_id=35b313ca&app_key=5fe592b84538ad54e7a6d8f45f321e34&ingr=Honey&nutrition-type=cooking"
-      }
-  }
-}
+      category: 'Generic foods',
+      categoryLabel: 'food',
+      image: 'https://www.edamam.com/food-img/23e/23e727a14f1035bdc2733bb0477efbd2.jpg',
+      servingSizes: [],
+      quantity: 2,
+      __v: 0
+    }
+]}

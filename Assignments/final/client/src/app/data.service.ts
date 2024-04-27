@@ -6,6 +6,9 @@ import { Food } from './food';
 import { Message } from './message';
 import { Household } from './household';
 import { headers } from 'next/headers';
+import { PantrySearchResult } from './pantry-search-result';
+import { IngredientSearchResult } from './ingredient-search-result';
+import { PantryCardOwner } from './pantry-card-owner';
 
 @Injectable({
   providedIn: 'root'
@@ -50,9 +53,9 @@ export class DataService {
     return this.http.get<User>(`${this.apiVersion}/users/${uid}`);
   }
 
-  getIngredients(uid: string, search: string): Observable<[Food]> {
-    return this.http.get<[Food]>(`${this.apiVersion}/users/${uid}/ingredients`, {
-      params: new HttpParams().set('search', search)
+  getIngredients(uid: string, search: string, page: string): Observable<IngredientSearchResult> {
+    return this.http.get<IngredientSearchResult>(`${this.apiVersion}/users/${uid}/ingredients`, {
+      params: new HttpParams().set('search', search).set('page', page)
     });
   }
 
@@ -60,8 +63,8 @@ export class DataService {
     return this.http.get<Food>(`${this.apiVersion}/users/${uid}/ingredients/${fid}`);
   }
 
-  getIngredient(uid: string, hid: string, fid: string): Observable<[Food]> {
-    return this.http.get<[Food]>(`${this.apiVersion}/users/${uid}/households/${hid}/ingredients/${fid}`);
+  getIngredient(uid: string, hid: string, fid: string): Observable<[PantryCardOwner]> {
+    return this.http.get<[PantryCardOwner]>(`${this.apiVersion}/users/${uid}/households/${hid}/ingredients/${fid}`);
   }
 
   setSharedIngredient(uid: string, hid: string, food: Food): Observable<Food> {
@@ -107,10 +110,14 @@ export class DataService {
     return this.http.get<Household>(`${this.apiVersion}/users/${uid}/households/${hid}`);
   }
 
-  getSharedFood(uid: string, hid: string, search: string): Observable<[string]> {
-    return this.http.get<[string]>(`${this.apiVersion}/users/${uid}/households/${hid}/ingredients`, {
-      params: new HttpParams().set('search', search)
+  getSharedFood(uid: string, hid: string, search: string, page: string): Observable<PantrySearchResult> {
+    return this.http.get<PantrySearchResult>(`${this.apiVersion}/users/${uid}/households/${hid}/ingredients`, {
+      params: new HttpParams().set('search', search).set('page', page)
     });
+  }
+
+  getPantryPage(url: string): Observable<PantrySearchResult> {
+    return this.http.get<PantrySearchResult>(`${this.apiVersion}${url}`);
   }
 
   createMessage(uid: string, contactId: string, foodId: string, quantity: number): Observable<Message> {
