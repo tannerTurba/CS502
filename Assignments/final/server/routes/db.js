@@ -749,7 +749,7 @@ async function init() {
     
     // Insert 5000 users, 5 per household
     let print = true;
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 100; i++) {
         await initHousehold(print);
         print = false;
     }
