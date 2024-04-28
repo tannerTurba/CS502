@@ -421,7 +421,7 @@ router.get('/users/:uid/households/:hid/ingredients', async (req, res, next ) =>
   // aggregate to get all ingredient information for a household
   const result = await Household.aggregate([
     // Match stage to filter household by its _id
-    { $match: { _id: mongoose.Types.ObjectId(hid) } },
+    { $match: { _id: hid } },
     // Make cross references
     {
       $lookup: {
