@@ -4,7 +4,6 @@ import { Router, RouterModule } from '@angular/router';
 import { User } from '../user';
 import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
-import { first } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
@@ -72,6 +71,10 @@ export class SignUpComponent {
 
     if (password!.length == 0) {
       this.pwdFeedback = "Enter a password";
+      checksPassed = false;
+    }
+    else if (password!.length < 6) {
+      this.pwdFeedback = "Password must be at least six characters long";
       checksPassed = false;
     }
     else {

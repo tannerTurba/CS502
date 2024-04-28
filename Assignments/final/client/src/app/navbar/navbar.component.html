@@ -40,7 +40,7 @@
                   <a [routerLink]="'/users/' + uid + '/my-account'" class="block px-4 py-2 hover:bg-stone-100 dark:hover:bg-stone-600 dark:hover:text-white">Your profile</a>
                 </li>
                 <li>
-                  <a routerLink="/login" class="block px-4 py-2 hover:bg-stone-100 dark:hover:bg-stone-600 dark:hover:text-white">Sign out</a>
+                  <a (click)="logout()" routerLink="/login" class="block px-4 py-2 hover:bg-stone-100 dark:hover:bg-stone-600 dark:hover:text-white">Sign out</a>
                 </li>
               </ul>
             </div>

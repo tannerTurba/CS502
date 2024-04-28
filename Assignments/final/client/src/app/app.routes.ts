@@ -12,9 +12,9 @@ export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', title: 'Cellarium | Login', component: LoginComponent},
     { path: 'sign-up', title: 'Cellarium | Sign Up', component: SignUpComponent },
-    { path: 'users/:uid/my-ingredients', title: 'Cellarium | My Ingredients', component: MyIngredientsComponent },
-    { path: 'users/:uid/the-pantry', title: 'Cellarium | The Pantry', component: ThePantryComponent },
-    { path: 'users/:uid/messages', title: 'Cellarium | Messages', component: MessagePageComponent },
-    { path: 'users/:uid/household', title: 'Cellarium | Household', component: HouseholdComponent },
-    { path: 'users/:uid/my-account', title: 'Cellarium | My Account', component: AccountDetailsComponent }
+    { path: 'users/:uid/my-ingredients', title: 'Cellarium | My Ingredients', component: MyIngredientsComponent, canActivate: [profileGuard] },
+    { path: 'users/:uid/the-pantry', title: 'Cellarium | The Pantry', component: ThePantryComponent, canActivate: [profileGuard] },
+    { path: 'users/:uid/messages', title: 'Cellarium | Messages', component: MessagePageComponent, canActivate: [profileGuard] },
+    { path: 'users/:uid/household', title: 'Cellarium | Household', component: HouseholdComponent, canActivate: [profileGuard] },
+    { path: 'users/:uid/my-account', title: 'Cellarium | My Account', component: AccountDetailsComponent, canActivate: [profileGuard] }
 ];
