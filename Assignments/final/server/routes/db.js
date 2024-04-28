@@ -9,12 +9,6 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var { faker } = require('@faker-js/faker');
 
-// let USERS = [
-//     { username: "jDoe", password: "1", firstName: "John", lastName: "Doe", role: 'admin', status: 'JOINED', householdId: '' },
-//     { username: "jaDoe", password: "1", firstName: "Jane", lastName: "Doe", role: 'member', status: 'JOINED', householdId: '' },
-//     { username: "test", password: "1", firstName: "test", lastName: "test", role: '', status: '', householdId: '' }
-// ];
-
 let FOOD = [
     {
         foodId: "food_a60ilboavp161pbygvy9ebn1snp8",
@@ -713,55 +707,6 @@ function fakeUser() {
     };
 }
 
-// async function initUsers() {
-//     let users = [];
-//     for (let i = 0; i < USERS.length; i++) {
-//         let user = USERS[i];
-//         let u = await User.create({
-//             username: user.username,
-//             password: await bcrypt.hash(user.password, 10),
-//             firstName: user.firstName,
-//             lastName: user.lastName,
-//             role: user.role,
-//             status: user.status
-//         });
-//         await initFood(u._id);
-//         users.push(u);
-//     }
-//     return users;
-// }
-
-// async function initFood(userId) {
-//     let foods = [];
-//     for (let i = 0; i < FOOD.length; i++) {
-//         let food = FOOD[i];
-//         let nutrients = await Nutrients.create( food.nutrients );
-//         let servingSizes = [];
-//         for (let k = 0; k < food.servingSizes.length; k++) {
-//             let servingSize = food.servingSizes[k];
-//             servingSizes.push(await ServingSize.create( servingSize ));
-//         }
-
-//         let f = await Food.create({
-//             userId: userId,
-//             foodId: food.foodId,
-//             label: food.label,
-//             knownAs: food.knownAs,
-//             nutrients: nutrients,
-//             brand: food.brand,
-//             category: food.category, 
-//             categoryLabel: food.categoryLabel,
-//             foodContentsLabel: food.foodContentsLabel,
-//             image: food.image,
-//             servingSizes: servingSizes,
-//             servingsPerContainer: food.servingsPerContainer,
-//             quantity: food.quantity
-//         });
-//         foods.push(f);
-//     }
-//     return foods;
-// }
-
 async function initMessages(to, from, foods) {
     let messages = []
     for (let i = 0; i < foods.length; i++) {
@@ -793,20 +738,6 @@ async function initDirectory(owner, contacts) {
     });
 }
 
-// async function initHousehold(members) {
-//     let foodIds = [];
-//     for (let i = 0; i < FOOD.length; i++) {
-//         foodIds.push(FOOD[i].foodId);
-//     }
-    
-//     let household = await Household.create( { members: [members[0], members[1]], foodIds: foodIds } );
-    
-//     for (let i = 0; i < 2; i++) {
-//         let user = members[i];
-//         await User.updateOne( { _id: user._id }, { householdId: household._id } );
-//     }
-// }
-
 async function init() {
     // remove all db documents
     const data = mongoose.connection.db;
@@ -816,14 +747,9 @@ async function init() {
         await data.dropCollection(names[i]);
     }
     
-    // let users = await initUsers();
-    // await Directory.create( {ownerId: users[2]._id, contacts: []} );
-    // await initDirectory(users[0], [users[1]]);
-    // await initDirectory(users[1], [users[0]]);
-    // await initHousehold(users);
-
+    // Insert 5000 users, 5 per household
     let print = true;
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 1000; i++) {
         await initHousehold(print);
         print = false;
     }
