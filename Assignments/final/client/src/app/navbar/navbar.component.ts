@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,9 +17,14 @@ export class NavbarComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private data: DataService
   ) {
     
   }
 
+  logout(): void {
+    this.data.logout().subscribe();
+    sessionStorage.setItem('uid', '');
+  }
 }

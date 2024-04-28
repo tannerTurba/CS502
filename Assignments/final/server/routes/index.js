@@ -10,11 +10,6 @@ var Household = require('./householdModel');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
-// router.all('*', function(req, res, next) {
-//    console.log(req.url);
-//    next();
-//  });
-
 /* Verifies a session user matches their request data */
 router.all('*/users/:uid*', function(req, res, next) {
   var user = req.session.user;
@@ -182,7 +177,7 @@ router.get('/users/:uid/ingredients', async (req, res, next) => {
   // Calculate pagination details
   let foods = await Food.find( { userId: uid } );
   let totalFoods = foods.length;
-  const pageLimit = 11;
+  const pageLimit = 12;
   const offset = (page - 1) * pageLimit;
   let prevPage = (page - 1) > 0 ? page - 1 : -1;
   let nextPage = (offset + pageLimit) < totalFoods ? page + 1 : -1;
@@ -477,7 +472,7 @@ router.get('/users/:uid/households/:hid/ingredients', async (req, res, next ) =>
 
   // Pagination calculations
   const page = Number.parseInt(req.query.page) || 1;
-  const pageLimit = 11;
+  const pageLimit = 12;
   const offset = (page - 1) * pageLimit;
   let prevPage = (page - 1) > 0 ? page - 1 : -1;
   let nextPage = (offset + pageLimit) < totalFoods ? page + 1 : -1;
